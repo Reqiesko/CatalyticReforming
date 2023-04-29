@@ -8,7 +8,7 @@
              d:DesignHeight="250" d:DesignWidth="250">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            
+            <Label Content="Пожалуйста авторизируйтесь" Margin="10" Height="40"></Label>
             <controls:LabeledControlPresenter HeaderText="Username">
                 <TextBox Text="{Binding Username}" Width="200px"/>
             </controls:LabeledControlPresenter>
