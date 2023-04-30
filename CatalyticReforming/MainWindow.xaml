@@ -19,6 +19,8 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AdminPageVM}">
                 <views:AdminPage/>
+            </DataTemplate> <DataTemplate DataType="{x:Type vm:StudyPageVM}">
+                <views:StudyPage/>
             </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
