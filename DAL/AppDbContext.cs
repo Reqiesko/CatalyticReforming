@@ -13,9 +13,6 @@ namespace DAL
         }
 
         public DbSet<User> Users { get; set; }
-        //public DbSet<Contract> Contracts { get; set; }
-        //public DbSet<Terminal> Terminals { get; set; }
-        //public DbSet<TypeTerminal> TypeTerminals { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

@@ -17,7 +17,12 @@ namespace CatalyticReforming
             services.AddSingleton<NavigationService, NavigationService>();
             services.AddSingleton<MainViewModel, MainViewModel>();
             services.AddSingleton<MainWindow, MainWindow>();
-
+            services.AddTransient<AdminPageVM>();
+            services.AddTransient<StartPageVM>();
+            services.AddTransient<LoginPageVM>();
+            services.AddTransient<StudyPageVM>();
+            services.AddTransient<ResearchPageVM>();
+            
             var serviceProvider = services.BuildServiceProvider();
             var mainWindow = serviceProvider.GetService<MainWindow>();
 

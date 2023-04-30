@@ -15,10 +15,8 @@ namespace CatalyticReforming.ViewModels
 
         private RelayCommand _loginCommand;
 
-        [Required]
-        public string Username { get; set; }
-        [Required]
-        public string Password { get; set; }
+        [Required] public string Username { get; set; }
+        [Required] public string Password { get; set; }
         public string ErrorMessage { get; set; }
 
         public LoginPageVM(NavigationService navigationService)
@@ -37,7 +35,7 @@ namespace CatalyticReforming.ViewModels
                     if (user is { Role: "user" })
                     {
                         // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
-                        //_navigationService.CurrentViewModel = new ComputePageVM(_navigationService);
+                        _navigationService.CurrentViewModel = new StartPageVM(_navigationService, user);
                     }
                     else if (user is { Role: "admin" })
                     {
