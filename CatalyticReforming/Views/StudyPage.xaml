@@ -17,9 +17,10 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <RadioButton GroupName="{Binding Id}"
-                                             Content="{Binding Text}"
-                                             IsChecked="{Binding IsSelected}"/>
+                                <CheckBox  
+                                    BindingGroup="{Binding Id}"
+                                    Content="{Binding Text}"
+                                    IsChecked="{Binding IsSelected}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -27,13 +28,15 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Text="Пройдите тестирование"></TextBox>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Questions}"
+        <TextBox IsReadOnly="True" Grid.Row="0" Text="Пройдите тестирование"></TextBox>
+        <ListBox
+            Grid.Row="1" ItemsSource="{Binding Questions}"
                  ItemTemplate="{StaticResource QuestionTemplate}"/>
     </Grid>
 </UserControl>

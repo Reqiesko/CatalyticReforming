@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CatalyticReforming.Commands;
 using CatalyticReforming.Services;
 using DAL;
 
@@ -9,7 +10,7 @@ public class StudyPageVM : ViewModelBase
 {
     private NavigationService _navigationService;
     private readonly User _user;
-    
+
     public List<Question> Questions { get; set; }
     
     public StudyPageVM(NavigationService navigationService, User user)
