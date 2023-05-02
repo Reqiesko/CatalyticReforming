@@ -2,9 +2,9 @@
 
 namespace CatalyticReforming.Views;
 
-public partial class StartPage : UserControl
+public partial class StudyControl : UserControl
 {
-    public StartPage()
+    public StudyControl()
     {
         InitializeComponent();
     }

@@ -6,14 +6,14 @@ using DAL;
 
 namespace CatalyticReforming.ViewModels;
 
-public class StudyPageVM : ViewModelBase
+public class StudyControlVM : ViewModelBase
 {
     private NavigationService _navigationService;
     private readonly User _user;
 
     public List<Question> Questions { get; set; }
     
-    public StudyPageVM(NavigationService navigationService, User user)
+    public StudyControlVM(NavigationService navigationService, User user)
     {
         _navigationService = navigationService;
         _user = user;

@@ -2,10 +2,10 @@
 
 namespace CatalyticReforming.ViewModels;
 
-public class ResearchPageVM : ViewModelBase
+public class ResearchControlVM : ViewModelBase
 {
     private NavigationService _navigationService;
-    public ResearchPageVM(NavigationService navigationService)
+    public ResearchControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
     }

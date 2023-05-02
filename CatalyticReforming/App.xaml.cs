@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.Services;
+using CatalyticReforming.Views;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CatalyticReforming
@@ -10,27 +13,47 @@ namespace CatalyticReforming
     /// </summary>
     public partial class App : Application
     {
+        private static IServiceProvider _serviceProvider;
         protected override void OnStartup(StartupEventArgs e)
         {
             var services = new ServiceCollection() { };
 
+
+        #region Services
             services.AddSingleton<NavigationService, NavigationService>();
+        #endregion
+
+
+        #region VM And Views
+
             services.AddSingleton<MainViewModel, MainViewModel>();
             services.AddSingleton<MainWindow, MainWindow>();
-            services.AddTransient<AdminPageVM>();
-            services.AddTransient<StartPageVM>();
-            services.AddTransient<LoginPageVM>();
-            services.AddTransient<StudyPageVM>();
-            services.AddTransient<ResearchPageVM>();
-            
-            var serviceProvider = services.BuildServiceProvider();
-            var mainWindow = serviceProvider.GetService<MainWindow>();
+            services.AddTransient<AdminControlVM>();
+            services.AddTransient<AdminControl>();
+            services.AddTransient<StartControlVM>();
+            services.AddTransient<StartControl>();
+            services.AddTransient<LoginControlVM>();
+            services.AddTransient<LoginControl>();
+            services.AddTransient<StudyControlVM>();
+            services.AddTransient<StartControl>();
+            services.AddTransient<ResearchControlVM>();
 
-            var navigationService = serviceProvider.GetService<NavigationService>();
-            navigationService.CurrentViewModel = serviceProvider.GetService<LoginPageVM>();
+        #endregion
+            
+
+            
+            _serviceProvider = services.BuildServiceProvider();
+            var mainWindow = _serviceProvider.GetService<MainWindow>();
+
+            var navigationService = _serviceProvider.GetService<NavigationService>();
+            navigationService.ChangeContent<LoginControl>(); 
 
             mainWindow?.Show();
-            base.OnStartup(e);
+        }
+
+        public static T GetService<T>()
+        {
+            return _serviceProvider.GetService<T>();
         }
     }
 }

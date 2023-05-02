@@ -1,12 +1,17 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
+using CatalyticReforming.ViewModels;
+
+
 namespace CatalyticReforming.Views;
 
-public partial class LoginPage : UserControl
+public partial class LoginControl : IViewWithVM<LoginControlVM>
 {
-    public LoginPage()
+    public LoginControl()
     {
+        ViewModel = App.GetService<LoginControlVM>();
+        DataContext = ViewModel;
         InitializeComponent();
     }
     
@@ -15,4 +20,6 @@ public partial class LoginPage : UserControl
         if (this.DataContext != null)
         { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
     }
+
+    public LoginControlVM ViewModel { get; set; }
 }

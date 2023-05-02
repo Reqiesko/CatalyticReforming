@@ -1,12 +1,19 @@
-﻿<UserControl x:Class="CatalyticReforming.Views.AdminPage"
+﻿<UserControl x:Class="CatalyticReforming.Views.AdminControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CatalyticReforming.Views"
              mc:Ignorable="d"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:testing="clr-namespace:CatalyticReforming.Views.Testing"
+
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Редактирование тестов">
+                <testing:TestBrowserControl/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

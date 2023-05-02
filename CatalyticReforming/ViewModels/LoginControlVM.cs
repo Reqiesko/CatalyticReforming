@@ -2,12 +2,15 @@
 using CatalyticReforming.Commands;
 using CatalyticReforming.Services;
 using System.Linq;
+
+using CatalyticReforming.Views;
+
 using DAL;
 
 
 namespace CatalyticReforming.ViewModels
 {
-    public class LoginPageVM : ViewModelBase
+    public class LoginControlVM : ViewModelBase
     {
         private readonly AppDbContext _dbContext;
 
@@ -19,7 +22,7 @@ namespace CatalyticReforming.ViewModels
         [Required] public string Password { get; set; }
         public string ErrorMessage { get; set; }
 
-        public LoginPageVM(NavigationService navigationService)
+        public LoginControlVM(NavigationService navigationService)
         {
             _navigationService = navigationService;
             _dbContext = new AppDbContext();
@@ -35,7 +38,7 @@ namespace CatalyticReforming.ViewModels
                     if (user is { Role: "user" })
                     {
                         // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
-                        _navigationService.CurrentViewModel = new StartPageVM(_navigationService, user);
+                        _navigationService.ChangeContent<StartControl>();
                     }
                     else if (user is { Role: "admin" })
                     {

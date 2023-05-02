@@ -8,26 +8,13 @@
         xmlns:views="clr-namespace:CatalyticReforming.Views"
         xmlns:vm="clr-namespace:CatalyticReforming.ViewModels"
         mc:Ignorable="d"
+
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type vm:LoginPageVM}">
-                <views:LoginPage/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:StartPageVM}">
-                <views:StartPage/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AdminPageVM}">
-                <views:AdminPage/>
-            </DataTemplate> <DataTemplate DataType="{x:Type vm:StudyPageVM}">
-                <views:StudyPage/>
-            </DataTemplate>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"></ContentControl>
         <ui:TitleBar
             Title="ПРИЛОЖЕНИЕ"
             Grid.Row="0"
@@ -44,5 +31,7 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
+        <ContentControl Grid.Row="1" Name="RootContent"/>
+
     </Grid>
 </ui:FluentWindow>

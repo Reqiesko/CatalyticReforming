@@ -1,25 +1,29 @@
 ﻿using System;
 
-namespace CatalyticReforming.Services
+using Microsoft.Extensions.DependencyInjection;
+
+
+namespace CatalyticReforming.Services;
+
+public class NavigationService
 {
-    public class NavigationService
+    private readonly MainWindow _mainWindow;
+    private readonly IServiceProvider _serviceProvider;
+
+    public NavigationService(MainWindow mainWindow, IServiceProvider serviceProvider)
     {
-        private ViewModelBase _currentViewModel;
-        public ViewModelBase CurrentViewModel
-        {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel = value;
-                OnCurrentViewModelChanged();
-            }
-        }
+        _mainWindow = mainWindow;
+        _serviceProvider = serviceProvider;
+    }
 
-        private void OnCurrentViewModelChanged()
-        {
-            CurrentViewModelChanged?.Invoke();
-        }
+    public void ChangeContent(object content)
+    {
+        _mainWindow.RootContent.Content = content;
+    }
 
-        public event Action CurrentViewModelChanged;
+    public void ChangeContent<T>()
+    {
+        var content = _serviceProvider.GetService<T>();
+        _mainWindow.RootContent.Content = content;
     }
 }

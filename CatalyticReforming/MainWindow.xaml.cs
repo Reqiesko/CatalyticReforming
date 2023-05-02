@@ -19,12 +19,15 @@ namespace CatalyticReforming
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow: IViewWithVM<MainViewModel>
     {
-        public MainWindow(MainViewModel mvm)
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = mvm;
+            ViewModel = App.GetService<MainViewModel>();
+            DataContext = ViewModel;
         }
+
+        public MainViewModel ViewModel { get; set; }
     }
 }
