@@ -4,9 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CatalyticReforming.Views.Testing"
+             xmlns:controls="clr-namespace:CatalyticReforming.Views.Controls"
              mc:Ignorable="d"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             d:DataContext="{d:DesignInstance local:EditQuestionControl}"
+
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <controls:LabeledControlPresenter HeaderText="Текст вопроса" HeaderTextHorizontalAlignment="Left">
+                <ui:TextBox Text="{Binding ViewModel.EditingQuestion.Text}" />
+            </controls:LabeledControlPresenter>
+            <controls:LabeledControlPresenter HeaderText="Ответы" HeaderTextHorizontalAlignment="Left">
+                <DataGrid ItemsSource="{Binding ViewModel.EditingQuestion.Answers}"/>
+            </controls:LabeledControlPresenter>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ui:Button Appearance="Success" Content="Добавить" />
+        </StackPanel>
     </Grid>
 </UserControl>
