@@ -112,14 +112,9 @@
                 HorizontalAlignment="Center"
                 Command="{Binding StartResearchCommand}"/>
         </Grid>
-        <!--<StackPanel Grid.ColumnSpan="0" Grid.RowSpan="2" Grid.Column="0">
-            <Button
-                Content="Начать исследование"
-                Margin="10 5 0 0"
-                Command="{Binding StartResearchCommand}"/>
-        </StackPanel>-->
+        
         <StackPanel Grid.Column="1">
-            <TextBox Width="590" Margin="0 5 10 0" ></TextBox>
+            <TextBlock Width="{Binding }" Margin="0 5 10 0" ></TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>
