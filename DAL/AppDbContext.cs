@@ -45,7 +45,7 @@ namespace DAL
                             Password = "a",
                             Username = "a",
                             Role = UserRoles.Admin,
-                            Access = false,
+                            Access = true,
                         });
         }
     }

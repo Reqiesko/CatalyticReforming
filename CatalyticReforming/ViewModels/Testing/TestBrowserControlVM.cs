@@ -10,7 +10,7 @@ using DAL;
 
 namespace CatalyticReforming.ViewModels.Testing;
 
-public class TestBrowserControlVM: ViewModelBase
+public class TestBrowserControlVM : ViewModelBase
 {
     private readonly Func<AppDbContext> _contextCreator;
     private readonly MyDialogService _dialogService;

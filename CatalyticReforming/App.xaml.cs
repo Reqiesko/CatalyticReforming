@@ -44,6 +44,7 @@ namespace CatalyticReforming
             services.AddTransient<LoginControl>();
             services.AddTransient<StudyControlVM>();
             services.AddTransient<StartControl>();
+            services.AddTransient<ResearchControl>();
             services.AddTransient<ResearchControlVM>();
             services.AddTransient<TestBrowserControlVM>();
             services.AddTransient<TestBrowserControl>();

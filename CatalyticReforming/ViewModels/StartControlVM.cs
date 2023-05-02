@@ -11,15 +11,13 @@ namespace CatalyticReforming.ViewModels;
 public class StartControlVM : ViewModelBase
 {
     private readonly NavigationService _navigationService;
-    private readonly User _user;
 
     private RelayCommand _openStudyPageCommand;
     private RelayCommand _openResearchPageCommand;
     
-    public StartControlVM(NavigationService navigationService, User user)
+    public StartControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
-        _user = user;
     }
     
     public RelayCommand OpenStudyPageCommand
@@ -39,10 +37,7 @@ public class StartControlVM : ViewModelBase
         {
             return _openResearchPageCommand ??= new RelayCommand(o =>
             {
-                if (Convert.ToBoolean(_user.Access))
-                {
-                    //_navigationService.ChangeContent<Research>();
-                }
+                _navigationService.ChangeContent<ResearchControl>();
             });
         }
     }

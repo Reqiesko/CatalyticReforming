@@ -7,12 +7,58 @@
              mc:Ignorable="d"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:testing="clr-namespace:CatalyticReforming.Views.Testing"
-
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:viewModels="clr-namespace:CatalyticReforming.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:AdminControlVM}"
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        
         <TabControl>
-            <TabItem Header="Редактирование тестов">
-                <testing:TestBrowserControl/>
+            <TabItem Header="Редактирование учетных записей">
+                <TabItem.Content>
+                    <DataGrid 
+                        RowStyle="{DynamicResource DataGridRowStyle1}"
+                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                        CellStyle="{DynamicResource DataGridCellStyle1}"
+                        Style="{DynamicResource DataGridStyle1}"
+                        ItemsSource="{Binding Users}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Id" IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Password" Binding="{Binding Path=Password}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Role" Binding="{Binding Path= Role}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Access" Binding="{Binding Path= Access}" IsReadOnly="True" Width="*"/>
+                            <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource gridEditButton}"
+                                                    CommandParameter="{Binding}"
+                                                    Command="{Binding Path=DataContext.EditUserCommand,
+                                                    RelativeSource={RelativeSource Mode=FindAncestor,
+                                                    AncestorType={x:Type UserControl}}}">
+                                                <iconPacks:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                            <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
+                                                    CommandParameter="{Binding}"
+                                                    Command="{Binding Path=DataContext.DeleteUserCommand,
+                                                    RelativeSource={RelativeSource Mode=FindAncestor,
+                                                    AncestorType={x:Type UserControl}}}">
+                                                <iconPacks:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem.Content>
             </TabItem>
         </TabControl>
     </Grid>
