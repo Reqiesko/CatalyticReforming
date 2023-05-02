@@ -16,10 +16,9 @@ public class StartControlVM : ViewModelBase
     private RelayCommand _openStudyPageCommand;
     private RelayCommand _openResearchPageCommand;
     
-    public StartControlVM(NavigationService navigationService, User user)
+    public StartControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
-        _user = user;
     }
     
     public RelayCommand OpenStudyPageCommand
@@ -39,7 +38,7 @@ public class StartControlVM : ViewModelBase
         {
             return _openResearchPageCommand ??= new RelayCommand(o =>
             {
-                if (Convert.ToBoolean(_user.Access))
+                if (_user.Access)
                 {
                     //_navigationService.ChangeContent<Research>();
                 }
