@@ -22,6 +22,6 @@ namespace DAL
         [StringLength(50)]
         public string Role { get; set; }
         
-        public int Access { get; set; }
+        public bool Access { get; set; }
     }
 }

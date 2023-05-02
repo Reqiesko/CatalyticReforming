@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CatalyticReforming.Views.Testing"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             d:DataContext="{d:DesignInstance local:TestBrowserControl}"
+
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -13,10 +15,10 @@
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
-            <ListView />
+            <DataGrid ItemsSource="{Binding ViewModel.Questions}"/>
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
                 <ui:Button Appearance="Info" Content="Изменить" Margin="5,0"/>
-                <ui:Button Appearance="Success" Content="Добавить" Margin="5,0"/>
+                <ui:Button Appearance="Success" Content="Добавить" Margin="5,0" Command="{Binding ViewModel.AddQuestion}"/>
                 <ui:Button Appearance="Danger" Content="Удалаить" Margin="5,0"/>
             </StackPanel>
         </Grid>

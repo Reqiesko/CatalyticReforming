@@ -2,7 +2,12 @@
 using System.Windows;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.Services;
+using CatalyticReforming.Services.DialogService;
+using CatalyticReforming.ViewModels.Testing;
 using CatalyticReforming.Views;
+using CatalyticReforming.Views.Testing;
+
+using DAL;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +25,10 @@ namespace CatalyticReforming
 
 
         #region Services
-            services.AddSingleton<NavigationService, NavigationService>();
+            services.AddSingleton<NavigationService>();
+            services.AddSingleton<MyDialogService>();
+            services.AddTransient<AppDbContext>();
+            services.AddTransient(provider => new Func<AppDbContext>(() => provider.GetService<AppDbContext>()));
         #endregion
 
 
@@ -37,7 +45,10 @@ namespace CatalyticReforming
             services.AddTransient<StudyControlVM>();
             services.AddTransient<StartControl>();
             services.AddTransient<ResearchControlVM>();
-
+            services.AddTransient<TestBrowserControlVM>();
+            services.AddTransient<TestBrowserControl>();
+            services.AddTransient<EditQuestionControl>();
+            services.AddTransient<EditQuestionControlVM>();
         #endregion
             
 

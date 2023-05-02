@@ -35,14 +35,15 @@ namespace CatalyticReforming.ViewModels
                 return _loginCommand ??= new RelayCommand(o =>
                 {
                     var user = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
-                    if (user is { Role: "user" })
+                    if (user.Role == UserRoles.User)
                     {
                         // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
                         _navigationService.ChangeContent<StartControl>();
                     }
-                    else if (user is { Role: "admin" })
+                    else if (user.Role == UserRoles.Admin)
                     {
-                        //_navigationService.CurrentViewModel = new AdminPageVM(_navigationService);
+                        _navigationService.ChangeContent<AdminControl>();
+
                     }
                     else
                     {
