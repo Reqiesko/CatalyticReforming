@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
+
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 using CatalyticReforming.Services;
 using CatalyticReforming.ViewModels;
@@ -28,42 +32,36 @@ namespace CatalyticReforming
         private static IServiceProvider _serviceProvider;
         protected override void OnStartup(StartupEventArgs e)
         {
-            var services = new ServiceCollection() { };
-
-
+            var builder = new ContainerBuilder();
+            builder.Populate(new ServiceCollection());
         #region Services
 
-            services.AddSingleton<NavigationService>();
-            services.AddSingleton<MyDialogService>();
-            services.AddSingleton<MessageBoxService>();
-            services.AddTransient<AppDbContext>();
-            services.AddTransient(provider => new Func<AppDbContext>(() => provider.GetService<AppDbContext>()));
+            builder.RegisterType<NavigationService>().AsSelf().SingleInstance();
+            builder.RegisterType<MyDialogService>().AsSelf().SingleInstance();
+            builder.RegisterType<MessageBoxService>().AsSelf().SingleInstance();
+            builder.RegisterType<AppDbContext>().AsSelf();
         #endregion
 
 
         #region VM And Views
 
-            services.AddSingleton<MainViewModel, MainViewModel>();
-            services.AddSingleton<MainWindow, MainWindow>();
-            services.AddTransient<AdminControlVM>();
-            services.AddTransient<AdminControl>();
-            services.AddTransient<StartControlVM>();
-            services.AddTransient<StartControl>();
-            services.AddTransient<LoginControlVM>();
-            services.AddTransient<LoginControl>();
-            services.AddTransient<StudyControlVM>();
-            services.AddTransient<StartControl>();
-            services.AddTransient<ResearchControl>();
-            services.AddTransient<ResearchControlVM>();
-            services.AddTransient<TestBrowserControlVM>();
-            services.AddTransient<TestBrowserControl>();
-            services.AddTransient<EditQuestionControl>();
-            services.AddTransient<EditQuestionControlVM>();
-        #endregion
-            
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                   .Where(t => t.Name.EndsWith("Window"))
+                   .AsSelf();
 
-            
-            _serviceProvider = services.BuildServiceProvider();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                   .Where(t => t.Name.EndsWith("Control"))
+                   .AsSelf();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                   .Where(t => t.Name.EndsWith("VM"))
+                   .AsSelf();
+        #endregion
+
+            builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
+
+
+            var container = builder.Build();
+            _serviceProvider = new AutofacServiceProvider(container);
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             var navigationService = _serviceProvider.GetService<NavigationService>();
