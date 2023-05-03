@@ -29,25 +29,25 @@ public class StudyControlVM : ViewModelBase
                     {
                         Id = 0,
                         Text = "Putin",
-                        IsSelected = false
+                        IsCorrect = false
                     },
                     new Answer()
                     {
                         Id = 1,
                         Text = "Putin1",
-                        IsSelected = false
+                        IsCorrect = false
                     },
                     new Answer()
                     {
                         Id = 2,
                         Text = "Putin2",
-                        IsSelected = false
+                        IsCorrect = false
                     },
                     new Answer()
                     {
                         Id = 3,
                         Text = "Putin3",
-                        IsSelected = false
+                        IsCorrect = false
                     }
                 
                 }

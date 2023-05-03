@@ -20,7 +20,7 @@
                                 <CheckBox  
                                     BindingGroup="{Binding Id}"
                                     Content="{Binding Text}"
-                                    IsChecked="{Binding IsSelected}"/>
+                                    IsChecked="{Binding IsCorrect}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

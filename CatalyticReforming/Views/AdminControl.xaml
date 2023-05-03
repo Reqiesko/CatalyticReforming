@@ -9,7 +9,7 @@
              xmlns:testing="clr-namespace:CatalyticReforming.Views.Testing"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:CatalyticReforming.ViewModels"
-             d:DataContext="{d:DesignInstance viewModels:AdminControlVM}"
+             d:DataContext="{d:DesignInstance local:AdminControl}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         
@@ -21,12 +21,12 @@
                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                         CellStyle="{DynamicResource DataGridCellStyle1}"
                         Style="{DynamicResource DataGridStyle1}"
-                        ItemsSource="{Binding Users}">
+                        ItemsSource="{Binding ViewModel.Users}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Id" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Path=ViewModel.Id}" VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -59,6 +59,9 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Редактирование тестов">
+                <testing:TestBrowserControl/>
             </TabItem>
         </TabControl>
     </Grid>
