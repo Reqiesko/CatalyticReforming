@@ -57,14 +57,14 @@
             <controls:LabeledControlPresenter
                 Grid.Row="4"
                 HeaderText="Давление">
-                <TextBox Text="{Binding ViewModel.ReactorPressuare}"/>
+                <TextBox Text="{Binding ViewModel.ReactorPressure}"/>
             </controls:LabeledControlPresenter>
             
             
             <controls:LabeledControlPresenter
                 Grid.Row="5"
                 HeaderText="Катализатор">
-                <ComboBox ItemsSource="{Binding ViewModel.ReactorsCollection}"/>
+                <ComboBox ItemsSource="{Binding ViewModel.CatalystCollection}"/>
             </controls:LabeledControlPresenter>
             
             <Label Grid.Row="6" Content="Входные параметры катализатора"/>
@@ -76,7 +76,7 @@
             <controls:LabeledControlPresenter
                 Grid.Row="8"
                 HeaderText="Коэффициент прочности">
-                <TextBox Text="{Binding ViewModel.CatalystDensity}"/>
+                <TextBox Text="{Binding ViewModel.StrengthFactor}"/>
             </controls:LabeledControlPresenter>
             
             <controls:LabeledControlPresenter 
@@ -110,7 +110,7 @@
                 Content="Начать исследование"
                 Margin="10 15 10 0"
                 HorizontalAlignment="Center"
-                Command="{Binding StartResearchCommand}"/>
+                Command="{Binding ViewModel.StartResearchCommand}"/>
         </Grid>
         
         <StackPanel Grid.Column="1">
