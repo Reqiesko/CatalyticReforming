@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using CatalyticReforming.ViewModels;
 
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.Window;
 
 

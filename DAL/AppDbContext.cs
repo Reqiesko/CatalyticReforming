@@ -20,7 +20,7 @@ namespace DAL
         {
             options
                 //.UseLazyLoadingProxies()
-                .UseSqlite("Data Source=Databases/DataBase.db")
+                .UseSqlite("Data Source=DataBase.db")
                 .EnableSensitiveDataLogging(true)
                 .LogTo(s => Debug.WriteLine(s));
         }
@@ -46,6 +46,30 @@ namespace DAL
                             Username = "a",
                             Role = UserRoles.Admin,
                             Access = true,
+                        });
+
+            modelBuilder.Entity<Question>()
+                        .HasData(new Question()
+                        {
+                            Id = 1,
+                            Text = "текст вопроса"
+                        });
+            
+            modelBuilder.Entity<Answer>()
+                        .HasData(new Answer()
+                        {
+                            Id = 1,
+                            IsCorrect = true,
+                            QuestionId = 1,
+                            Text = "ответ 1"
+                        });
+            modelBuilder.Entity<Answer>()
+                        .HasData(new Answer()
+                        {
+                            Id = 2,
+                            IsCorrect = false,
+                            QuestionId = 1,
+                            Text = "ответ 2"
                         });
         }
     }

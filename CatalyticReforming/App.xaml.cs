@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows;
-using CatalyticReforming.ViewModels;
+
 using CatalyticReforming.Services;
+using CatalyticReforming.ViewModels;
 using CatalyticReforming.Services.DialogService;
 using CatalyticReforming.ViewModels.Testing;
 using CatalyticReforming.Views;
@@ -10,6 +11,12 @@ using CatalyticReforming.Views.Testing;
 using DAL;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using Wpf.Ui.Contracts;
+using Wpf.Ui.Services;
+
+using NavigationService = CatalyticReforming.Services.NavigationService;
+
 
 namespace CatalyticReforming
 {
@@ -25,8 +32,10 @@ namespace CatalyticReforming
 
 
         #region Services
+
             services.AddSingleton<NavigationService>();
             services.AddSingleton<MyDialogService>();
+            services.AddSingleton<MessageBoxService>();
             services.AddTransient<AppDbContext>();
             services.AddTransient(provider => new Func<AppDbContext>(() => provider.GetService<AppDbContext>()));
         #endregion
