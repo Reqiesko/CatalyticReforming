@@ -35,6 +35,12 @@ namespace CatalyticReforming.ViewModels
                 return _loginCommand ??= new RelayCommand(o =>
                 {
                     var user = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+
+                    if (user == null)
+                    {
+                        ErrorMessage = "Error";
+                        return;
+                    }
                     if (user.Role == UserRoles.User)
                     {
                         // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.

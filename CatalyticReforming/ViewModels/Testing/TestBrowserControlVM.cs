@@ -5,6 +5,8 @@ using System.Windows;
 using CatalyticReforming.Commands;
 using CatalyticReforming.Services;
 using CatalyticReforming.Services.DialogService;
+using CatalyticReforming.Utils.Default_Dialogs;
+using CatalyticReforming.ViewModels.DAL_VM;
 using CatalyticReforming.Views.Testing;
 
 using DAL;
@@ -20,19 +22,21 @@ public class TestBrowserControlVM : ViewModelBase
 {
     private readonly Func<AppDbContext> _contextCreator;
     private readonly MyDialogService _dialogService;
-    private readonly MessageBoxService _messageBoxService;
+    private readonly DefaultDialogs _defaultDialogs;
+    private readonly GenericRepository _repository;
 
-    public TestBrowserControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, MessageBoxService messageBoxService)
+    public TestBrowserControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, DefaultDialogs defaultDialogs, GenericRepository repository)
     {
         _contextCreator = contextCreator;
         _dialogService = dialogService;
-        _messageBoxService = messageBoxService;
+        _defaultDialogs = defaultDialogs;
+        _repository = repository;
 
         using var context = _contextCreator();
-        Questions = new ObservableCollection<Question>(context.Questions);
+        Questions = context.Questions.Adapt<ObservableCollection<QuestionVM>>();
     }
 
-    public ObservableCollection<Question> Questions { get; set; }
+    public ObservableCollection<QuestionVM> Questions { get; set; }
     private RelayCommand _addQuestion;
 
     public RelayCommand AddQuestion
@@ -41,12 +45,15 @@ public class TestBrowserControlVM : ViewModelBase
         {
             return _addQuestion ??= new RelayCommand(async o =>
             {
-                var newQuestion = await _dialogService.ShowDialog<EditQuestionControl>(new Question());
-
-                // await using var context = _contextCreator();
-                //
-                // context.Questions.Add((Question) newQuestion);
-                // context.SaveChanges();
+                var newQuestion = await _dialogService.ShowDialog<EditQuestionControl>(new QuestionVM()) as QuestionVM;
+                
+                if (newQuestion is null)
+                {
+                    return;
+                }
+                var entity = await _repository.Create<QuestionVM,Question>(newQuestion);
+                newQuestion.Id = entity.Id;
+                Questions.Add(newQuestion);
             });
         }
     }
@@ -59,18 +66,15 @@ public class TestBrowserControlVM : ViewModelBase
         {
             return _editQuestion ??= new RelayCommand(async question =>
             {
-                var res = await _dialogService.ShowDialog<EditQuestionControl>(question.Adapt<Question>()) as Question;
+                var res = await _dialogService.ShowDialog<EditQuestionControl>(question.Adapt<QuestionVM>()) as QuestionVM;
 
-                if (res is  null)
+                if (res is null)
                 {
                     return;
                 }
 
-                await using var context = _contextCreator();
-
-                res.BuildAdapter()
-                   .EntityFromContext(context)
-                   .AdaptTo(question);
+                await _repository.Update<QuestionVM,Question>(res);
+                res.Adapt((QuestionVM) question);
             });
         }
     }
@@ -83,20 +87,15 @@ public class TestBrowserControlVM : ViewModelBase
         {
             return _deleteQuestion ??= new RelayCommand(async question =>
             {
-                var mbRes = await _messageBoxService.Show("Вы действительно хотите удалить выбранный вопрос?",
-                                                          "Предупреждение",
-                                                          MessageBoxButton.YesNo);
+                var mbRes = await _defaultDialogs.AreYouSureToDelete("выбранный вопрос");
 
                 if (mbRes != MessageBoxResult.Yes)
                 {
                     return;
                 }
 
-                await using var context = _contextCreator();
-                context.Questions.Remove((Question) question);
-                await context.SaveChangesAsync();
-                Questions.Remove((Question) question);
-
+                await _repository.Delete<QuestionVM,Question>((QuestionVM)question);
+                Questions.Remove((QuestionVM) question);
             });
         }
     }

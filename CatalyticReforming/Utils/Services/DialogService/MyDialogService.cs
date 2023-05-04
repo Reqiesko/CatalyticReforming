@@ -46,7 +46,7 @@ public class MyDialogService
     {
         var window = new FluentWindow();
         window.Content = CreateDialogGrid(content as UIElement);
-
+        window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         return window;
     }
     /// <summary>
@@ -71,7 +71,7 @@ public class MyDialogService
             interactionAware.FinishInteraction = () =>
             {
                 Debug.WriteLine("Диалог скрылся");
-                window.Hide();
+                window.Close();
                 window.Closed -= OnClosed;
             };
         }

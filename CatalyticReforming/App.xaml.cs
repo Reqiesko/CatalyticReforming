@@ -8,11 +8,14 @@ using Autofac.Extensions.DependencyInjection;
 using CatalyticReforming.Services;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.Services.DialogService;
+using CatalyticReforming.Utils.Default_Dialogs;
 using CatalyticReforming.ViewModels.Testing;
 using CatalyticReforming.Views;
 using CatalyticReforming.Views.Testing;
 
 using DAL;
+
+using Mapster;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,14 +35,22 @@ namespace CatalyticReforming
         private static IServiceProvider _serviceProvider;
         protected override void OnStartup(StartupEventArgs e)
         {
+        #region Registration dependencies
+
+            
+
+       
             var builder = new ContainerBuilder();
             builder.Populate(new ServiceCollection());
         #region Services
 
             builder.RegisterType<NavigationService>().AsSelf().SingleInstance();
+            builder.RegisterType<GenericRepository>().AsSelf().SingleInstance();
+            builder.RegisterType<DefaultDialogs>().AsSelf().SingleInstance();
             builder.RegisterType<MyDialogService>().AsSelf().SingleInstance();
             builder.RegisterType<MessageBoxService>().AsSelf().SingleInstance();
             builder.RegisterType<AppDbContext>().AsSelf();
+            
         #endregion
 
 
@@ -59,7 +70,14 @@ namespace CatalyticReforming
 
             builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
 
+        #endregion
 
+
+        #region Mapping
+
+            TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
+
+        #endregion
             var container = builder.Build();
             _serviceProvider = new AutofacServiceProvider(container);
             var mainWindow = _serviceProvider.GetService<MainWindow>();

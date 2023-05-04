@@ -12,7 +12,7 @@ public partial class EditQuestionControl : IViewWithVM<EditQuestionControlVM>
     {
         InitializeComponent();
         ViewModel = App.GetService<EditQuestionControlVM>();
-        DataContext = ViewModel;
+        DataContext = this;
     }
 
     public EditQuestionControlVM ViewModel { get; set; }

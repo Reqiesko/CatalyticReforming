@@ -19,7 +19,7 @@ namespace DAL
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options
-                //.UseLazyLoadingProxies()
+                .UseLazyLoadingProxies()
                 .UseSqlite("Data Source=DataBase.db")
                 .EnableSensitiveDataLogging(true)
                 .LogTo(s => Debug.WriteLine(s));

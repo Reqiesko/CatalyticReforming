@@ -17,7 +17,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <ui:Button Content="Добавить" Appearance="Success" Command="{Binding ViewModel.AddQuestion}"/>
+                <ui:Button Content="Добавить вопрос" Appearance="Success" Command="{Binding ViewModel.AddQuestion}"/>
             </StackPanel>
             <DataGrid Grid.Row="1"
                       RowStyle="{DynamicResource DataGridRowStyle1}"
