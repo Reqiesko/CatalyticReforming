@@ -4,3 +4,4 @@ public interface IDALVM
 {
     public int Id { get; set; }
 }
+

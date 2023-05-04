@@ -12,18 +12,20 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <StackPanel>
             <controls:LabeledControlPresenter HeaderText="Текст ответа" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingAnswer.Text}"/>
+                <ui:TextBox Text="{Binding ViewModel.EditingAnswer.Text}" />
             </controls:LabeledControlPresenter>
-            <CheckBox Content="Правильный" IsChecked="{Binding ViewModel.EditingAnswer.IsCorrect}" Margin="0,3"/>
+            <CheckBox Content="Правильный" IsChecked="{Binding ViewModel.EditingAnswer.IsCorrect}" Margin="0,3" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <ui:Button Width="100" Margin="5,0" Content="Применить" Command="{Binding ViewModel.ApplyCommand}" Appearance="Info"/>
-            <ui:Button Width="100" Margin="5,0" Content="Отмена" Command="{Binding ViewModel.CancelCommand}" Appearance="Transparent"/>
+            <ui:Button Width="100" Margin="5,0" Content="Применить" Command="{Binding ViewModel.ApplyCommand}"
+                       Appearance="Info" />
+            <ui:Button Width="100" Margin="5,0" Content="Отмена" Command="{Binding ViewModel.CancelCommand}"
+                       Appearance="Transparent" />
         </StackPanel>
     </Grid>
 </UserControl>

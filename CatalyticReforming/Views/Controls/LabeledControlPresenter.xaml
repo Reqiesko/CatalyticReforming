@@ -24,8 +24,7 @@
                             FontSize="{TemplateBinding HeaderFontSize}"
                             FontWeight="DemiBold"
                             Text="{TemplateBinding HeaderText}"
-                            HorizontalAlignment="{TemplateBinding HeaderTextHorizontalAlignment}"
-                            />
+                            HorizontalAlignment="{TemplateBinding HeaderTextHorizontalAlignment}" />
 
 
                         <ContentPresenter Grid.Row="1" Margin="0,8,0,0" Content="{TemplateBinding Content}" />

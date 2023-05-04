@@ -1,58 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using CatalyticReforming.Commands;
+
 using CatalyticReforming.Services;
+
 using DAL;
+
 
 namespace CatalyticReforming.ViewModels;
 
 public class StudyControlVM : ViewModelBase
 {
-    private NavigationService _navigationService;
     private readonly User _user;
+    private NavigationService _navigationService;
 
-    public List<Question> Questions { get; set; }
-    
     public StudyControlVM(NavigationService navigationService, User user)
     {
         _navigationService = navigationService;
         _user = user;
-        Questions = new List<Question>()
+
+        Questions = new List<Question>
         {
-            new Question()
+            new()
             {
                 Id = 0,
                 Text = "Who is president of Russia?",
-                Answers = new List<Answer>()
+                Answers = new List<Answer>
                 {
-                    new Answer()
+                    new()
                     {
                         Id = 0,
                         Text = "Putin",
-                        IsCorrect = false
+                        IsCorrect = false,
                     },
-                    new Answer()
+                    new()
                     {
                         Id = 1,
                         Text = "Putin1",
-                        IsCorrect = false
+                        IsCorrect = false,
                     },
-                    new Answer()
+                    new()
                     {
                         Id = 2,
                         Text = "Putin2",
-                        IsCorrect = false
+                        IsCorrect = false,
                     },
-                    new Answer()
+                    new()
                     {
                         Id = 3,
                         Text = "Putin3",
-                        IsCorrect = false
-                    }
-                
-                }
-            }
+                        IsCorrect = false,
+                    },
+                },
+            },
         };
+
         Console.WriteLine("WWWW");
     }
+
+    public List<Question> Questions { get; set; }
 }

@@ -6,17 +6,16 @@ using System.Windows.Controls;
 using Wpf.Ui.Controls;
 
 using Button = Wpf.Ui.Controls.Button;
-
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 
 namespace CatalyticReforming.Services;
 
 public class MessageBoxService
 {
-
     public Task<MessageBoxResult> Show(string messageBoxText)
     {
-        return Show(window: null, messageBoxText: messageBoxText);
+        return Show(null, messageBoxText: messageBoxText);
     }
 
     public Task<MessageBoxResult> Show(string messageBoxText, string caption)
@@ -47,7 +46,7 @@ public class MessageBoxService
     public Task<MessageBoxResult> Show(Window window, string messageBoxText, string caption, MessageBoxButton button)
     {
         var tcs = new TaskCompletionSource<MessageBoxResult>();
-        var mb = new Wpf.Ui.Controls.MessageBox();
+        var mb = new MessageBox();
         mb.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         mb.Owner = window;
         mb.Title = caption;
@@ -55,7 +54,7 @@ public class MessageBoxService
         var result = MessageBoxResult.None;
 
         var footer = new StackPanel
-            {HorizontalAlignment = HorizontalAlignment.Right, Orientation = Orientation.Horizontal};
+            {HorizontalAlignment = HorizontalAlignment.Right, Orientation = Orientation.Horizontal,};
 
         void OnButtonClicked(MessageBoxResult buttonResult)
         {
@@ -113,3 +112,4 @@ public class MessageBoxService
         return tcs.Task;
     }
 }
+

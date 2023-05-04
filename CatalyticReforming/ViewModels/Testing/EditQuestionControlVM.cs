@@ -17,12 +17,23 @@ namespace CatalyticReforming.ViewModels.Testing;
 
 public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, IInteractionAware
 {
-    private readonly Func<AppDbContext> _contextCreator;
-    private readonly MyDialogService _dialogService;
     private readonly GenericRepository _answerRepository;
+    private readonly Func<AppDbContext> _contextCreator;
     private readonly DefaultDialogs _defaultDialogs;
+    private readonly MyDialogService _dialogService;
 
-    public EditQuestionControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, GenericRepository answerRepository, DefaultDialogs defaultDialogs)
+    private RelayCommand _addAnswer;
+
+    private RelayCommand _applyCommand;
+
+    private RelayCommand _cancelCommand;
+
+    private RelayCommand _deleteAnswer;
+
+    private RelayCommand _editAnswer;
+
+    public EditQuestionControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, GenericRepository answerRepository,
+                                 DefaultDialogs defaultDialogs)
     {
         _contextCreator = contextCreator;
         _dialogService = dialogService;
@@ -31,16 +42,6 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
     }
 
     public QuestionVM EditingQuestion { get; set; }
-    public object Result { get; set; }
-
-    public object Data
-    {
-        get => EditingQuestion;
-        set => EditingQuestion = (QuestionVM) value;
-    }
-    public Action FinishInteraction { get; set; }
-
-    private RelayCommand _addAnswer;
 
     public RelayCommand AddAnswer
     {
@@ -54,12 +55,11 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
                 {
                     return;
                 }
+
                 EditingQuestion.Answers.Add(res);
             });
         }
     }
-
-    private RelayCommand _editAnswer;
 
     public RelayCommand EditAnswer
     {
@@ -73,18 +73,17 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
                 {
                     return;
                 }
-                res.Adapt((AnswerVM)answer);
+
+                res.Adapt((AnswerVM) answer);
             });
         }
     }
-
-    private RelayCommand _deleteAnswer;
 
     public RelayCommand DeleteAnswer
     {
         get
         {
-            return _deleteAnswer ??= new RelayCommand(async answer=>
+            return _deleteAnswer ??= new RelayCommand(async answer =>
             {
                 var res = await _defaultDialogs.AreYouSureToDelete("ответ");
 
@@ -98,8 +97,6 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
         }
     }
 
-    private RelayCommand _applyCommand;
-
     public RelayCommand ApplyCommand
     {
         get
@@ -112,8 +109,6 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
         }
     }
 
-    private RelayCommand _cancelCommand;
-
     public RelayCommand CancelCommand
     {
         get
@@ -125,4 +120,13 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
         }
     }
 
+    public object Data
+    {
+        get => EditingQuestion;
+        set => EditingQuestion = (QuestionVM) value;
+    }
+
+    public Action FinishInteraction { get; set; }
+    public object Result { get; set; }
 }
+

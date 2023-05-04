@@ -27,3 +27,4 @@ public class NavigationService
         _mainWindow.RootContent.Content = content;
     }
 }
+

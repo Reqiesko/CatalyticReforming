@@ -6,12 +6,9 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 
 using CatalyticReforming.Services;
-using CatalyticReforming.ViewModels;
 using CatalyticReforming.Services.DialogService;
 using CatalyticReforming.Utils.Default_Dialogs;
-using CatalyticReforming.ViewModels.Testing;
 using CatalyticReforming.Views;
-using CatalyticReforming.Views.Testing;
 
 using DAL;
 
@@ -19,78 +16,77 @@ using Mapster;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using Wpf.Ui.Contracts;
-using Wpf.Ui.Services;
 
-using NavigationService = CatalyticReforming.Services.NavigationService;
+namespace CatalyticReforming;
 
-
-namespace CatalyticReforming
+/// <summary>
+///     Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private static IServiceProvider _serviceProvider;
+
+    protected override void OnStartup(StartupEventArgs e)
     {
-        private static IServiceProvider _serviceProvider;
-        protected override void OnStartup(StartupEventArgs e)
-        {
-        #region Registration dependencies
+    #region Registration dependencies
 
-            
-
-       
-            var builder = new ContainerBuilder();
-            builder.Populate(new ServiceCollection());
-        #region Services
-
-            builder.RegisterType<NavigationService>().AsSelf().SingleInstance();
-            builder.RegisterType<GenericRepository>().AsSelf().SingleInstance();
-            builder.RegisterType<DefaultDialogs>().AsSelf().SingleInstance();
-            builder.RegisterType<MyDialogService>().AsSelf().SingleInstance();
-            builder.RegisterType<MessageBoxService>().AsSelf().SingleInstance();
-            builder.RegisterType<AppDbContext>().AsSelf();
-            
-        #endregion
+        var builder = new ContainerBuilder();
+        builder.Populate(new ServiceCollection());
 
 
-        #region VM And Views
+    #region Services
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                   .Where(t => t.Name.EndsWith("Window"))
-                   .AsSelf();
+        builder.RegisterType<NavigationService>().AsSelf().SingleInstance();
+        builder.RegisterType<GenericRepository>().AsSelf().SingleInstance();
+        builder.RegisterType<DefaultDialogs>().AsSelf().SingleInstance();
+        builder.RegisterType<MyDialogService>().AsSelf().SingleInstance();
+        builder.RegisterType<MessageBoxService>().AsSelf().SingleInstance();
+        builder.RegisterType<AppDbContext>().AsSelf();
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                   .Where(t => t.Name.EndsWith("Control"))
-                   .AsSelf();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                   .Where(t => t.Name.EndsWith("VM"))
-                   .AsSelf();
-        #endregion
-
-            builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
-
-        #endregion
+    #endregion
 
 
-        #region Mapping
+    #region VM And Views
 
-            TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
+        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+               .Where(t => t.Name.EndsWith("Window"))
+               .AsSelf();
 
-        #endregion
-            var container = builder.Build();
-            _serviceProvider = new AutofacServiceProvider(container);
-            var mainWindow = _serviceProvider.GetService<MainWindow>();
+        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+               .Where(t => t.Name.EndsWith("Control"))
+               .AsSelf();
 
-            var navigationService = _serviceProvider.GetService<NavigationService>();
-            navigationService.ChangeContent<LoginControl>(); 
+        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+               .Where(t => t.Name.EndsWith("VM"))
+               .AsSelf();
 
-            mainWindow?.Show();
-        }
+    #endregion
 
-        public static T GetService<T>()
-        {
-            return _serviceProvider.GetService<T>();
-        }
+
+        builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
+
+    #endregion
+
+
+    #region Mapping
+
+        TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
+
+    #endregion
+
+
+        var container = builder.Build();
+        _serviceProvider = new AutofacServiceProvider(container);
+        var mainWindow = _serviceProvider.GetService<MainWindow>();
+
+        var navigationService = _serviceProvider.GetService<NavigationService>();
+        navigationService.ChangeContent<LoginControl>();
+
+        mainWindow?.Show();
+    }
+
+    public static T GetService<T>()
+    {
+        return _serviceProvider.GetService<T>();
     }
 }

@@ -25,13 +25,16 @@ public class MyDialogService
     private Grid CreateDialogGrid(UIElement content)
     {
         var grid = new Grid();
-        grid.RowDefinitions.Add(new RowDefinition(){Height = GridLength.Auto,});
+
+        grid.RowDefinitions.Add(new RowDefinition
+                                    {Height = GridLength.Auto,});
+
         grid.RowDefinitions.Add(new RowDefinition());
         grid.Children.Add(content);
         Grid.SetRow(content, 1);
         var titleBar = new TitleBar();
 
-        titleBar.Tray = new NotifyIcon()
+        titleBar.Tray = new NotifyIcon
         {
             FocusOnLeftClick = true,
             MenuOnRightClick = true,
@@ -47,10 +50,12 @@ public class MyDialogService
         var window = new FluentWindow();
         window.Content = CreateDialogGrid(content as UIElement);
         window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
         return window;
     }
+
     /// <summary>
-    /// Показать диалоговое окно
+    ///     Показать диалоговое окно
     /// </summary>
     /// <param name="data">Передаваемые данные</param>
     /// <typeparam name="T">Тип элемента для отображения в диалоговом окне</typeparam>
@@ -61,6 +66,7 @@ public class MyDialogService
         var e = App.GetService<T>() as IViewWithVM;
         var viewModel = e.ViewModelObject;
         var window = CreateWindow(e);
+
         if (viewModel is IDataHolder dataHolder)
         {
             dataHolder.Data = data;
@@ -76,7 +82,7 @@ public class MyDialogService
             };
         }
 
-        
+
         window.Closed += OnClosed;
 
         void OnClosed(object? o, EventArgs eventArgs)
@@ -93,3 +99,4 @@ public class MyDialogService
         return tcs.Task;
     }
 }
+

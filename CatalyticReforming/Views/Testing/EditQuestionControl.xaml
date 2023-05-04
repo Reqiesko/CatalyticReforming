@@ -14,56 +14,61 @@
     <Grid Margin="15">
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="70"/>
+            <RowDefinition />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <StackPanel>
             <StackPanel>
-                <controls:LabeledControlPresenter Margin="5" HeaderText="Текст вопроса" HeaderTextHorizontalAlignment="Left">
+                <controls:LabeledControlPresenter Margin="5" HeaderText="Текст вопроса"
+                                                  HeaderTextHorizontalAlignment="Left">
                     <ui:TextBox Text="{Binding ViewModel.EditingQuestion.Text}" />
                 </controls:LabeledControlPresenter>
             </StackPanel>
-            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
                 <ui:Button Appearance="Success" Content="Добавить ответ" Command="{Binding ViewModel.AddAnswer}" />
             </StackPanel>
             <DataGrid
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-                          CellStyle="{DynamicResource DataGridCellStyle1}"
-                          Style="{DynamicResource DataGridStyle1}"
-                          ItemsSource="{Binding ViewModel.EditingQuestion.Answers}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Текст ответа" Binding="{Binding Path=Text}" IsReadOnly="True" Width="*"/>
-                        <DataGridCheckBoxColumn Header="Правильный" Binding="{Binding Path=IsCorrect}"/>
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}"
-                                                CommandParameter="{Binding}"
-                                                Command="{Binding Path=ViewModel.EditAnswer,
+                RowStyle="{DynamicResource DataGridRowStyle1}"
+                ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                CellStyle="{DynamicResource DataGridCellStyle1}"
+                Style="{DynamicResource DataGridStyle1}"
+                ItemsSource="{Binding ViewModel.EditingQuestion.Answers}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Текст ответа" Binding="{Binding Path=Text}" IsReadOnly="True" Width="*" />
+                    <DataGridCheckBoxColumn Header="Правильный" Binding="{Binding Path=IsCorrect}" />
+                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}"
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding Path=ViewModel.EditAnswer,
                                                         RelativeSource={RelativeSource Mode=FindAncestor,
                                                         AncestorType={x:Type UserControl}}}">
-                                            <iconPacks:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
-                                                CommandParameter="{Binding}"
-                                                Command="{Binding Path=ViewModel.DeleteAnswer,
+                                        <iconPacks:PackIconMaterial Kind="PencilOutline"
+                                                                    Style="{StaticResource gridButtonIcon}" />
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding Path=ViewModel.DeleteAnswer,
                                                         RelativeSource={RelativeSource Mode=FindAncestor,
                                                         AncestorType={x:Type UserControl}}}">
-                                            <iconPacks:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                    
-                </DataGrid>
+                                        <iconPacks:PackIconMaterial Kind="DeleteOutline"
+                                                                    Style="{StaticResource gridButtonIcon}" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <ui:Button Margin="5,0" Width="100" Appearance="Info" Content="Применить" Command="{Binding ViewModel.ApplyCommand}"/>
-            <ui:Button Margin="5,0" Width="100" Appearance="Transparent" Content="Отмена" Command="{Binding ViewModel.CancelCommand}"/>
+            <ui:Button Margin="5,0" Width="100" Appearance="Info" Content="Применить"
+                       Command="{Binding ViewModel.ApplyCommand}" />
+            <ui:Button Margin="5,0" Width="100" Appearance="Transparent" Content="Отмена"
+                       Command="{Binding ViewModel.CancelCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

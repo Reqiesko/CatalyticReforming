@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.ViewModels;
 
 
 namespace CatalyticReforming.Views;

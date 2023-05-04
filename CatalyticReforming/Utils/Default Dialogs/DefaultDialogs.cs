@@ -2,7 +2,6 @@
 using System.Windows;
 
 using CatalyticReforming.Services;
-using CatalyticReforming.Services.DialogService;
 
 
 namespace CatalyticReforming.Utils.Default_Dialogs;
@@ -15,10 +14,12 @@ public class DefaultDialogs
     {
         _messageBoxService = messageBoxService;
     }
-    public  async Task<MessageBoxResult> AreYouSureToDelete(string toDelete)
+
+    public async Task<MessageBoxResult> AreYouSureToDelete(string toDelete)
     {
         return await _messageBoxService.Show($"Вы действительно хотите удалить {toDelete}?",
-                                      "Предупреждение",
-                                      MessageBoxButton.YesNo);
+                                             "Предупреждение",
+                                             MessageBoxButton.YesNo);
     }
 }
+

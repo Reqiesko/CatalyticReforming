@@ -13,11 +13,11 @@
     <Grid>
         <Grid Margin="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="40" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <ui:Button Content="Добавить вопрос" Appearance="Success" Command="{Binding ViewModel.AddQuestion}"/>
+                <ui:Button Content="Добавить вопрос" Appearance="Success" Command="{Binding ViewModel.AddQuestion}" />
             </StackPanel>
             <DataGrid Grid.Row="1"
                       RowStyle="{DynamicResource DataGridRowStyle1}"
@@ -26,8 +26,9 @@
                       Style="{DynamicResource DataGridStyle1}"
                       ItemsSource="{Binding ViewModel.Questions}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Текст вопроса" Binding="{Binding Path=Text}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Количество ответов" Binding="{Binding Path=Answers.Count}"/>
+                    <DataGridTextColumn Header="Текст вопроса" Binding="{Binding Path=Text}" IsReadOnly="True"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Количество ответов" Binding="{Binding Path=Answers.Count}" />
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -37,21 +38,23 @@
                                             Command="{Binding Path=ViewModel.EditQuestion,
                                                     RelativeSource={RelativeSource Mode=FindAncestor,
                                                     AncestorType={x:Type UserControl}}}">
-                                        <iconPacks:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        <iconPacks:PackIconMaterial Kind="PencilOutline"
+                                                                    Style="{StaticResource gridButtonIcon}" />
                                     </Button>
                                     <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
                                             CommandParameter="{Binding}"
                                             Command="{Binding Path=ViewModel.DeleteQuestion,
                                                     RelativeSource={RelativeSource Mode=FindAncestor,
                                                     AncestorType={x:Type UserControl}}}">
-                                        <iconPacks:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        <iconPacks:PackIconMaterial Kind="DeleteOutline"
+                                                                    Style="{StaticResource gridButtonIcon}" />
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-                
+
             </DataGrid>
             <!-- <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal"> -->
             <!--     <ui:Button Appearance="Info" Content="Изменить" Margin="5,0"/> -->

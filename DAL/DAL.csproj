@@ -1,26 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.16" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.16" />
-    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.16"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.16"/>
+        <PackageReference Include="PropertyChanged.Fody" Version="4.1.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Databases\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Databases\"/>
+        <Folder Include="Models\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Databases\Database.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="Databases\Database.db">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
 </Project>

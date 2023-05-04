@@ -1,13 +1,6 @@
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using DAL.Annotations;
+namespace DAL;
 
-namespace DAL
+public class EntityBase
 {
-    public class EntityBase 
-    {
-        public int Id { get; set; }
-    }
-
+    public int Id { get; set; }
 }

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:CatalyticReforming.Views"
              xmlns:viewModels="clr-namespace:CatalyticReforming.ViewModels"
              xmlns:dal="clr-namespace:DAL;assembly=DAL"
              mc:Ignorable="d"
@@ -12,15 +11,15 @@
     <UserControl.Resources>
         <DataTemplate x:Key="QuestionTemplate" DataType="{x:Type dal:Question}">
             <StackPanel>
-                <TextBlock Text="{Binding Text}"/>
+                <TextBlock Text="{Binding Text}" />
                 <ItemsControl ItemsSource="{Binding Answers}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox  
+                                <CheckBox
                                     BindingGroup="{Binding Id}"
                                     Content="{Binding Text}"
-                                    IsChecked="{Binding IsCorrect}"/>
+                                    IsChecked="{Binding IsCorrect}" />
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -28,15 +27,15 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox IsReadOnly="True" Grid.Row="0" Text="Пройдите тестирование"></TextBox>
+        <TextBox IsReadOnly="True" Grid.Row="0" Text="Пройдите тестирование" />
         <ListBox
             Grid.Row="1" ItemsSource="{Binding Questions}"
-                 ItemTemplate="{StaticResource QuestionTemplate}"/>
+            ItemTemplate="{StaticResource QuestionTemplate}" />
     </Grid>
 </UserControl>

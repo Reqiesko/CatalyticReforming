@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 using CatalyticReforming.ViewModels.DAL_VM;
@@ -22,18 +21,19 @@ public class GenericRepository
         _contextCreator = contextCreator;
     }
 
-    public async Task<DALTYPE> Create<VMTYPE,DALTYPE>(VMTYPE dto) where DALTYPE:  EntityBase 
-                                                                  where VMTYPE: IDALVM
+    public async Task<DALTYPE> Create<VMTYPE, DALTYPE>(VMTYPE dto) where DALTYPE : EntityBase
+                                                                   where VMTYPE : IDALVM
     {
         await using var context = _contextCreator();
         var entity = dto.Adapt<DALTYPE>();
         await context.AddAsync(entity);
         await context.SaveChangesAsync();
+
         return entity;
     }
 
-    public async Task Update<VMTYPE,DALTYPE>(VMTYPE dto) where DALTYPE: EntityBase
-                                                         where VMTYPE: IDALVM
+    public async Task Update<VMTYPE, DALTYPE>(VMTYPE dto) where DALTYPE : EntityBase
+                                                          where VMTYPE : IDALVM
     {
         await using var context = _contextCreator();
 
@@ -48,15 +48,16 @@ public class GenericRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task Delete<VMTYPE,DALTYPE>(VMTYPE dto) where DALTYPE: EntityBase
-                                                         where VMTYPE: IDALVM
+    public async Task Delete<VMTYPE, DALTYPE>(VMTYPE dto) where DALTYPE : EntityBase
+                                                          where VMTYPE : IDALVM
     {
         await using var context = _contextCreator();
 
         var entity = await context.Set<DALTYPE>()
-                            .SingleOrDefaultAsync(x => x.Id == dto.Id);
+                                  .SingleOrDefaultAsync(x => x.Id == dto.Id);
 
         context.Remove(entity);
         await context.SaveChangesAsync();
     }
 }
+

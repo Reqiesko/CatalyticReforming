@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.Testing;
 
 
@@ -17,4 +15,5 @@ public partial class TestBrowserControl : IViewWithVM<TestBrowserControlVM>
 
     public TestBrowserControlVM ViewModel { get; set; }
 }
+
 

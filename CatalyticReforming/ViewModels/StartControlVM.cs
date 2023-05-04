@@ -1,9 +1,6 @@
-﻿using System;
-using CatalyticReforming.Commands;
+﻿using CatalyticReforming.Commands;
 using CatalyticReforming.Services;
 using CatalyticReforming.Views;
-
-using DAL;
 
 
 namespace CatalyticReforming.ViewModels;
@@ -11,15 +8,15 @@ namespace CatalyticReforming.ViewModels;
 public class StartControlVM : ViewModelBase
 {
     private readonly NavigationService _navigationService;
+    private RelayCommand _openResearchPageCommand;
 
     private RelayCommand _openStudyPageCommand;
-    private RelayCommand _openResearchPageCommand;
-    
+
     public StartControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
     }
-    
+
     public RelayCommand OpenStudyPageCommand
     {
         get
@@ -30,7 +27,7 @@ public class StartControlVM : ViewModelBase
             });
         }
     }
-    
+
     public RelayCommand OpenResearchPageCommand
     {
         get

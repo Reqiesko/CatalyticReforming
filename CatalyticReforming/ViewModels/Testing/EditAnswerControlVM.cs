@@ -4,20 +4,16 @@ using CatalyticReforming.Commands;
 using CatalyticReforming.Services.DialogService;
 using CatalyticReforming.ViewModels.DAL_VM;
 
-using DAL;
-
 
 namespace CatalyticReforming.ViewModels.Testing;
 
 public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {
-    public EditAnswerControlVM()
-    {
-        
-    }
+    private RelayCommand _applyCommand;
+
+    private RelayCommand _cancelCommand;
 
     public AnswerVM EditingAnswer { get; set; }
-    private RelayCommand _applyCommand;
 
     public RelayCommand ApplyCommand
     {
@@ -30,8 +26,6 @@ public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, II
             });
         }
     }
-
-    private RelayCommand _cancelCommand;
 
     public RelayCommand CancelCommand
     {
@@ -51,6 +45,8 @@ public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, II
         set => EditingAnswer = (AnswerVM) value;
     }
 
-    public object Result { get; set; }
     public Action FinishInteraction { get; set; }
+
+    public object Result { get; set; }
 }
+

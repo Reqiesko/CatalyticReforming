@@ -13,19 +13,23 @@ using DAL;
 
 using Mapster;
 
-using Wpf.Ui.Contracts;
-
 
 namespace CatalyticReforming.ViewModels.Testing;
 
 public class TestBrowserControlVM : ViewModelBase
 {
     private readonly Func<AppDbContext> _contextCreator;
-    private readonly MyDialogService _dialogService;
     private readonly DefaultDialogs _defaultDialogs;
+    private readonly MyDialogService _dialogService;
     private readonly GenericRepository _repository;
+    private RelayCommand _addQuestion;
 
-    public TestBrowserControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, DefaultDialogs defaultDialogs, GenericRepository repository)
+    private RelayCommand _deleteQuestion;
+
+    private RelayCommand _editQuestion;
+
+    public TestBrowserControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, DefaultDialogs defaultDialogs,
+                                GenericRepository repository)
     {
         _contextCreator = contextCreator;
         _dialogService = dialogService;
@@ -37,7 +41,6 @@ public class TestBrowserControlVM : ViewModelBase
     }
 
     public ObservableCollection<QuestionVM> Questions { get; set; }
-    private RelayCommand _addQuestion;
 
     public RelayCommand AddQuestion
     {
@@ -46,19 +49,18 @@ public class TestBrowserControlVM : ViewModelBase
             return _addQuestion ??= new RelayCommand(async o =>
             {
                 var newQuestion = await _dialogService.ShowDialog<EditQuestionControl>(new QuestionVM()) as QuestionVM;
-                
+
                 if (newQuestion is null)
                 {
                     return;
                 }
-                var entity = await _repository.Create<QuestionVM,Question>(newQuestion);
+
+                var entity = await _repository.Create<QuestionVM, Question>(newQuestion);
                 newQuestion.Id = entity.Id;
                 Questions.Add(newQuestion);
             });
         }
     }
-
-    private RelayCommand _editQuestion;
 
     public RelayCommand EditQuestion
     {
@@ -73,13 +75,11 @@ public class TestBrowserControlVM : ViewModelBase
                     return;
                 }
 
-                await _repository.Update<QuestionVM,Question>(res);
+                await _repository.Update<QuestionVM, Question>(res);
                 res.Adapt((QuestionVM) question);
             });
         }
     }
-
-    private RelayCommand _deleteQuestion;
 
     public RelayCommand DeleteQuestion
     {
@@ -94,11 +94,10 @@ public class TestBrowserControlVM : ViewModelBase
                     return;
                 }
 
-                await _repository.Delete<QuestionVM,Question>((QuestionVM)question);
+                await _repository.Delete<QuestionVM, Question>((QuestionVM) question);
                 Questions.Remove((QuestionVM) question);
             });
         }
     }
-
-
 }
+

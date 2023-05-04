@@ -1,6 +1,5 @@
 ﻿namespace CatalyticReforming.ViewModels;
 
-public class AdminControlVM: ViewModelBase
+public class AdminControlVM : ViewModelBase
 {
-    
 }
