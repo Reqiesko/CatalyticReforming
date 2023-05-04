@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using CatalyticReforming.Commands;
-using CatalyticReforming.Services;
 using CatalyticReforming.ViewModels;
 
 using CatalyticReforming.Utils.Commands;
