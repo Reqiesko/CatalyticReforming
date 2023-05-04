@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using CatalyticReforming.Services;
+using CatalyticReforming.Utils.Services;
+using CatalyticReforming.ViewModels;
 
 using DAL;
 
 
-namespace CatalyticReforming.ViewModels;
+namespace CatalyticReforming.Views;
 
 public class StudyControlVM : ViewModelBase
 {

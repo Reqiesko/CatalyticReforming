@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-using CatalyticReforming.Commands;
-using CatalyticReforming.Services;
-using CatalyticReforming.Views;
+using CatalyticReforming.Utils.Commands;
+using CatalyticReforming.Utils.Services;
+using CatalyticReforming.ViewModels;
 
 using DAL;
 
 
-namespace CatalyticReforming.ViewModels;
+namespace CatalyticReforming.Views;
 
 public class LoginControlVM : ViewModelBase
 {
@@ -47,12 +47,12 @@ public class LoginControlVM : ViewModelBase
                     return;
                 }
 
-                if (user.Role == UserRoles.User)
+                if (user.Role.Name == "User")
                 {
                     // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
                     _navigationService.ChangeContent<StartControl>();
                 }
-                else if (user.Role == UserRoles.Admin)
+                else if (user.Role.Name == "Admin")
                 {
                     _navigationService.ChangeContent<AdminControl>();
                 }

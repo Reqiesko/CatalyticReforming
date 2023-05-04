@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Windows;
 
-using CatalyticReforming.Commands;
-using CatalyticReforming.Services;
-using CatalyticReforming.Services.DialogService;
+using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Default_Dialogs;
+using CatalyticReforming.Utils.Services;
+using CatalyticReforming.Utils.Services.DialogService;
+using CatalyticReforming.Utils.Services.DialogService.Interfaces;
+using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
-using CatalyticReforming.Views.Testing;
 
 using DAL;
 
 using Mapster;
 
 
-namespace CatalyticReforming.ViewModels.Testing;
+namespace CatalyticReforming.Views.Testing;
 
 public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, IInteractionAware
 {

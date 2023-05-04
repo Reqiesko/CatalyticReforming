@@ -3,7 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace CatalyticReforming.Services;
+namespace CatalyticReforming.Utils.Services;
 
 public class NavigationService
 {

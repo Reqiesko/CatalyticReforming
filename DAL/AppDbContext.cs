@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -29,13 +30,25 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<UserRole>()
+                    .HasData(new UserRole()
+                    {
+                        Id = 1,
+                        Name = "Admin"
+                    });
+        modelBuilder.Entity<UserRole>()
+                    .HasData(new UserRole()
+                    {
+                        Id = 2,
+                        Name = "User"
+                    });
         modelBuilder.Entity<User>()
                     .HasData(new User
                     {
                         Id = 1,
                         Password = "u",
                         Username = "u",
-                        Role = UserRoles.User,
+                        RoleId = 2,
                         Access = false,
                     });
 
@@ -45,7 +58,7 @@ public class AppDbContext : DbContext
                         Id = 2,
                         Password = "a",
                         Username = "a",
-                        Role = UserRoles.Admin,
+                        RoleId = 1,
                         Access = true,
                     });
 

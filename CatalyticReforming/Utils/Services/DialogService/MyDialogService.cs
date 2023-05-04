@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-using CatalyticReforming.ViewModels;
+using CatalyticReforming.Utils.Services.DialogService.Interfaces;
+using CatalyticReforming.Views;
 
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Window;
 
 
-namespace CatalyticReforming.Services.DialogService;
+namespace CatalyticReforming.Utils.Services.DialogService;
 
 public class MyDialogService
 {

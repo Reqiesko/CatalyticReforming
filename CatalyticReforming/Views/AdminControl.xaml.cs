@@ -9,7 +9,7 @@ public partial class AdminControl : IViewWithVM<AdminControlVM>
     {
         InitializeComponent();
         ViewModel = App.GetService<AdminControlVM>();
-        DataContext = ViewModel;
+        DataContext = this;
     }
 
     public AdminControlVM ViewModel { get; set; }

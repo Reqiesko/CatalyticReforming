@@ -1,9 +1,9 @@
-﻿using CatalyticReforming.Commands;
-using CatalyticReforming.Services;
-using CatalyticReforming.Views;
+﻿using CatalyticReforming.Utils.Commands;
+using CatalyticReforming.Utils.Services;
+using CatalyticReforming.ViewModels;
 
 
-namespace CatalyticReforming.ViewModels;
+namespace CatalyticReforming.Views;
 
 public class StartControlVM : ViewModelBase
 {

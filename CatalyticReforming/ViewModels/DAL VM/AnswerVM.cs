@@ -1,10 +1,15 @@
-﻿namespace CatalyticReforming.ViewModels.DAL_VM;
+﻿using System;
 
-public class AnswerVM : ViewModelBase, IDALVM
+
+namespace CatalyticReforming.ViewModels.DAL_VM;
+
+public class AnswerVM : ViewModelBase, IDALVM 
 {
     public string Text { get; set; }
     public bool IsCorrect { get; set; }
     public int QuestionId { get; set; }
     public int Id { get; set; }
+
+
 }
 
