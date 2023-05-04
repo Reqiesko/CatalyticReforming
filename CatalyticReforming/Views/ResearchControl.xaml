@@ -13,31 +13,9 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <!-- <Grid.RowDefinitions> -->
-        <!--     <RowDefinition Height="Auto"/> -->
-        <!--     <RowDefinition Height="Auto"/> -->
-        <!-- </Grid.RowDefinitions> -->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" Content="Входные параметры" />
+       
+            <StackPanel>
+                <Label Grid.Row="0" Content="Входные параметры" />
 
             <controls:LabeledControlPresenter
                 Grid.Row="1"
@@ -110,10 +88,10 @@
                 Margin="10 15 10 0"
                 HorizontalAlignment="Center"
                 Command="{Binding ViewModel.StartResearchCommand}" />
-        </Grid>
+            </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <TextBlock Width="{Binding }" Margin="0 5 10 0" />
+            <TextBox Width="600" Margin="0 5 10 0" />
         </StackPanel>
     </Grid>
 </UserControl>
