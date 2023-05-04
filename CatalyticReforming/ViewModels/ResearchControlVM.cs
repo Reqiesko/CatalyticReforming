@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-
+using System.IO;
+using System.Reflection;
 using CatalyticReforming.Commands;
 using CatalyticReforming.Services;
-
 using Microsoft.Win32;
-
 
 namespace CatalyticReforming.ViewModels;
 
@@ -14,10 +13,27 @@ public class ResearchControlVM : ViewModelBase
     private NavigationService _navigationService;
 
     private RelayCommand _startResearchCommand;
-
+    
     public ResearchControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
+        MatlabCode = "% Создание таблицы/n" +
+                     "T = 490:1:503; % диапазон температур" +
+                     "/nG = 100:100:1000; % диапазон потока сырья/n" +
+                     "[TT, GG] = meshgrid(T, G);/n" +
+                     "yn = 0.1; % фиксированное значение/n" +
+                     "ya = 0.2; % фиксированное значение/n" +
+                     "F = targetFunction(TT, GG, yn, ya);/n" +
+                     "tableData = [TT(:), GG(:), F(:)];/n" +
+                     "tableHeaders = {'T', 'G', 'F'};/n" +
+                     "tableResult = array2table(tableData, 'VariableNames', tableHeaders)/n" +
+                     "% Построение графика/n" +
+                     "figure;/n" +
+                     "surf(TT, GG, F);/n" +
+                     "title('Целевая функция');/n" +
+                     "xlabel('T');/n" +
+                     "ylabel('G');/n" +
+                     "zlabel('F');";
     }
 
     public ObservableCollection<string> InsallersCollection { get; set; }
@@ -31,7 +47,8 @@ public class ResearchControlVM : ViewModelBase
     public ObservableCollection<double> AromaticHydrocarbons { get; set; }
     public ObservableCollection<double> MaterialsInput { get; set; }
     public ObservableCollection<double> Temperature { get; set; }
-
+    
+    public string MatlabCode { get; set; }
     public RelayCommand StartResearchCommand
     {
         get
@@ -40,7 +57,8 @@ public class ResearchControlVM : ViewModelBase
             {
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = GetInstallationPath("MATLAB") + "/bin/Matlab.exe"; // путь к исполняемому файлу MATLAB
-                startInfo.Arguments = "\"x = -10:0.1:10; y = x.^2; plot(x,y);\"";       // код для выполнения
+                startInfo.Arguments = "-nodesktop \"" + MatlabCode + "\"";      // код для выполнения
+                startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
                 Process.Start(startInfo);
             });
         }
