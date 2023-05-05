@@ -57,8 +57,9 @@ public class ResearchControlVM : ViewModelBase
             {
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = GetInstallationPath("MATLAB") + "/bin/Matlab.exe"; // путь к исполняемому файлу MATLAB
-                startInfo.Arguments = "-nodesktop \"" + MatlabCode + "\"";      // код для выполнения
-                startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
+                startInfo.Arguments = "-r \"" + MatlabCode + "\"";      // код для выполнения
+                //startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
+                //startInfo.UseShellExecute = false;
                 Process.Start(startInfo);
             });
         }
