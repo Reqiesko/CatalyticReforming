@@ -5,101 +5,120 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CatalyticReforming.Views"
              xmlns:controls="clr-namespace:CatalyticReforming.Views.Controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ResearchControl}"
-             d:DesignHeight="850" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="1500" d:DesignWidth="800">
+    <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-       
-            <StackPanel>
-                <Label Grid.Row="0" Content="Входные параметры" />
+        <ScrollViewer>
+        <StackPanel>
+            <ui:Card >
+                Входные параметры
+                <ui:Card.Footer>
+                    <StackPanel>
 
-                <controls:LabeledControlPresenter
-                    Grid.Row="1"
-                    HeaderText="Выберите установку"
-                    HeaderTextHorizontalAlignment="Left">
-                    <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
-                </controls:LabeledControlPresenter>
-    
-                <controls:LabeledControlPresenter
-                    Grid.Row="2"
-                    HeaderText="Реактор">
-                    <ComboBox ItemsSource="{Binding ViewModel.ReactorsCollection}" />
-                </controls:LabeledControlPresenter>
-    
-                <Label Grid.Row="3" Content="Входные параметры реактора" />
-                <controls:LabeledControlPresenter
-                    Grid.Row="4"
-                    HeaderText="Давление">
-                    <TextBox Text="{Binding ViewModel.ReactorPressure}" />
-                </controls:LabeledControlPresenter>
-    
-    
-                <controls:LabeledControlPresenter
-                    Grid.Row="5"
-                    HeaderText="Катализатор">
-                    <ComboBox ItemsSource="{Binding ViewModel.CatalystCollection}" />
-                </controls:LabeledControlPresenter>
-    
-                <Label Grid.Row="6" Content="Входные параметры катализатора" />
-                <controls:LabeledControlPresenter
-                    Grid.Row="7"
-                    HeaderText="Насыпаная плотность катализатора">
-                    <TextBox Text="{Binding ViewModel.CatalystDensity}" />
-                </controls:LabeledControlPresenter>
-                <controls:LabeledControlPresenter
-                    Grid.Row="8"
-                    HeaderText="Коэффициент прочности">
-                    <TextBox Text="{Binding ViewModel.StrengthFactor}" />
-                </controls:LabeledControlPresenter>
-    
-                <controls:LabeledControlPresenter
-                    Grid.Row="9"
-                    HeaderText="Сырье">
-                    <ComboBox ItemsSource="{Binding ViewModel.MaterialCollection}" />
-                </controls:LabeledControlPresenter>
-                <Label Grid.Row="10" Content="Входные параметры сырья" />
-                <controls:LabeledControlPresenter
-                    Grid.Row="11"
-                    HeaderText="Содержание нафтеновых углеводородов">
-                    <TextBox Text="{Binding ViewModel.NaphthenicHydrocarbons}" />
-                </controls:LabeledControlPresenter>
-                <controls:LabeledControlPresenter
-                    Grid.Row="12"
-                    HeaderText="Содержание ароматических углеводородов">
-                    <TextBox Text="{Binding ViewModel.AromaticHydrocarbons}" />
-                </controls:LabeledControlPresenter>
-                <controls:LabeledControlPresenter
-                    Grid.Row="13"
-                    HeaderText="Подача сырья">
-                    <TextBox Text="{Binding ViewModel.MaterialsInput}" />
-                </controls:LabeledControlPresenter>
-                <controls:LabeledControlPresenter
-                    Grid.Row="14"
-                    HeaderText="Температура на входе в реактор">
-                    <TextBox Text="{Binding ViewModel.Temperature}" />
-                </controls:LabeledControlPresenter>
-                
-                <CheckBox Content="Варьировать подачу сырья"
+                    <controls:LabeledControlPresenter
+                        HeaderText="Выберите установку"
+                        HeaderTextHorizontalAlignment="Left">
+                        <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
+                    </controls:LabeledControlPresenter>
+
+                    <controls:LabeledControlPresenter
+                        HeaderText="Реактор">
+                        <ComboBox ItemsSource="{Binding ViewModel.ReactorsCollection}" />
+                    </controls:LabeledControlPresenter>
+                </StackPanel>
+                </ui:Card.Footer>
+
+            </ui:Card>
+            
+            <ui:Card Margin="0,5" >
+                Входные параметры реактора
+                <ui:Card.Footer>
+                    <StackPanel>
+
+                        <controls:LabeledControlPresenter
+                            HeaderText="Давление">
+                            <TextBox Text="{Binding ViewModel.ReactorPressure}" />
+                        </controls:LabeledControlPresenter>
+
+
+                        <controls:LabeledControlPresenter
+                            HeaderText="Катализатор">
+                            <ComboBox ItemsSource="{Binding ViewModel.CatalystCollection}" />
+                        </controls:LabeledControlPresenter>
+                    </StackPanel>
+                </ui:Card.Footer>
+            </ui:Card>
+
+            <ui:Card Margin="0,5" >
+                Входные параметры катализатора
+                <ui:Card.Footer>
+                    <StackPanel>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Насыпаная плотность катализатора">
+                            <TextBox Text="{Binding ViewModel.CatalystDensity}" />
+                        </controls:LabeledControlPresenter>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Коэффициент прочности">
+                            <TextBox Text="{Binding ViewModel.StrengthFactor}" />
+                        </controls:LabeledControlPresenter>
+
+                        <controls:LabeledControlPresenter
+                            HeaderText="Сырье">
+                            <ComboBox ItemsSource="{Binding ViewModel.MaterialCollection}" />
+                        </controls:LabeledControlPresenter>
+                    </StackPanel>
+                </ui:Card.Footer>
+            </ui:Card>
+            
+            
+            <ui:Card Margin="0,5" >
+                Входные параметры сырья
+                <ui:Card.Footer>
+                    <StackPanel>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Содержание нафтеновых углеводородов">
+                            <TextBox Text="{Binding ViewModel.NaphthenicHydrocarbons}" />
+                        </controls:LabeledControlPresenter>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Содержание ароматических углеводородов">
+                            <TextBox Text="{Binding ViewModel.AromaticHydrocarbons}" />
+                        </controls:LabeledControlPresenter>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Подача сырья">
+                            <TextBox Text="{Binding ViewModel.MaterialsInput}" />
+                        </controls:LabeledControlPresenter>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Температура на входе в реактор">
+                            <TextBox Text="{Binding ViewModel.Temperature}" />
+                        </controls:LabeledControlPresenter>
+                    </StackPanel>
+                </ui:Card.Footer>
+            </ui:Card>
+
+            <CheckBox Content="Варьировать подачу сырья"
                           
-                          Command="{Binding ViewModel.ChangeMaterialCommand}"/>
-                <CheckBox Content="Варьировать температуру"
+                      Command="{Binding ViewModel.ChangeMaterialCommand}"/>
+            <CheckBox Content="Варьировать температуру"
                          
-                          Command="{Binding ViewModel.ChangeTemperatureCommand}"/>
-                
-                <Button
-                    Grid.Row="15"
-                    Content="Начать исследование"
-                    Margin="10 15 10 0"
-                    HorizontalAlignment="Center"
-                    Command="{Binding ViewModel.StartResearchCommand}"/>
-            </StackPanel>
+                      Command="{Binding ViewModel.ChangeTemperatureCommand}"/>
+
+            
+            <Button
+                Content="Начать исследование"
+                Margin="10 15 10 0"
+                HorizontalAlignment="Center"
+                Command="{Binding ViewModel.StartResearchCommand}" />
+        </StackPanel>
+            </ScrollViewer>
 
         <StackPanel Grid.Column="1">
-            <TextBox Text="{Binding .ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
+            <TextBox Width="600" Margin="0 5 10 0" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,7 +1,4 @@
-﻿using CatalyticReforming.ViewModels;
-
-
-namespace CatalyticReforming.Views;
+﻿namespace CatalyticReforming.Views;
 
 public partial class ResearchControl : IViewWithVM<ResearchControlVM>
 {
@@ -14,3 +11,4 @@ public partial class ResearchControl : IViewWithVM<ResearchControlVM>
 
     public ResearchControlVM ViewModel { get; set; }
 }
+
