@@ -8,7 +8,7 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:ResearchControl}"
-             d:DesignHeight="1500" d:DesignWidth="800">
+             d:DesignHeight="1500" d:DesignWidth="900">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -67,11 +67,6 @@
                             HeaderText="Коэффициент прочности">
                             <TextBox Text="{Binding ViewModel.StrengthFactor}" />
                         </controls:LabeledControlPresenter>
-
-                        <controls:LabeledControlPresenter
-                            HeaderText="Сырье">
-                            <ComboBox ItemsSource="{Binding ViewModel.MaterialCollection}" />
-                        </controls:LabeledControlPresenter>
                     </StackPanel>
                 </ui:Card.Footer>
             </ui:Card>
@@ -81,6 +76,10 @@
                 Входные параметры сырья
                 <ui:Card.Footer>
                     <StackPanel>
+                        <controls:LabeledControlPresenter
+                            HeaderText="Сырье">
+                            <ComboBox ItemsSource="{Binding ViewModel.MaterialCollection}" />
+                        </controls:LabeledControlPresenter>
                         <controls:LabeledControlPresenter
                             HeaderText="Содержание нафтеновых углеводородов">
                             <TextBox Text="{Binding ViewModel.NaphthenicHydrocarbons}" />
@@ -95,17 +94,15 @@
                         </controls:LabeledControlPresenter>
                         <controls:LabeledControlPresenter
                             HeaderText="Температура на входе в реактор">
-                            <TextBox Text="{Binding ViewModel.Temperature}" />
+                            <TextBox Text="{Binding ViewModel.Temperature}"/>
                         </controls:LabeledControlPresenter>
                     </StackPanel>
                 </ui:Card.Footer>
             </ui:Card>
 
             <CheckBox Content="Варьировать подачу сырья"
-                          
                       Command="{Binding ViewModel.ChangeMaterialCommand}"/>
             <CheckBox Content="Варьировать температуру"
-                         
                       Command="{Binding ViewModel.ChangeTemperatureCommand}"/>
 
             
@@ -118,7 +115,7 @@
             </ScrollViewer>
 
         <StackPanel Grid.Column="1">
-            <TextBox Width="600" Margin="0 5 10 0" />
+            <TextBox Text="{Binding .ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
         </StackPanel>
     </Grid>
 </UserControl>

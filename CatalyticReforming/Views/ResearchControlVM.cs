@@ -22,7 +22,7 @@ public class ResearchControlVM : ViewModelBase
     private RelayCommand _changeTemperatureCommand;
     private RelayCommand _changeMaterialCommand;
     private RelayCommand _materialCheckChangeCommand;
-    private RelayCommand _temperatureCheckChangeCommand;
+    private RelayCommand _temperatureChangeCommand;
     private bool TemperatureCheckBox { get; set; }
     private bool MaterialCheckBox { get; set; }
     public string MatlabCode { get; set; }
@@ -37,38 +37,68 @@ public class ResearchControlVM : ViewModelBase
     public ObservableCollection<string> MaterialCollection { get; set; }
     public ObservableCollection<double> NaphthenicHydrocarbons { get; set; }
     public ObservableCollection<double> AromaticHydrocarbons { get; set; }
-    public string MaterialsInput { get; set; }
-    public string Temperature { get; set; }
+    
+    private string _temperature;
+    public string Temperature
+    {
+        get { return _temperature; }
+        set
+        {
+            if (_temperature != value)
+            {
+                _temperature = value;
+                OnPropertyChanged(nameof(Temperature));
+                UpdateMatlabCode();
+            }
+        }
+    }
+
+    private string _materialsInput;
+    public string MaterialsInput
+    {
+        get { return _materialsInput; }
+        set
+        {
+            if (_materialsInput != value)
+            {
+                _materialsInput = value;
+                OnPropertyChanged(nameof(MaterialsInput));
+                UpdateMatlabCode();
+            }
+        }
+    }
     
     public ResearchControlVM(NavigationService navigationService)
     {
         _navigationService = navigationService;
         MaterialCheckBox = false;
         TemperatureCheckBox = false;
-        
-        MatlabCode = $"function [tableResult] = targetFunction()/n" +
-                     "% Определение параметров функции/n" +
-                     "a = 15.802;/n" +
-                     "b = 0.03155;/n" +
-                     "c = 0.95975;/n" +
-                     "d = 2.4206;/n" +
-                     "yn = 0.1;/n" +
-                     "ya = 0.2;/n" +
-                     "% Создание таблицы/n" +
-                     "T = " + Temperature + ";/n" +
-                     "G = "+ MaterialsInput + ";/n" +
-                     "[TT, GG] = meshgrid(T, G);/n" +
-                     "F = a - b * TT + c * GG - d*(yn - ya);/n" +
-                     "tableData = [TT(:), GG(:), F(:)];/n" +
-                     "tableHeaders = {'T', 'G', 'F'};/n" +
-                     "tableResult = array2table(tableData, 'VariableNames', tableHeaders);/n" +
-                     "% Построение графика/n" +
-                     "figure;/n" +
-                     "surf(TT, GG, F);/n" +
-                     "title('Целевая функция');/n" +
-                     "xlabel('T');/n" +
-                     "ylabel('G');/n" +
-                     "zlabel('F');/n" +
+        MatlabCode = $"function [tableResult] = targetFunction()\n" +
+                     "% Определение параметров функции\n" +
+                     "a = 15.802;\n" +
+                     "b = 0.03155;\n" +
+                     "c = 0.95975;\n" +
+                     "d = 2.4206;\n" +
+                     "yn = 0.1;\n" +
+                     "ya = 0.2;\n" +
+                     "% Создание таблицы\n" +
+                     "T = " + Temperature + ";\n" +
+                     "G = "+ MaterialsInput + ";\n" +
+                     "[TT, GG] = meshgrid(T, G);\n" +
+                     "F = a - b * TT + c * GG - d*(yn - ya);\n" +
+                     "tableData = [TT(:), GG(:), F(:)];\n" +
+                     "tableHeaders = {'T', 'G', 'F'};\n" +
+                     "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
+                     "% Отображение таблицы в новом окне\n" +
+                     "figure;\n" +
+                     "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
+                     "% Построение графика\n" +
+                     "figure;\n" +
+                     "surf(TT, GG, F);\n" +
+                     "title('Целевая функция');\n" +
+                     "xlabel('T');\n" +
+                     "ylabel('G');\n" +
+                     "zlabel('F');\n" +
                      "end";
     }
 
@@ -82,10 +112,16 @@ public class ResearchControlVM : ViewModelBase
         {
             return _startResearchCommand ??= new RelayCommand(o =>
             {
+                var scriptPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +
+                                 "/MatlabCodeFiles/targetFunction.m";
+                var matlabCodeFile = new StreamWriter(scriptPath);
+                matlabCodeFile.Write(MatlabCode);
+                matlabCodeFile.Close();
+                var arguments = "tableResult = targetFunction();";
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = GetInstallationPath("MATLAB") + "/bin/Matlab.exe"; // путь к исполняемому файлу MATLAB
-                startInfo.Arguments = "-r \"" + MatlabCode + "\"";      // код для выполнения
-                //startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
+                startInfo.Arguments = $"-r \"run('{scriptPath}');\"";      // код для выполнения
+                startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
                 //startInfo.UseShellExecute = false;
                 Process.Start(startInfo);
             });
@@ -103,30 +139,7 @@ public class ResearchControlVM : ViewModelBase
                 if (TemperatureCheckBox == true)
                 {
                     Temperature = "490:1:503";
-                    MatlabCode = $"function [tableResult] = targetFunction()/n" +
-                                 "% Определение параметров функции/n" +
-                                 "a = 15.802;/n" +
-                                 "b = 0.03155;/n" +
-                                 "c = 0.95975;/n" +
-                                 "d = 2.4206;/n" +
-                                 "yn = 0.1;/n" +
-                                 "ya = 0.2;/n" +
-                                 "% Создание таблицы/n" +
-                                 "T = " + Temperature + ";/n" +
-                                 "G = "+ MaterialsInput + ";/n" +
-                                 "[TT, GG] = meshgrid(T, G);/n" +
-                                 "F = a - b * TT + c * GG - d*(yn - ya);/n" +
-                                 "tableData = [TT(:), GG(:), F(:)];/n" +
-                                 "tableHeaders = {'T', 'G', 'F'};/n" +
-                                 "tableResult = array2table(tableData, 'VariableNames', tableHeaders);/n" +
-                                 "% Построение графика/n" +
-                                 "figure;/n" +
-                                 "surf(TT, GG, F);/n" +
-                                 "title('Целевая функция');/n" +
-                                 "xlabel('T');/n" +
-                                 "ylabel('G');/n" +
-                                 "zlabel('F');/n" +
-                                 "end";
+                    UpdateMatlabCode();
                 }
                 else
                 {
@@ -146,30 +159,7 @@ public class ResearchControlVM : ViewModelBase
                 if (MaterialCheckBox == true)
                 {
                     MaterialsInput = "8.87:0.1:16.04";
-                    MatlabCode = $"function [tableResult] = targetFunction()/n" +
-                                 "% Определение параметров функции/n" +
-                                 "a = 15.802;/n" +
-                                 "b = 0.03155;/n" +
-                                 "c = 0.95975;/n" +
-                                 "d = 2.4206;/n" +
-                                 "yn = 0.1;/n" +
-                                 "ya = 0.2;/n" +
-                                 "% Создание таблицы/n" +
-                                 "T = " + Temperature + ";/n" +
-                                 "G = "+ MaterialsInput + ";/n" +
-                                 "[TT, GG] = meshgrid(T, G);/n" +
-                                 "F = a - b * TT + c * GG - d*(yn - ya);/n" +
-                                 "tableData = [TT(:), GG(:), F(:)];/n" +
-                                 "tableHeaders = {'T', 'G', 'F'};/n" +
-                                 "tableResult = array2table(tableData, 'VariableNames', tableHeaders);/n" +
-                                 "% Построение графика/n" +
-                                 "figure;/n" +
-                                 "surf(TT, GG, F);/n" +
-                                 "title('Целевая функция');/n" +
-                                 "xlabel('T');/n" +
-                                 "ylabel('G');/n" +
-                                 "zlabel('F');/n" +
-                                 "end";
+                    UpdateMatlabCode();
                 }
                 else
                 {
@@ -183,7 +173,7 @@ public class ResearchControlVM : ViewModelBase
     {
         get
         {
-            return _temperatureCheckChangeCommand ??= new RelayCommand(o =>
+            return _temperatureChangeCommand ??= new RelayCommand(o =>
             {
                 TemperatureCheckBox = TemperatureCheckBox != true;
             });
@@ -199,6 +189,38 @@ public class ResearchControlVM : ViewModelBase
                 MaterialCheckBox = MaterialCheckBox != true;
             });
         }
+    }
+
+    private void UpdateMatlabCode()
+    {
+        string matlabCode = $"function [tableResult] = targetFunction()\n" +
+                            "% Определение параметров функции\n" +
+                            "a = 15.802;\n" +
+                            "b = 0.03155;\n" +
+                            "c = 0.95975;\n" +
+                            "d = 2.4206;\n" +
+                            "yn = 0.1;\n" +
+                            "ya = 0.2;\n" +
+                            "% Создание таблицы\n" +
+                            "T = " + Temperature + ";\n" +
+                            "G = "+ MaterialsInput + ";\n" +
+                            "[TT, GG] = meshgrid(T, G);\n" +
+                            "F = a - b * TT + c * GG - d*(yn - ya);\n" +
+                            "tableData = [TT(:), GG(:), F(:)];\n" +
+                            "tableHeaders = {'T', 'G', 'F'};\n" +
+                            "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
+                            "% Отображение таблицы в новом окне\n" +
+                            "figure;\n" +
+                            "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
+                            "% Построение графика\n" +
+                            "figure;\n" +
+                            "surf(TT, GG, F);\n" +
+                            "title('Целевая функция');\n" +
+                            "xlabel('T');\n" +
+                            "ylabel('G');\n" +
+                            "zlabel('F');\n" +
+                            "end";
+        MatlabCode = matlabCode;
     }
     
     private string GetInstallationPath(string programName)
