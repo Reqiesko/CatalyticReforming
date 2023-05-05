@@ -2,7 +2,7 @@
 using System.Windows.Input;
 
 
-namespace CatalyticReforming.Commands;
+namespace CatalyticReforming.Utils.Commands;
 
 public class RelayCommand : ICommand
 {

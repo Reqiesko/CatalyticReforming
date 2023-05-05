@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:CatalyticReforming.ViewModels"
+             xmlns:views="clr-namespace:CatalyticReforming.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="500"
-             d:DataContext="{d:DesignInstance viewModels:StartControlVM}">
+             d:DataContext="{d:DesignInstance views:StartControlVM}">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid>

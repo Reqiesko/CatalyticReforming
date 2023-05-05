@@ -15,7 +15,9 @@ public class User : EntityBase
 
     [Required]
     [StringLength(50)]
-    public string Role { get; set; }
+    public virtual UserRole Role { get; set; }
+
+    public int RoleId { get; set; }
 
     public bool Access { get; set; }
 }

@@ -5,9 +5,9 @@ using System.Windows;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 
-using CatalyticReforming.Services;
-using CatalyticReforming.Services.DialogService;
 using CatalyticReforming.Utils.Default_Dialogs;
+using CatalyticReforming.Utils.Services;
+using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.Views;
 
 using DAL;

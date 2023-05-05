@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace CatalyticReforming.Services.DialogService;
+namespace CatalyticReforming.Utils.Services.DialogService.Interfaces;
 
 public interface IInteractionAware
 {

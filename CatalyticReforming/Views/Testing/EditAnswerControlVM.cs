@@ -1,11 +1,12 @@
 ﻿using System;
 
-using CatalyticReforming.Commands;
-using CatalyticReforming.Services.DialogService;
+using CatalyticReforming.Utils.Commands;
+using CatalyticReforming.Utils.Services.DialogService.Interfaces;
+using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
 
-namespace CatalyticReforming.ViewModels.Testing;
+namespace CatalyticReforming.Views.Testing;
 
 public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {

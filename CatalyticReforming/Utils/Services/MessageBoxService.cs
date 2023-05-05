@@ -9,7 +9,7 @@ using Button = Wpf.Ui.Controls.Button;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 
-namespace CatalyticReforming.Services;
+namespace CatalyticReforming.Utils.Services;
 
 public class MessageBoxService
 {

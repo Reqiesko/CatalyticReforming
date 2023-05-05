@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using CatalyticReforming.ViewModels.DAL_VM;
@@ -10,7 +11,7 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace CatalyticReforming.Services;
+namespace CatalyticReforming.Utils.Services;
 
 public class GenericRepository
 {
@@ -21,6 +22,15 @@ public class GenericRepository
         _contextCreator = contextCreator;
     }
 
+    public async Task<List<VMTYPE>> GetAll<VMTYPE, DALTYPE>() where DALTYPE : EntityBase
+                                                              where VMTYPE : IDALVM
+    {
+        await using var context = _contextCreator();
+
+        return context.Set<DALTYPE>()
+                      .Adapt<List<VMTYPE>>();
+    }
+    
     public async Task<DALTYPE> Create<VMTYPE, DALTYPE>(VMTYPE dto) where DALTYPE : EntityBase
                                                                    where VMTYPE : IDALVM
     {
