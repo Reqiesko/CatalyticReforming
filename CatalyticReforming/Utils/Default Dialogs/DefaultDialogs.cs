@@ -21,5 +21,11 @@ public class DefaultDialogs
                                              "Предупреждение",
                                              MessageBoxButton.YesNo);
     }
+    public async Task<MessageBoxResult> ShowWarning(string warningText)
+    {
+        return await _messageBoxService.Show(warningText,
+                                             "Предупреждение",
+                                             MessageBoxButton.OK);
+    }
 }
 

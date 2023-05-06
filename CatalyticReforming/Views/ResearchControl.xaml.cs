@@ -1,4 +1,6 @@
-﻿namespace CatalyticReforming.Views;
+﻿using System.Windows;
+
+namespace CatalyticReforming.Views;
 
 public partial class ResearchControl : IViewWithVM<ResearchControlVM>
 {
@@ -10,5 +12,29 @@ public partial class ResearchControl : IViewWithVM<ResearchControlVM>
     }
 
     public ResearchControlVM ViewModel { get; set; }
+
+    private void TemperatureCheckBox_OnChecked(object sender, RoutedEventArgs e)
+    {
+        if (TemperatureCheckBox.IsChecked == true)
+        {
+            MaterialCheckBox.IsEnabled = false;
+        }
+        else
+        {
+            MaterialCheckBox.IsEnabled = true;
+        }
+    }
+
+    private void MaterialCheckBox_OnChecked(object sender, RoutedEventArgs e)
+    {
+        if (MaterialCheckBox.IsChecked == true)
+        {
+            TemperatureCheckBox.IsEnabled = false;
+        }
+        else
+        {
+            TemperatureCheckBox.IsEnabled = true;
+        }
+    }
 }
 
