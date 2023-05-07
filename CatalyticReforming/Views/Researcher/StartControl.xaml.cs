@@ -1,7 +1,7 @@
-﻿using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Researcher;
 
 public partial class StartControl : IViewWithVM<StartControlVM>
 {

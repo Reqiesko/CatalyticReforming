@@ -6,7 +6,7 @@ using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
 
-namespace CatalyticReforming.Views.Testing;
+namespace CatalyticReforming.Views.Admin.Testing;
 
 public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {

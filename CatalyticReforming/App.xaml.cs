@@ -9,6 +9,7 @@ using CatalyticReforming.Utils.Default_Dialogs;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.Views;
+using CatalyticReforming.Views.Auth;
 
 using DAL;
 

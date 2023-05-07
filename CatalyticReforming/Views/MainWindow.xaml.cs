@@ -1,8 +1,7 @@
-﻿using CatalyticReforming.ViewModels;
-using CatalyticReforming.Views;
+﻿using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming;
+namespace CatalyticReforming.Views;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml

@@ -11,7 +11,7 @@ using CatalyticReforming.ViewModels.DAL_VM;
 using DAL;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Admin;
 
 public class UserEditControlVM: ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {

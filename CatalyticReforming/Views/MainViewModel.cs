@@ -1,7 +1,7 @@
 ﻿using CatalyticReforming.ViewModels;
 
 
-namespace CatalyticReforming;
+namespace CatalyticReforming.Views;
 
 public class MainViewModel : ViewModelBase
 {

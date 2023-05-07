@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
-using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.Views.Auth;
+
 using DAL;
+
 using Mapster;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Researcher;
 
 public class StudyControlVM : ViewModelBase
 {

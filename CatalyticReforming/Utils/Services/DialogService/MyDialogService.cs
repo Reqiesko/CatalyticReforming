@@ -6,6 +6,7 @@ using System.Windows.Controls;
 
 using CatalyticReforming.Utils.Services.DialogService.Interfaces;
 using CatalyticReforming.Views;
+using CatalyticReforming.Views.Shared;
 
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Window;

@@ -14,7 +14,7 @@ using DAL;
 using Mapster;
 
 
-namespace CatalyticReforming.Views.Testing;
+namespace CatalyticReforming.Views.Admin.Testing;
 
 public class TestBrowserControlVM : ViewModelBase
 {

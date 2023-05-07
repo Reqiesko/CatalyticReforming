@@ -3,16 +3,17 @@ using System.Linq;
 
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
-using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
-using CatalyticReforming.Views.Auth;
+using CatalyticReforming.Views.Admin;
+using CatalyticReforming.Views.Researcher;
 
 using DAL;
+
 using Mapster;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Auth;
 
 public class LoginControlVM : ViewModelBase
 {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Media;
 
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Default_Dialogs;
@@ -8,6 +7,7 @@ using CatalyticReforming.Utils.Services;
 using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.Views.Auth;
 
 using DAL;
 
@@ -16,7 +16,7 @@ using Mapster;
 using NavigationService = CatalyticReforming.Utils.Services.NavigationService;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Admin;
 
 public class AdminControlVM : ViewModelBase
 {

@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-using CatalyticReforming.ViewModels;
+using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Auth;
 
 public partial class LoginControl : IViewWithVM<LoginControlVM>
 {

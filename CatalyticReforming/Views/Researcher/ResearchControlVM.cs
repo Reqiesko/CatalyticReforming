@@ -2,18 +2,17 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using CatalyticReforming.ViewModels;
 
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Default_Dialogs;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
-
+using CatalyticReforming.Views.Auth;
 
 using Microsoft.Win32;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Researcher;
 
 public class ResearchControlVM : ViewModelBase
 {

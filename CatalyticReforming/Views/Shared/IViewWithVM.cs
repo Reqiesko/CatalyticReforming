@@ -1,4 +1,4 @@
-﻿namespace CatalyticReforming.Views;
+﻿namespace CatalyticReforming.Views.Shared;
 
 public interface IViewWithVM<ViewModelType> : IViewWithVM
 {

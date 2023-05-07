@@ -1,7 +1,7 @@
-﻿using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Admin;
 
 public partial class AdminControl : IViewWithVM<AdminControlVM>
 {

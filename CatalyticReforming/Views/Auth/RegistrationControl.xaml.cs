@@ -1,6 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using CatalyticReforming.Views.Shared;
+
 
 namespace CatalyticReforming.Views.Auth;
 

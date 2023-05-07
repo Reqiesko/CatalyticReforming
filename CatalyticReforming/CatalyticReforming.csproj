@@ -37,9 +37,6 @@
         <Compile Update="Views\Admin\Testing\EditAnswerControlVM.cs">
           <DependentUpon>EditAnswerControl.xaml</DependentUpon>
         </Compile>
-        <Compile Update="Views\Admin\Testing\TestBrowserControlVM.cs">
-          <DependentUpon>EditQuestionControlVM.cs</DependentUpon>
-        </Compile>
         <Compile Update="Views\Admin\AdminControlVM.cs">
           <DependentUpon>AdminControl.xaml</DependentUpon>
         </Compile>
@@ -51,6 +48,12 @@
         </Compile>
         <Compile Update="Views\Researcher\StartControlVM.cs">
           <DependentUpon>StartControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\Testing\EditQuestionControlVM.cs">
+          <DependentUpon>EditQuestionControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\Testing\TestBrowserControlVM.cs">
+          <DependentUpon>TestBrowserControl.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
 
@@ -69,10 +72,6 @@
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Admin\Testing\TestBrowserControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <DependentUpon>EditQuestionControlVM.cs</DependentUpon>
       </Page>
       <Page Update="Views\Admin\Testing\EditQuestionControl.xaml">
         <Generator>MSBuild:Compile</Generator>

@@ -1,7 +1,7 @@
-﻿using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming.Views.Testing;
+namespace CatalyticReforming.Views.Admin.Testing;
 
 public partial class TestBrowserControl : IViewWithVM<TestBrowserControlVM>
 {

@@ -1,9 +1,7 @@
-﻿using System.Windows.Controls;
-
-using CatalyticReforming.ViewModels;
+﻿using CatalyticReforming.Views.Shared;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Admin;
 
 public partial class EditUserControl : IViewWithVM<UserEditControlVM>
 {

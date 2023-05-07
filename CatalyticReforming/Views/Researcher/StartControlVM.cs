@@ -1,9 +1,10 @@
 ﻿using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
+using CatalyticReforming.Views.Auth;
 
 
-namespace CatalyticReforming.Views;
+namespace CatalyticReforming.Views.Researcher;
 
 public class StartControlVM : ViewModelBase
 {

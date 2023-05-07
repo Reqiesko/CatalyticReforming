@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 
 
-namespace CatalyticReforming.Views.Controls;
+namespace CatalyticReforming.Views.Shared.Controls;
 
 public class LabeledControlPresenter : ContentControl
 {

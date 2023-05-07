@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 
-namespace CatalyticReforming.Views;
+using CatalyticReforming.Views.Shared;
+
+
+namespace CatalyticReforming.Views.Researcher;
 
 public partial class ResearchControl : IViewWithVM<ResearchControlVM>
 {

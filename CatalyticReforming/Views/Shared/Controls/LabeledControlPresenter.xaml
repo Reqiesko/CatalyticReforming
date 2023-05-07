@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:CatalyticReforming.Views.Controls">
+                    xmlns:controls="clr-namespace:CatalyticReforming.Views.Shared.Controls">
     <Style TargetType="{x:Type controls:LabeledControlPresenter}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />

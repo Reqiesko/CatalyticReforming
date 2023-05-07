@@ -1,6 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using CatalyticReforming.Views.Shared;
 
-namespace CatalyticReforming.Views;
+
+namespace CatalyticReforming.Views.Researcher;
 
 public partial class StudyControl : IViewWithVM<StudyControlVM>
 {
