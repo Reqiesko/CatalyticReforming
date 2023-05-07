@@ -10,9 +10,9 @@
              d:DataContext="{d:DesignInstance local:RegistrationControl}"
 
              d:DesignHeight="400" d:DesignWidth="400">
-    <Grid Margin="5">
-        <Grid>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <ui:Card HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+            <StackPanel >
                 <Label Content="Введите имя пользователя и пароль" Margin="10" Height="40" />
                 <controls:LabeledControlPresenter HeaderText="Имя пользователя" HeaderTextHorizontalAlignment="Left">
                     <TextBox
@@ -34,6 +34,6 @@
 
                 <Label Content="{Binding ViewModel.ErrorMessage}" Margin="10" Height="40" />
             </StackPanel>
-        </Grid>
-    </Grid>
+        
+    </ui:Card>
 </UserControl>

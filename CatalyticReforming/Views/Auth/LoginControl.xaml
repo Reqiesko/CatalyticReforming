@@ -5,21 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:CatalyticReforming.Views.Shared.Controls"
              xmlns:auth="clr-namespace:CatalyticReforming.Views.Auth"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance auth:LoginControl}"
 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <ui:Card HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel >
             <Label Content="Пожалуйста авторизируйтесь" Margin="10" Height="40" />
             <controls:LabeledControlPresenter HeaderText="Username" HeaderTextHorizontalAlignment="Left">
-                <TextBox Text="{Binding ViewModel.Username}" HorizontalAlignment="Stretch" />
+                <TextBox Text="{Binding ViewModel.Username}"  />
             </controls:LabeledControlPresenter>
-            <controls:LabeledControlPresenter HeaderText="Password" Margin="0, 5" HorizontalAlignment="Stretch"
+            <controls:LabeledControlPresenter HeaderText="Password" Margin="0, 5" 
                                               HeaderTextHorizontalAlignment="Left">
                 <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" />
             </controls:LabeledControlPresenter>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                 <Button Content="Войти" HorizontalAlignment="Center" Command="{Binding ViewModel.LoginCommand}"
                         Margin="0,0,5,0"
                         Width="120" />
@@ -30,5 +31,5 @@
 
             <Label Content="{Binding ViewModel.ErrorMessage}" Margin="10" Height="40" />
         </StackPanel>
-    </Grid>
+    </ui:Card>
 </UserControl>
