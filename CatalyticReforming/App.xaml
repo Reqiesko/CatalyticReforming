@@ -7,8 +7,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="Views/Controls/LabeledControlPresenter.xaml" />
-                <ResourceDictionary Source="Views/styles/DataGridStyle.xaml" />
+                <ResourceDictionary Source="Views/Shared/Controls/LabeledControlPresenter.xaml" />
+                <ResourceDictionary Source="Views/Shared/styles/DataGridStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

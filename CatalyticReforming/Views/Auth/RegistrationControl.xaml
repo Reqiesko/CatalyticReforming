@@ -1,0 +1,34 @@
+<UserControl x:Class="CatalyticReforming.Views.Auth.RegistrationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CatalyticReforming.Views.Auth"
+             xmlns:controls="clr-namespace:CatalyticReforming.Views.Controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:RegistrationControl}"
+
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid Margin="5">
+        <Grid>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Введите имя пользователя и пароль" Margin="10" Height="40" />
+                <controls:LabeledControlPresenter HeaderText="Имя пользователя" HeaderTextHorizontalAlignment="Left">
+                    <TextBox Text="{Binding ViewModel.NewUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="330" />
+                </controls:LabeledControlPresenter>
+                <controls:LabeledControlPresenter HeaderText="Пароль" Margin="0, 5" HeaderTextHorizontalAlignment="Left">
+                    <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Width="330" />
+                </controls:LabeledControlPresenter>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
+                    <ui:Button Content="Назад" HorizontalAlignment="Center" Command="{Binding ViewModel.ToLoginCommand}" Margin="5,0"
+                               Width="160" />
+                    <ui:Button Appearance="Info"  Content="Зарегистрироваться" HorizontalAlignment="Center" Command="{Binding ViewModel.RegisterCommand}" Margin="5,0"
+                            Width="160" />
+                </StackPanel>
+            
+                <Label Content="{Binding ViewModel.ErrorMessage}" Margin="10" Height="40" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

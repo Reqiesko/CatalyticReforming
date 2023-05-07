@@ -10,14 +10,22 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DataContext="{d:DesignInstance local:AdminControl}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-
-        <TabControl>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Background="Transparent">
+            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24" Command="{Binding ViewModel.ChangeUserCommand}"/>
+        </Menu>
+        <Grid Margin="15,0,15,15" Grid.Row="1">
+            
+            <TabControl>
             <TabItem Header="Редактирование учетных записей">
                 <TabItem.Content>
                     <StackPanel Margin="8">
                         <StackPanel Orientation="Horizontal">
-                        <ui:Button Content="Добавить вопрос" Appearance="Success" Command="{Binding ViewModel.AddQuestion}"/>
+                        <ui:Button Content="Добавить пользователя" Appearance="Success" Command="{Binding ViewModel.AddUser}"/>
                     </StackPanel>
                     <DataGrid
                         RowStyle="{DynamicResource DataGridRowStyle1}"
@@ -74,5 +82,6 @@
                 <testing:TestBrowserControl />
             </TabItem>
         </TabControl>
+        </Grid>
     </Grid>
 </UserControl>

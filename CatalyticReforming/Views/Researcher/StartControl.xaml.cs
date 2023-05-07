@@ -9,7 +9,7 @@ public partial class StartControl : IViewWithVM<StartControlVM>
     {
         InitializeComponent();
         ViewModel = App.GetService<StartControlVM>();
-        DataContext = ViewModel;
+        DataContext = this;
     }
 
     public StartControlVM ViewModel { get; set; }

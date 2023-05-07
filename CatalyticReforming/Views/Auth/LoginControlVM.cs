@@ -6,6 +6,8 @@ using CatalyticReforming.Utils.Services;
 using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.Views.Auth;
+
 using DAL;
 using Mapster;
 
@@ -25,6 +27,7 @@ public class LoginControlVM : ViewModelBase
     {
         _navigationService = navigationService;
         _userService = userService;
+        _userService.CurrentUser = null;
         _dbContext = new AppDbContext();
     }
 
@@ -71,4 +74,18 @@ public class LoginControlVM : ViewModelBase
             });
         }
     }
+    private RelayCommand _registerCommand;
+
+    public RelayCommand RegisterCommand
+    {
+        get
+        {
+            return _registerCommand ??= new RelayCommand(_ =>
+            {
+                _navigationService.ChangeContent<RegistrationControl>();
+            });
+        }
+    }
+    
+
 }

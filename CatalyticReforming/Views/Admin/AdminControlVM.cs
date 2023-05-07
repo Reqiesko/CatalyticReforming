@@ -13,6 +13,8 @@ using DAL;
 
 using Mapster;
 
+using NavigationService = CatalyticReforming.Utils.Services.NavigationService;
+
 
 namespace CatalyticReforming.Views;
 
@@ -21,12 +23,14 @@ public class AdminControlVM : ViewModelBase
     private readonly MyDialogService _dialogService;
     private readonly GenericRepository _repository;
     private readonly DefaultDialogs _defaultDialogs;
+    private readonly NavigationService _navigationService;
 
-    public AdminControlVM(MyDialogService dialogService, GenericRepository repository, DefaultDialogs defaultDialogs)
+    public AdminControlVM(MyDialogService dialogService, GenericRepository repository, DefaultDialogs defaultDialogs, NavigationService navigationService)
     {
         _dialogService = dialogService;
         _repository = repository;
         _defaultDialogs = defaultDialogs;
+        _navigationService = navigationService;
         Users = new ObservableCollection<UserVM>(_repository.GetAll<UserVM, User>().Result);
 
     }
@@ -91,5 +95,18 @@ public class AdminControlVM : ViewModelBase
             });
         }
     }
+    private RelayCommand _changeUserCommand;
 
+    public RelayCommand ChangeUserCommand
+    {
+        get
+        {
+            return _changeUserCommand ??= new RelayCommand(o =>
+            {
+                _navigationService.ChangeContent<LoginControl>();
+            });
+        }
+    }
+
+    
 }

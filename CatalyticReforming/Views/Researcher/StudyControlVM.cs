@@ -46,4 +46,30 @@ public class StudyControlVM : ViewModelBase
             });
         }
     }
+    private RelayCommand _changeUserCommand;
+
+    public RelayCommand ChangeUserCommand
+    {
+        get
+        {
+            return _changeUserCommand ??= new RelayCommand(o =>
+            {
+                _navigationService.ChangeContent<LoginControl>();
+            });
+        }
+    }
+
+    private RelayCommand _navigateBackCommand;
+
+    public RelayCommand NavigateBackCommand
+    {
+        get
+        {
+            return _navigateBackCommand ??= new RelayCommand(o =>
+            {
+                _navigationService.ChangeContent<StartControl>();
+
+            });
+        }
+    }
 }

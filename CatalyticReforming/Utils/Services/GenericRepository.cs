@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using CatalyticReforming.ViewModels.DAL_VM;
@@ -22,6 +23,16 @@ public class GenericRepository
         _contextCreator = contextCreator;
     }
 
+    public async Task<List<VMTYPE>> GetAll<VMTYPE, DALTYPE>(Func<DALTYPE,bool> predicate) where DALTYPE : EntityBase
+                                                              where VMTYPE : IDALVM
+    {
+        await using var context = _contextCreator();
+
+        return context.Set<DALTYPE>()
+                      .Where(predicate)
+                      .Adapt<List<VMTYPE>>();
+    }
+    
     public async Task<List<VMTYPE>> GetAll<VMTYPE, DALTYPE>() where DALTYPE : EntityBase
                                                               where VMTYPE : IDALVM
     {
@@ -35,7 +46,9 @@ public class GenericRepository
                                                                    where VMTYPE : IDALVM
     {
         await using var context = _contextCreator();
-        var entity = dto.Adapt<DALTYPE>();
+        var entity = dto.BuildAdapter()
+                        .EntityFromContext(context)
+                        .AdaptToType<DALTYPE>();
         await context.AddAsync(entity);
         await context.SaveChangesAsync();
 
@@ -50,10 +63,10 @@ public class GenericRepository
         var entity = await context.Set<DALTYPE>()
                                   .SingleOrDefaultAsync(x => x.Id == dto.Id);
 
-        // dto.BuildAdapter()
-        //    .EntityFromContext(context)
-        //    .AdaptTo(entity);
-        dto.Adapt(entity);
+        dto.BuildAdapter()
+           .EntityFromContext(context)
+           .AdaptTo(entity);
+        //dto.Adapt(entity);
 
         await context.SaveChangesAsync();
     }

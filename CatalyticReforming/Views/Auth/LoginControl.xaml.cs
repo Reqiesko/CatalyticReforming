@@ -11,7 +11,7 @@ public partial class LoginControl : IViewWithVM<LoginControlVM>
     public LoginControl()
     {
         ViewModel = App.GetService<LoginControlVM>();
-        DataContext = ViewModel;
+        DataContext = this;
         InitializeComponent();
     }
 
@@ -21,7 +21,7 @@ public partial class LoginControl : IViewWithVM<LoginControlVM>
     {
         if (DataContext != null)
         {
-            ((dynamic) DataContext).Password = ((PasswordBox) sender).Password;
+            ViewModel.Password = ((PasswordBox) sender).Password;
         }
     }
 }
