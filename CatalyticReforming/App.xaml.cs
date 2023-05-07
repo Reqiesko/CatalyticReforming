@@ -92,3 +92,4 @@ public partial class App : Application
         return _serviceProvider.GetService<T>();
     }
 }
+

@@ -17,3 +17,4 @@ public partial class MainWindow : IViewWithVM<MainViewModel>
 
     public MainViewModel ViewModel { get; set; }
 }
+

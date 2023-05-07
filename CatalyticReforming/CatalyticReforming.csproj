@@ -8,103 +8,103 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="7.0.1" />
-        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-        <PackageReference Include="Mapster" Version="7.4.0-pre06" />
-        <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
-        <PackageReference Include="Mapster.EFCore" Version="5.1.1-pre02" />
-        <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-        <PackageReference Include="WPF-UI" Version="3.0.0-preview.1" />
+        <PackageReference Include="Autofac" Version="7.0.1"/>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0"/>
+        <PackageReference Include="Mapster" Version="7.4.0-pre06"/>
+        <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0"/>
+        <PackageReference Include="Mapster.EFCore" Version="5.1.1-pre02"/>
+        <PackageReference Include="PropertyChanged.Fody" Version="4.1.0"/>
+        <PackageReference Include="WPF-UI" Version="3.0.0-preview.1"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DAL\DAL.csproj" />
+        <ProjectReference Include="..\DAL\DAL.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <Compile Update="Views\Auth\LoginControlVM.cs">
-          <DependentUpon>LoginControl.xaml</DependentUpon>
+            <DependentUpon>LoginControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Auth\RegistrationControlVM.cs">
-          <DependentUpon>RegistrationControl.xaml</DependentUpon>
+            <DependentUpon>RegistrationControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Researcher\ResearchControlVM.cs">
-          <DependentUpon>ResearchControl.xaml</DependentUpon>
+            <DependentUpon>ResearchControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Researcher\StudyControlVM.cs">
-          <DependentUpon>StudyControl.xaml</DependentUpon>
+            <DependentUpon>StudyControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Admin\Testing\EditAnswerControlVM.cs">
-          <DependentUpon>EditAnswerControl.xaml</DependentUpon>
+            <DependentUpon>EditAnswerControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Admin\AdminControlVM.cs">
-          <DependentUpon>AdminControl.xaml</DependentUpon>
+            <DependentUpon>AdminControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Admin\EditUserControlVM.cs">
-          <DependentUpon>EditUserControl.xaml</DependentUpon>
+            <DependentUpon>EditUserControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\MainViewModel.cs">
-          <DependentUpon>MainWindow.xaml</DependentUpon>
+            <DependentUpon>MainWindow.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Researcher\StartControlVM.cs">
-          <DependentUpon>StartControl.xaml</DependentUpon>
+            <DependentUpon>StartControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Admin\Testing\EditQuestionControlVM.cs">
-          <DependentUpon>EditQuestionControl.xaml</DependentUpon>
+            <DependentUpon>EditQuestionControl.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Admin\Testing\TestBrowserControlVM.cs">
-          <DependentUpon>TestBrowserControl.xaml</DependentUpon>
+            <DependentUpon>TestBrowserControl.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Views\Auth\LoginControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Researcher\ResearchControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Researcher\StudyControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Admin\Testing\EditQuestionControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\Admin\Testing\EditAnswerControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\Admin\AdminControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Admin\EditUserControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Shared\styles\DataGridStyle.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\Shared\Controls\LabeledControlPresenter.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Views\Researcher\StartControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="Views\Auth\LoginControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Researcher\ResearchControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Researcher\StudyControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Admin\Testing\EditQuestionControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="Views\Admin\Testing\EditAnswerControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="Views\Admin\AdminControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Admin\EditUserControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Shared\styles\DataGridStyle.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="Views\Shared\Controls\LabeledControlPresenter.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="Views\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Researcher\StartControl.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
 </Project>

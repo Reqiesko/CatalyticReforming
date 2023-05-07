@@ -14,3 +14,4 @@ public partial class StartControl : IViewWithVM<StartControlVM>
 
     public StartControlVM ViewModel { get; set; }
 }
+

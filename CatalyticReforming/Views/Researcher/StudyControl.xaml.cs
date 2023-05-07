@@ -5,7 +5,7 @@ namespace CatalyticReforming.Views.Researcher;
 
 public partial class StudyControl : IViewWithVM<StudyControlVM>
 {
-    public StudyControl() 
+    public StudyControl()
     {
         InitializeComponent();
         ViewModel = App.GetService<StudyControlVM>();
@@ -14,3 +14,4 @@ public partial class StudyControl : IViewWithVM<StudyControlVM>
 
     public StudyControlVM ViewModel { get; set; }
 }
+

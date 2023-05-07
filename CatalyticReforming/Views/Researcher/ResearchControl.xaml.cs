@@ -41,3 +41,4 @@ public partial class ResearchControl : IViewWithVM<ResearchControlVM>
     }
 }
 
+

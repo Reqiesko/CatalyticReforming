@@ -21,3 +21,4 @@ public class User : EntityBase
 
     public bool Access { get; set; }
 }
+

@@ -38,3 +38,4 @@ public class LabeledControlPresenter : ContentControl
         set => SetValue(FontSizeProperty, value);
     }
 }
+

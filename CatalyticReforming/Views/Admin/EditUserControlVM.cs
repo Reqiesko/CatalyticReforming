@@ -13,9 +13,12 @@ using DAL;
 
 namespace CatalyticReforming.Views.Admin;
 
-public class UserEditControlVM: ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
+public class UserEditControlVM : ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {
     private readonly GenericRepository _repository;
+    private RelayCommand _applyCommand;
+
+    private RelayCommand _cancelCommand;
 
     public UserEditControlVM(GenericRepository repository)
     {
@@ -25,7 +28,6 @@ public class UserEditControlVM: ViewModelBase, IDataHolder, IResultHolder, IInte
 
     public UserVM EditingUser { get; set; }
     public ObservableCollection<UserRoleVM> UserRoles { get; set; }
-    private RelayCommand _applyCommand;
 
     public RelayCommand ApplyCommand
     {
@@ -38,8 +40,6 @@ public class UserEditControlVM: ViewModelBase, IDataHolder, IResultHolder, IInte
             });
         }
     }
-
-    private RelayCommand _cancelCommand;
 
     public RelayCommand CancelCommand
     {
@@ -63,6 +63,8 @@ public class UserEditControlVM: ViewModelBase, IDataHolder, IResultHolder, IInte
         }
     }
 
-    public object Result { get; set; }
     public Action FinishInteraction { get; set; }
+
+    public object Result { get; set; }
 }
+

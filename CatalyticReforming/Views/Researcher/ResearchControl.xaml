@@ -11,12 +11,13 @@
              d:DesignHeight="1500" d:DesignWidth="1200">
     <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Menu Background="Transparent">
-            <ui:MenuItem SymbolIcon="ArrowLeft24" Command="{Binding ViewModel.NavigateBackCommand}"/>
-            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24" Command="{Binding ViewModel.ChangeUserCommand}"/>
+            <ui:MenuItem SymbolIcon="ArrowLeft24" Command="{Binding ViewModel.NavigateBackCommand}" />
+            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24"
+                         Command="{Binding ViewModel.ChangeUserCommand}" />
         </Menu>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -26,7 +27,7 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer>
                 <StackPanel>
-                    <ui:Card >
+                    <ui:Card>
                         Входные параметры
                         <ui:Card.Footer>
                             <StackPanel>
@@ -35,7 +36,7 @@
                                     HeaderTextHorizontalAlignment="Left">
                                     <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
                                 </controls:LabeledControlPresenter>
-        
+
                                 <controls:LabeledControlPresenter
                                     HeaderText="Реактор">
                                     <ComboBox ItemsSource="{Binding ViewModel.ReactorsCollection}" />
@@ -43,18 +44,18 @@
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
-                    
-                    <ui:Card Margin="0,5" >
+
+                    <ui:Card Margin="0,5">
                         Входные параметры реактора
                         <ui:Card.Footer>
                             <StackPanel>
-        
+
                                 <controls:LabeledControlPresenter
                                     HeaderText="Давление">
                                     <TextBox Text="{Binding ViewModel.ReactorPressure}" />
                                 </controls:LabeledControlPresenter>
-        
-        
+
+
                                 <controls:LabeledControlPresenter
                                     HeaderText="Катализатор">
                                     <ComboBox ItemsSource="{Binding ViewModel.CatalystCollection}" />
@@ -62,8 +63,8 @@
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
-        
-                    <ui:Card Margin="0,5" >
+
+                    <ui:Card Margin="0,5">
                         Входные параметры катализатора
                         <ui:Card.Footer>
                             <StackPanel>
@@ -78,9 +79,9 @@
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
-                    
-                    
-                    <ui:Card Margin="0,5" >
+
+
+                    <ui:Card Margin="0,5">
                         Входные параметры сырья
                         <ui:Card.Footer>
                             <StackPanel>
@@ -102,7 +103,7 @@
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Температура на входе в реактор">
-                                    <TextBox Text="{Binding ViewModel.Temperature}"/>
+                                    <TextBox Text="{Binding ViewModel.Temperature}" />
                                 </controls:LabeledControlPresenter>
                             </StackPanel>
                         </ui:Card.Footer>
@@ -114,24 +115,24 @@
                                 <CheckBox Content="Варьировать подачу сырья"
                                           x:Name="MaterialCheckBox"
                                           Click="MaterialCheckBox_OnChecked"
-                                          Command="{Binding ViewModel.ChangeMaterialCommand}"/>
+                                          Command="{Binding ViewModel.ChangeMaterialCommand}" />
                                 <CheckBox Content="Варьировать температуру"
                                           x:Name="TemperatureCheckBox"
                                           Click="TemperatureCheckBox_OnChecked"
-                                          Command="{Binding ViewModel.ChangeTemperatureCommand}"/>
+                                          Command="{Binding ViewModel.ChangeTemperatureCommand}" />
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
-                    
+
                     <Button
                         Content="Начать исследование"
                         Margin="10 15 10 0"
                         HorizontalAlignment="Center"
                         Command="{Binding ViewModel.StartResearchCommand}" />
-            </StackPanel>
-                </ScrollViewer>
+                </StackPanel>
+            </ScrollViewer>
             <ScrollViewer Grid.Column="1">
-                <StackPanel >
+                <StackPanel>
                     <TextBox Text="{Binding .ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
                 </StackPanel>
             </ScrollViewer>
@@ -145,7 +146,7 @@
                                 HeaderTextHorizontalAlignment="Left">
                                 <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
                             </controls:LabeledControlPresenter>
-                            <TextBox Margin="0 5 0 0"></TextBox>
+                            <TextBox Margin="0 5 0 0" />
                         </StackPanel>
                     </ui:Card.Footer>
                 </ui:Card>

@@ -5,3 +5,4 @@ public interface IResultHolder
     public object Result { get; }
 }
 
+

@@ -16,101 +16,34 @@ namespace CatalyticReforming.Views.Researcher;
 
 public class ResearchControlVM : ViewModelBase
 {
-    private NavigationService _navigationService;
     private readonly DefaultDialogs _defaultDialogs;
-    
-    private RelayCommand _startResearchCommand;
-    private RelayCommand _changeTemperatureCommand;
-    private RelayCommand _changeMaterialCommand;
-    private RelayCommand _materialCheckChangeCommand;
-    private RelayCommand _temperatureChangeCommand;
-    private bool TemperatureCheckBox { get; set; }
-    private bool MaterialCheckBox { get; set; }
-    private string ChangeParameter { get; set; }
-    public string MatlabCode { get; set; }
-    
-    
-    public ObservableCollection<string> InsallersCollection { get; set; }
-    public ObservableCollection<string> ReactorsCollection { get; set; }
-    public ObservableCollection<double> ReactorPressure { get; set; }
-    public ObservableCollection<string> CatalystCollection { get; set; }
-    public ObservableCollection<double> CatalystDensity { get; set; }
-    public ObservableCollection<double> StrengthFactor { get; set; }
-    public ObservableCollection<string> MaterialCollection { get; set; }
-
-    private string _naphthenicHydrocarbons;
     private string _aromaticHydrocarbons;
+    private RelayCommand _changeMaterialCommand;
+    private RelayCommand _changeTemperatureCommand;
 
-    public string NaphthenicHydrocarbons
-    {
-        get
-        {
-            return _naphthenicHydrocarbons;
-        }
-        set
-        {
-            if (_naphthenicHydrocarbons != value)
-            {
-                _naphthenicHydrocarbons = value;
-                OnPropertyChanged(nameof(NaphthenicHydrocarbons));
-                UpdateMatlabCode();
-            }
-        }
-    }
-    public string AromaticHydrocarbons
-    {
-        get
-        {
-            return _aromaticHydrocarbons;
-        }
-        set
-        {
-            if (_aromaticHydrocarbons != value)
-            {
-                _aromaticHydrocarbons = value;
-                OnPropertyChanged(nameof(AromaticHydrocarbons));
-                UpdateMatlabCode();
-            }
-        }
-    }
-    
-    private string _temperature;
-    public string Temperature
-    {
-        get { return _temperature; }
-        set
-        {
-            if (_temperature != value)
-            {
-                _temperature = value;
-                OnPropertyChanged(nameof(Temperature));
-                UpdateMatlabCode();
-            }
-        }
-    }
+    private RelayCommand _changeUserCommand;
+    private RelayCommand _materialCheckChangeCommand;
 
     private string _materialsInput;
-    public string MaterialsInput
-    {
-        get { return _materialsInput; }
-        set
-        {
-            if (_materialsInput != value)
-            {
-                _materialsInput = value;
-                OnPropertyChanged(nameof(MaterialsInput));
-                UpdateMatlabCode();
-            }
-        }
-    }
-    
+
+    private string _naphthenicHydrocarbons;
+
+    private RelayCommand _navigateBackCommand;
+    private readonly NavigationService _navigationService;
+
+    private RelayCommand _startResearchCommand;
+
+    private string _temperature;
+    private RelayCommand _temperatureChangeCommand;
+
     public ResearchControlVM(NavigationService navigationService, DefaultDialogs defaultDialogs)
     {
         _navigationService = navigationService;
         _defaultDialogs = defaultDialogs;
         MaterialCheckBox = false;
         TemperatureCheckBox = false;
-        MatlabCode = $"function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
+
+        MatlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                      "% Определение параметров функции\n" +
                      "a = 15.802;\n" +
                      "b = 0.03155;\n" +
@@ -160,28 +93,100 @@ public class ResearchControlVM : ViewModelBase
                      "end";
     }
 
+    private bool TemperatureCheckBox { get; set; }
+    private bool MaterialCheckBox { get; set; }
+    private string ChangeParameter { get; set; }
+    public string MatlabCode { get; set; }
+
+
+    public ObservableCollection<string> InsallersCollection { get; set; }
+    public ObservableCollection<string> ReactorsCollection { get; set; }
+    public ObservableCollection<double> ReactorPressure { get; set; }
+    public ObservableCollection<string> CatalystCollection { get; set; }
+    public ObservableCollection<double> CatalystDensity { get; set; }
+    public ObservableCollection<double> StrengthFactor { get; set; }
+    public ObservableCollection<string> MaterialCollection { get; set; }
+
+    public string NaphthenicHydrocarbons
+    {
+        get => _naphthenicHydrocarbons;
+        set
+        {
+            if (_naphthenicHydrocarbons != value)
+            {
+                _naphthenicHydrocarbons = value;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
+
+    public string AromaticHydrocarbons
+    {
+        get => _aromaticHydrocarbons;
+        set
+        {
+            if (_aromaticHydrocarbons != value)
+            {
+                _aromaticHydrocarbons = value;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
+
+    public string Temperature
+    {
+        get => _temperature;
+        set
+        {
+            if (_temperature != value)
+            {
+                _temperature = value;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
+
+    public string MaterialsInput
+    {
+        get => _materialsInput;
+        set
+        {
+            if (_materialsInput != value)
+            {
+                _materialsInput = value;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
+
     //uitable('Data',tableResult{:,:},'ColumnName',tableResult.Properties.VariableNames,'Units','Normalized','Position',[0,0,1,1]);
     //tableResult = targetFunction();
-    
-    
+
+
     public RelayCommand StartResearchCommand
     {
         get
         {
             return _startResearchCommand ??= new RelayCommand(async o =>
             {
-                if (MaterialCheckBox == true || TemperatureCheckBox == true)
+                if (MaterialCheckBox || TemperatureCheckBox)
                 {
                     var scriptPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +
                                      "/MatlabCodeFiles/targetFunction.m";
+
                     var matlabCodeFile = new StreamWriter(scriptPath);
                     matlabCodeFile.Write(MatlabCode);
                     matlabCodeFile.Close();
-                    var arguments = $"[tableResult, optimalValue, optimalOctaneNumber] = targetFunction();";
+                    var arguments = "[tableResult, optimalValue, optimalOctaneNumber] = targetFunction();";
                     var startInfo = new ProcessStartInfo();
                     startInfo.FileName = GetInstallationPath("MATLAB") + "/bin/Matlab.exe"; // путь к исполняемому файлу MATLAB
-                    startInfo.Arguments = $"-r \"run('{scriptPath}'); arguments;\"";      // код для выполнения
+                    startInfo.Arguments = $"-r \"run('{scriptPath}'); arguments;\"";        // код для выполнения
                     startInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/MatlabCodeFiles";
+
                     //startInfo.UseShellExecute = false;
                     Process.Start(startInfo);
                 }
@@ -201,7 +206,8 @@ public class ResearchControlVM : ViewModelBase
             return _changeTemperatureCommand ??= new RelayCommand(o =>
             {
                 TemperatureCheckBox = TemperatureCheckBox != true;
-                if (TemperatureCheckBox == true)
+
+                if (TemperatureCheckBox)
                 {
                     Temperature = "490:1:503";
                     MaterialsInput = "10";
@@ -210,12 +216,11 @@ public class ResearchControlVM : ViewModelBase
                 }
                 else
                 {
-                    return;
                 }
             });
         }
     }
-    
+
     public RelayCommand ChangeMaterialCommand
     {
         get
@@ -223,7 +228,8 @@ public class ResearchControlVM : ViewModelBase
             return _changeMaterialCommand ??= new RelayCommand(o =>
             {
                 MaterialCheckBox = MaterialCheckBox != true;
-                if (MaterialCheckBox == true)
+
+                if (MaterialCheckBox)
                 {
                     MaterialsInput = "8.87:0.1:16.04";
                     Temperature = "500";
@@ -232,12 +238,11 @@ public class ResearchControlVM : ViewModelBase
                 }
                 else
                 {
-                    return;
                 }
             });
         }
     }
-    
+
     public RelayCommand TemperatureCheckChangeCommand
     {
         get
@@ -248,7 +253,7 @@ public class ResearchControlVM : ViewModelBase
             });
         }
     }
-    
+
     public RelayCommand MaterialCheckChangeCommand
     {
         get
@@ -259,60 +264,83 @@ public class ResearchControlVM : ViewModelBase
             });
         }
     }
-    
+
+    public RelayCommand ChangeUserCommand
+    {
+        get
+        {
+            return _changeUserCommand ??= new RelayCommand(o =>
+            {
+                _navigationService.ChangeContent<LoginControl>();
+            });
+        }
+    }
+
+    public RelayCommand NavigateBackCommand
+    {
+        get
+        {
+            return _navigateBackCommand ??= new RelayCommand(o =>
+            {
+                _navigationService.ChangeContent<StartControl>();
+            });
+        }
+    }
+
     private void UpdateMatlabCode()
     {
-        string matlabCode = $"function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
-                            "% Определение параметров функции\n" +
-                            "a = 15.802;\n" +
-                            "b = 0.03155;\n" +
-                            "c = 0.95975;\n" +
-                            "d = 2.4206;\n" +
-                            "a1 = 2.517;\n" +
-                            "b1 = 0.00455;\n" +
-                            "c1 = 0.1449;\n" +
-                            "d1 = 0.0221;\n" +
-                            "yn = " + NaphthenicHydrocarbons + ";\n" +
-                            "ya = " + AromaticHydrocarbons + ";\n" +
-                            "parameter = " + $"'{ChangeParameter}'" + ";\n" +
-                            "% Создание таблицы\n" +
-                            "T = " + Temperature + ";\n" +
-                            "G = " + MaterialsInput + ";\n" +
-                            "[TT, GG] = meshgrid(T, G);\n" +
-                            "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
-                            "tableData = [TT(:), GG(:), F(:)];\n" +
-                            "tableHeaders = {'T', 'G', 'F'};\n" +
-                            "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
-                            "% Отображение таблицы в новом окне\n" +
-                            "figure;\n" +
-                            "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
-                            "% Построение графика в новом окне\n" +
-                            "figure;\n" +
-                            "if strcmp(parameter, 'G')\n" +
-                            "plot(T, F);\n" +
-                            "title('Зависимость функции при различных Т');\n" +
-                            "xlabel('T');\n" +
-                            "ylabel('F');\n" +
-                            "elseif strcmp(parameter, 'T')\n" +
-                            "plot(G, F);\n" +
-                            "title('Зависимость функции при различных G');\n" +
-                            "xlabel('G');\n" +
-                            "ylabel('F');\n" +
-                            "end\n" +
-                            "% Поиск оптимального значения параметра\n" +
-                            "if strcmp(parameter, 'T')\n" +
-                            "[~, index] = max(F);\n" +
-                            "optimalValue = G(index);\n" +
-                            "elseif strcmp(parameter, 'G')\n" +
-                            "[~, index] = max(F);\n" +
-                            "optimalValue = T(index);\n" +
-                            "end\n" +
-                            "% Расчет октанового числа при оптимальном значении параметра\n" +
-                            "optimalOctaneNumber = a1 + b1 * optimalValue - c1 * optimalValue + d1*(yn - ya);\n" +
-                            "end";
+        var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
+                         "% Определение параметров функции\n" +
+                         "a = 15.802;\n" +
+                         "b = 0.03155;\n" +
+                         "c = 0.95975;\n" +
+                         "d = 2.4206;\n" +
+                         "a1 = 2.517;\n" +
+                         "b1 = 0.00455;\n" +
+                         "c1 = 0.1449;\n" +
+                         "d1 = 0.0221;\n" +
+                         "yn = " + NaphthenicHydrocarbons + ";\n" +
+                         "ya = " + AromaticHydrocarbons + ";\n" +
+                         "parameter = " + $"'{ChangeParameter}'" + ";\n" +
+                         "% Создание таблицы\n" +
+                         "T = " + Temperature + ";\n" +
+                         "G = " + MaterialsInput + ";\n" +
+                         "[TT, GG] = meshgrid(T, G);\n" +
+                         "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                         "tableData = [TT(:), GG(:), F(:)];\n" +
+                         "tableHeaders = {'T', 'G', 'F'};\n" +
+                         "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
+                         "% Отображение таблицы в новом окне\n" +
+                         "figure;\n" +
+                         "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
+                         "% Построение графика в новом окне\n" +
+                         "figure;\n" +
+                         "if strcmp(parameter, 'G')\n" +
+                         "plot(T, F);\n" +
+                         "title('Зависимость функции при различных Т');\n" +
+                         "xlabel('T');\n" +
+                         "ylabel('F');\n" +
+                         "elseif strcmp(parameter, 'T')\n" +
+                         "plot(G, F);\n" +
+                         "title('Зависимость функции при различных G');\n" +
+                         "xlabel('G');\n" +
+                         "ylabel('F');\n" +
+                         "end\n" +
+                         "% Поиск оптимального значения параметра\n" +
+                         "if strcmp(parameter, 'T')\n" +
+                         "[~, index] = max(F);\n" +
+                         "optimalValue = G(index);\n" +
+                         "elseif strcmp(parameter, 'G')\n" +
+                         "[~, index] = max(F);\n" +
+                         "optimalValue = T(index);\n" +
+                         "end\n" +
+                         "% Расчет октанового числа при оптимальном значении параметра\n" +
+                         "optimalOctaneNumber = a1 + b1 * optimalValue - c1 * optimalValue + d1*(yn - ya);\n" +
+                         "end";
+
         MatlabCode = matlabCode;
     }
-    
+
     private string GetInstallationPath(string programName)
     {
         // Открываем нужную ветку реестра
@@ -343,31 +371,5 @@ public class ResearchControlVM : ViewModelBase
         // Если не нашли программу, то возвращаем пустую строку
         return string.Empty;
     }
-    
-    private RelayCommand _changeUserCommand;
-
-    public RelayCommand ChangeUserCommand
-    {
-        get
-        {
-            return _changeUserCommand ??= new RelayCommand(o =>
-            {
-                _navigationService.ChangeContent<LoginControl>();
-            });
-        }
-    }
-
-    private RelayCommand _navigateBackCommand;
-
-    public RelayCommand NavigateBackCommand
-    {
-        get
-        {
-            return _navigateBackCommand ??= new RelayCommand(o =>
-            {
-                _navigationService.ChangeContent<StartControl>();
-            });
-        }
-    }
-
 }
+

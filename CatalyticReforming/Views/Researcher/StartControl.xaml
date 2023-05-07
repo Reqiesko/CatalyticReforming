@@ -10,56 +10,57 @@
              d:DataContext="{d:DesignInstance researcher:StartControl}">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Menu Background="Transparent">
-            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24" Command="{Binding ViewModel.ChangeUserCommand}"/>
+            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24"
+                         Command="{Binding ViewModel.ChangeUserCommand}" />
         </Menu>
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="0"
-                        Content="Без удачно пройденного обучения, вы не сможете перейти к исследовательской части!" />
-                    <ui:CardAction
-                        Margin="10"
-                        Grid.Column="0"
-                             Grid.Row="1"
-                             Command="{Binding ViewModel.OpenStudyPageCommand}">
-                        Обучение
-                    </ui:CardAction>
-                    <ui:CardAction
-                        Background="LightSkyBlue"
-                        Margin="10"
-                        Grid.Column="1"
-                                   Grid.Row="1"
-                                   Command="{Binding ViewModel.OpenResearchPageCommand}">
-                        Исследование
-                    </ui:CardAction>
-                    <!-- <Button -->
-                    <!--     Grid.Column="0" -->
-                    <!--     Grid.Row="1" -->
-                    <!--     Margin="0 20 0 0" -->
-                    <!--     HorizontalAlignment="Center" -->
-                    <!--     Content="Обучение" -->
-                    <!--     Command="{Binding OpenStudyPageCommand}" /> -->
-                    <!-- <Button -->
-                    <!--     Grid.Column="1" -->
-                    <!--     Grid.Row="1" -->
-                    <!--     Margin="0 20 0 0" -->
-                    <!--     HorizontalAlignment="Center" -->
-                    <!--     Content="Исследование" -->
-                    <!--     Command="{Binding OpenResearchPageCommand}" /> -->
-                </Grid>
-            </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                Content="Без удачно пройденного обучения, вы не сможете перейти к исследовательской части!" />
+            <ui:CardAction
+                Margin="10"
+                Grid.Column="0"
+                Grid.Row="1"
+                Command="{Binding ViewModel.OpenStudyPageCommand}">
+                Обучение
+            </ui:CardAction>
+            <ui:CardAction
+                Background="LightSkyBlue"
+                Margin="10"
+                Grid.Column="1"
+                Grid.Row="1"
+                Command="{Binding ViewModel.OpenResearchPageCommand}">
+                Исследование
+            </ui:CardAction>
+            <!-- <Button -->
+            <!--     Grid.Column="0" -->
+            <!--     Grid.Row="1" -->
+            <!--     Margin="0 20 0 0" -->
+            <!--     HorizontalAlignment="Center" -->
+            <!--     Content="Обучение" -->
+            <!--     Command="{Binding OpenStudyPageCommand}" /> -->
+            <!-- <Button -->
+            <!--     Grid.Column="1" -->
+            <!--     Grid.Row="1" -->
+            <!--     Margin="0 20 0 0" -->
+            <!--     HorizontalAlignment="Center" -->
+            <!--     Content="Исследование" -->
+            <!--     Command="{Binding OpenResearchPageCommand}" /> -->
+        </Grid>
+    </Grid>
 
 </UserControl>

@@ -13,23 +13,27 @@
              d:DesignHeight="400" d:DesignWidth="400">
     <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="70"/>
+            <RowDefinition />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <StackPanel>
             <controls:LabeledControlPresenter HeaderText="Имя пользователя" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ui:TextBox
+                    Text="{Binding ViewModel.EditingUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Пароль" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </controls:LabeledControlPresenter><controls:LabeledControlPresenter HeaderText="Роль" HeaderTextHorizontalAlignment="Left">
+                <ui:TextBox
+                    Text="{Binding ViewModel.EditingUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </controls:LabeledControlPresenter>
+            <controls:LabeledControlPresenter HeaderText="Роль" HeaderTextHorizontalAlignment="Left">
                 <ComboBox ItemsSource="{Binding ViewModel.UserRoles}"
                           DisplayMemberPath="Name"
-                          SelectedItem="{Binding ViewModel.EditingUser.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </controls:LabeledControlPresenter> 
+                          SelectedItem="{Binding ViewModel.EditingUser.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Доступ" HeaderTextHorizontalAlignment="Left">
-                <CheckBox IsChecked="{Binding ViewModel.EditingUser.Access, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          Content="Доступ предоставлен"/>
+                <CheckBox
+                    IsChecked="{Binding ViewModel.EditingUser.Access, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Content="Доступ предоставлен" />
             </controls:LabeledControlPresenter>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

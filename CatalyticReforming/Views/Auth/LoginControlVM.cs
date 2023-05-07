@@ -23,6 +23,7 @@ public class LoginControlVM : ViewModelBase
     private readonly UserService _userService;
 
     private RelayCommand _loginCommand;
+    private RelayCommand _registerCommand;
 
     public LoginControlVM(NavigationService navigationService, UserService userService)
     {
@@ -60,7 +61,6 @@ public class LoginControlVM : ViewModelBase
                     // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
                     _userService.CurrentUser = user.Adapt<UserVM>();
                     _navigationService.ChangeContent<StartControl>();
-                    
                 }
                 else if (user.Role.Name == "Admin")
                 {
@@ -75,7 +75,6 @@ public class LoginControlVM : ViewModelBase
             });
         }
     }
-    private RelayCommand _registerCommand;
 
     public RelayCommand RegisterCommand
     {
@@ -87,6 +86,5 @@ public class LoginControlVM : ViewModelBase
             });
         }
     }
-    
-
 }
+

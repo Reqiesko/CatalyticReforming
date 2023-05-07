@@ -15,6 +15,10 @@ public class RegistrationControlVM : ViewModelBase
     private readonly GenericRepository _genericRepository;
     private readonly NavigationService _navigationService;
 
+    private RelayCommand _registerCommand;
+
+    private RelayCommand _toLoginCommand;
+
     public RegistrationControlVM(GenericRepository genericRepository, NavigationService navigationService)
     {
         _genericRepository = genericRepository;
@@ -22,9 +26,8 @@ public class RegistrationControlVM : ViewModelBase
         var userRole = genericRepository.GetAll<UserRoleVM, UserRole>(u => u.Name == "User").Result.First();
         NewUser.Role = userRole;
     }
-    public UserVM NewUser { get; set; } = new UserVM();
 
-    private RelayCommand _registerCommand;
+    public UserVM NewUser { get; set; } = new();
 
     public RelayCommand RegisterCommand
     {
@@ -38,8 +41,6 @@ public class RegistrationControlVM : ViewModelBase
         }
     }
 
-    private RelayCommand _toLoginCommand;
-
     public RelayCommand ToLoginCommand
     {
         get
@@ -50,5 +51,5 @@ public class RegistrationControlVM : ViewModelBase
             });
         }
     }
-
 }
+

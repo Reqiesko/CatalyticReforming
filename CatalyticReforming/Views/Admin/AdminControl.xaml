@@ -10,78 +10,84 @@
              xmlns:admin="clr-namespace:CatalyticReforming.Views.Admin"
              d:DataContext="{d:DesignInstance admin:AdminControl}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Menu Background="Transparent">
-            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24" Command="{Binding ViewModel.ChangeUserCommand}"/>
+            <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24"
+                         Command="{Binding ViewModel.ChangeUserCommand}" />
         </Menu>
         <Grid Margin="15,0,15,15" Grid.Row="1">
-            
+
             <TabControl>
-            <TabItem Header="Редактирование учетных записей">
-                <TabItem.Content>
-                    <StackPanel Margin="8">
-                        <StackPanel Orientation="Horizontal">
-                        <ui:Button Content="Добавить пользователя" Appearance="Success" Command="{Binding ViewModel.AddUser}"/>
-                    </StackPanel>
-                    <DataGrid
-                        RowStyle="{DynamicResource DataGridRowStyle1}"
-                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-                        CellStyle="{DynamicResource DataGridCellStyle1}"
-                        Style="{DynamicResource DataGridStyle1}"
-                        ItemsSource="{Binding ViewModel.Users}">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Id" IsReadOnly="True" Width="auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" IsReadOnly="True"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Password" Binding="{Binding Path=Password}" IsReadOnly="True"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Role" Binding="{Binding Path= Role.Name}" IsReadOnly="True"
-                                                Width="*" />
-                            <DataGridTextColumn Header="Access" Binding="{Binding Path= Access}" IsReadOnly="True"
-                                                Width="*" />
-                            <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Style="{StaticResource gridEditButton}"
-                                                    CommandParameter="{Binding}"
-                                                    Command="{Binding Path=ViewModel.EditUser,
+                <TabItem Header="Редактирование учетных записей">
+                    <TabItem.Content>
+                        <StackPanel Margin="8">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:Button Content="Добавить пользователя" Appearance="Success"
+                                           Command="{Binding ViewModel.AddUser}" />
+                            </StackPanel>
+                            <DataGrid
+                                RowStyle="{DynamicResource DataGridRowStyle1}"
+                                ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                CellStyle="{DynamicResource DataGridCellStyle1}"
+                                Style="{DynamicResource DataGridStyle1}"
+                                ItemsSource="{Binding ViewModel.Users}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id" IsReadOnly="True" Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"
+                                                        IsReadOnly="True"
+                                                        Width="*" />
+                                    <DataGridTextColumn Header="Password" Binding="{Binding Path=Password}"
+                                                        IsReadOnly="True"
+                                                        Width="*" />
+                                    <DataGridTextColumn Header="Role" Binding="{Binding Path= Role.Name}"
+                                                        IsReadOnly="True"
+                                                        Width="*" />
+                                    <DataGridTextColumn Header="Access" Binding="{Binding Path= Access}"
+                                                        IsReadOnly="True"
+                                                        Width="*" />
+                                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Style="{StaticResource gridEditButton}"
+                                                            CommandParameter="{Binding}"
+                                                            Command="{Binding Path=ViewModel.EditUser,
                                                     RelativeSource={RelativeSource Mode=FindAncestor,
                                                     AncestorType={x:Type UserControl}}}">
-                                                <iconPacks:PackIconMaterial Kind="PencilOutline"
-                                                                            Style="{StaticResource gridButtonIcon}" />
-                                            </Button>
-                                            <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
-                                                    CommandParameter="{Binding}"
-                                                    Command="{Binding Path=ViewModel.DeleteUser,
+                                                        <iconPacks:PackIconMaterial Kind="PencilOutline"
+                                                            Style="{StaticResource gridButtonIcon}" />
+                                                    </Button>
+                                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
+                                                            CommandParameter="{Binding}"
+                                                            Command="{Binding Path=ViewModel.DeleteUser,
                                                     RelativeSource={RelativeSource Mode=FindAncestor,
                                                     AncestorType={x:Type UserControl}}}">
-                                                <iconPacks:PackIconMaterial Kind="DeleteOutline"
-                                                                            Style="{StaticResource gridButtonIcon}" />
-                                            </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="Редактирование тестов">
-                <testing:TestBrowserControl />
-            </TabItem>
-        </TabControl>
+                                                        <iconPacks:PackIconMaterial Kind="DeleteOutline"
+                                                            Style="{StaticResource gridButtonIcon}" />
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="Редактирование тестов">
+                    <testing:TestBrowserControl />
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </UserControl>

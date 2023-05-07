@@ -16,6 +16,7 @@ public partial class RegistrationControl : IViewWithVM<RegistrationControlVM>
     }
 
     public RegistrationControlVM ViewModel { get; set; }
+
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
         if (DataContext != null)
@@ -24,4 +25,5 @@ public partial class RegistrationControl : IViewWithVM<RegistrationControlVM>
         }
     }
 }
+
 

@@ -13,31 +13,33 @@ using DAL;
 
 using Mapster;
 
-using NavigationService = CatalyticReforming.Utils.Services.NavigationService;
-
 
 namespace CatalyticReforming.Views.Admin;
 
 public class AdminControlVM : ViewModelBase
 {
-    private readonly MyDialogService _dialogService;
-    private readonly GenericRepository _repository;
     private readonly DefaultDialogs _defaultDialogs;
+    private readonly MyDialogService _dialogService;
     private readonly NavigationService _navigationService;
+    private readonly GenericRepository _repository;
 
-    public AdminControlVM(MyDialogService dialogService, GenericRepository repository, DefaultDialogs defaultDialogs, NavigationService navigationService)
+    private RelayCommand _addUser;
+    private RelayCommand _changeUserCommand;
+    private RelayCommand _deleteUser;
+
+    private RelayCommand _editUser;
+
+    public AdminControlVM(MyDialogService dialogService, GenericRepository repository, DefaultDialogs defaultDialogs,
+                          NavigationService navigationService)
     {
         _dialogService = dialogService;
         _repository = repository;
         _defaultDialogs = defaultDialogs;
         _navigationService = navigationService;
         Users = new ObservableCollection<UserVM>(_repository.GetAll<UserVM, User>().Result);
-
     }
 
     public ObservableCollection<UserVM> Users { get; set; }
-
-    private RelayCommand _addUser;
 
     public RelayCommand AddUser
     {
@@ -46,18 +48,18 @@ public class AdminControlVM : ViewModelBase
             return _addUser ??= new RelayCommand(async _ =>
             {
                 var newUser = await _dialogService.ShowDialog<EditUserControl>(new UserVM()) as UserVM;
+
                 if (newUser is null)
                 {
                     return;
                 }
+
                 var entity = await _repository.Create<UserVM, User>(newUser);
                 newUser.Id = entity.Id;
                 Users.Add(newUser);
             });
         }
     }
-
-    private RelayCommand _editUser;
 
     public RelayCommand EditUser
     {
@@ -66,16 +68,17 @@ public class AdminControlVM : ViewModelBase
             return _editUser ??= new RelayCommand(async userVM =>
             {
                 var newUser = await _dialogService.ShowDialog<EditUserControl>(userVM.Adapt<UserVM>()) as UserVM;
+
                 if (newUser is null)
                 {
                     return;
                 }
+
                 await _repository.Update<UserVM, User>(newUser);
                 newUser.Adapt((UserVM) userVM);
             });
         }
     }
-    private RelayCommand _deleteUser;
 
     public RelayCommand DeleteUser
     {
@@ -84,18 +87,17 @@ public class AdminControlVM : ViewModelBase
             return _deleteUser ??= new RelayCommand(async userVM =>
             {
                 var mbRes = await _defaultDialogs.AreYouSureToDelete(" выбранного пользователя");
-                
+
                 if (mbRes != MessageBoxResult.Yes)
                 {
                     return;
                 }
+
                 await _repository.Delete<QuestionVM, Question>((QuestionVM) userVM);
                 Users.Remove((UserVM) userVM);
-
             });
         }
     }
-    private RelayCommand _changeUserCommand;
 
     public RelayCommand ChangeUserCommand
     {
@@ -107,6 +109,5 @@ public class AdminControlVM : ViewModelBase
             });
         }
     }
-
-    
 }
+

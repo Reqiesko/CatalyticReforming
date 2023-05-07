@@ -14,3 +14,4 @@ public partial class AdminControl : IViewWithVM<AdminControlVM>
 
     public AdminControlVM ViewModel { get; set; }
 }
+

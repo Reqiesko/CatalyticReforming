@@ -7,14 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.16" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.16" />
-        <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.16"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.16"/>
+        <PackageReference Include="PropertyChanged.Fody" Version="4.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Databases\" />
-        <Folder Include="Models\" />
+        <Folder Include="Databases\"/>
+        <Folder Include="Models\"/>
     </ItemGroup>
 
     <ItemGroup>

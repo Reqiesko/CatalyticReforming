@@ -31,3 +31,4 @@ public class RelayCommand : ICommand
         _execute(parameter);
     }
 }
+

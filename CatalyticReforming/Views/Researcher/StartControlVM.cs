@@ -10,6 +10,8 @@ public class StartControlVM : ViewModelBase
 {
     private readonly NavigationService _navigationService;
     private readonly UserService _userService;
+
+    private RelayCommand _changeUserCommand;
     private RelayCommand _openResearchPageCommand;
 
     private RelayCommand _openStudyPageCommand;
@@ -38,11 +40,9 @@ public class StartControlVM : ViewModelBase
             return _openResearchPageCommand ??= new RelayCommand(o =>
             {
                 _navigationService.ChangeContent<ResearchControl>();
-            }, _=> _userService.CurrentUser != null && _userService.CurrentUser.Access);
+            }, _ => _userService.CurrentUser != null && _userService.CurrentUser.Access);
         }
     }
-
-    private RelayCommand _changeUserCommand;
 
     public RelayCommand ChangeUserCommand
     {
@@ -54,5 +54,5 @@ public class StartControlVM : ViewModelBase
             });
         }
     }
-
 }
+

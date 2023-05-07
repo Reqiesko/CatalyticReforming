@@ -15,16 +15,19 @@
             <controls:LabeledControlPresenter HeaderText="Username" HeaderTextHorizontalAlignment="Left">
                 <TextBox Text="{Binding ViewModel.Username}" HorizontalAlignment="Stretch" />
             </controls:LabeledControlPresenter>
-            <controls:LabeledControlPresenter HeaderText="Password" Margin="0, 5" HorizontalAlignment="Stretch" HeaderTextHorizontalAlignment="Left">
-                <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"  />
+            <controls:LabeledControlPresenter HeaderText="Password" Margin="0, 5" HorizontalAlignment="Stretch"
+                                              HeaderTextHorizontalAlignment="Left">
+                <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" />
             </controls:LabeledControlPresenter>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Войти" HorizontalAlignment="Center" Command="{Binding ViewModel.LoginCommand}" Margin="0,0,5,0"
+                <Button Content="Войти" HorizontalAlignment="Center" Command="{Binding ViewModel.LoginCommand}"
+                        Margin="0,0,5,0"
                         Width="120" />
-                <Button Content="Регистрация" HorizontalAlignment="Center" Command="{Binding ViewModel.RegisterCommand}" Margin="5,0,0,0"
+                <Button Content="Регистрация" HorizontalAlignment="Center"
+                        Command="{Binding ViewModel.RegisterCommand}" Margin="5,0,0,0"
                         Width="120" />
             </StackPanel>
-            
+
             <Label Content="{Binding ViewModel.ErrorMessage}" Margin="10" Height="40" />
         </StackPanel>
     </Grid>

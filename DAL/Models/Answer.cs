@@ -8,3 +8,4 @@ public class Answer : EntityBase
     public virtual Question Question { get; set; }
     public int QuestionId { get; set; }
 }
+

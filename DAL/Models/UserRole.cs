@@ -1,9 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿namespace DAL;
 
-
-namespace DAL;
-
-public class UserRole: EntityBase
+public class UserRole : EntityBase
 {
     public string Name { get; set; }
 }
+

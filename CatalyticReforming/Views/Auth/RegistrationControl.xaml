@@ -15,18 +15,23 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Content="Введите имя пользователя и пароль" Margin="10" Height="40" />
                 <controls:LabeledControlPresenter HeaderText="Имя пользователя" HeaderTextHorizontalAlignment="Left">
-                    <TextBox Text="{Binding ViewModel.NewUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="330" />
+                    <TextBox
+                        Text="{Binding ViewModel.NewUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Width="330" />
                 </controls:LabeledControlPresenter>
-                <controls:LabeledControlPresenter HeaderText="Пароль" Margin="0, 5" HeaderTextHorizontalAlignment="Left">
+                <controls:LabeledControlPresenter HeaderText="Пароль" Margin="0, 5"
+                                                  HeaderTextHorizontalAlignment="Left">
                     <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Width="330" />
                 </controls:LabeledControlPresenter>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
-                    <ui:Button Content="Назад" HorizontalAlignment="Center" Command="{Binding ViewModel.ToLoginCommand}" Margin="5,0"
+                    <ui:Button Content="Назад" HorizontalAlignment="Center"
+                               Command="{Binding ViewModel.ToLoginCommand}" Margin="5,0"
                                Width="160" />
-                    <ui:Button Appearance="Info"  Content="Зарегистрироваться" HorizontalAlignment="Center" Command="{Binding ViewModel.RegisterCommand}" Margin="5,0"
-                            Width="160" />
+                    <ui:Button Appearance="Info" Content="Зарегистрироваться" HorizontalAlignment="Center"
+                               Command="{Binding ViewModel.RegisterCommand}" Margin="5,0"
+                               Width="160" />
                 </StackPanel>
-            
+
                 <Label Content="{Binding ViewModel.ErrorMessage}" Margin="10" Height="40" />
             </StackPanel>
         </Grid>

@@ -13,3 +13,4 @@ public interface IViewWithVM
     public object ViewModelObject { get; }
 }
 
+
