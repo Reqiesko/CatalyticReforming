@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 
 using CatalyticReforming.Utils.Commands;
@@ -8,7 +7,8 @@ using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 using CatalyticReforming.Views.Auth;
 
-using DAL;
+using DAL.Models.auth;
+using DAL.Models.test;
 
 using Mapster;
 
@@ -17,22 +17,21 @@ namespace CatalyticReforming.Views.Researcher;
 
 public class StudyControlVM : ViewModelBase
 {
+    private readonly NavigationService _navigationService;
     private readonly GenericRepository _repository;
     private readonly UserService _userService;
     private RelayCommand _changeUserCommand;
     private RelayCommand _completeTestCommand;
 
     private RelayCommand _navigateBackCommand;
-    private readonly NavigationService _navigationService;
 
-    public StudyControlVM(NavigationService navigationService, UserService userService, Func<AppDbContext> contextCreator,
+    public StudyControlVM(NavigationService navigationService, UserService userService,
                           GenericRepository repository)
     {
         _navigationService = navigationService;
         _userService = userService;
         _repository = repository;
-        using var context = contextCreator();
-        Questions = context.Questions.Adapt<ObservableCollection<QuestionVM>>();
+        Questions = _repository.GetAll<QuestionVM, Question>().Result.Adapt<ObservableCollection<QuestionVM>>();
     }
 
     public ObservableCollection<QuestionVM> Questions { get; set; }
@@ -80,4 +79,5 @@ public class StudyControlVM : ViewModelBase
         }
     }
 }
+
 

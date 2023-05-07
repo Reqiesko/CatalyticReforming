@@ -5,7 +5,7 @@ using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
-using DAL;
+using DAL.Models.auth;
 
 
 namespace CatalyticReforming.Views.Auth;
@@ -52,4 +52,5 @@ public class RegistrationControlVM : ViewModelBase
         }
     }
 }
+
 

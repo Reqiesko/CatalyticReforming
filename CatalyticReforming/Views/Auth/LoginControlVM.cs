@@ -8,7 +8,7 @@ using CatalyticReforming.ViewModels.DAL_VM;
 using CatalyticReforming.Views.Admin;
 using CatalyticReforming.Views.Researcher;
 
-using DAL;
+using DAL.Models.auth;
 
 using Mapster;
 
@@ -17,20 +17,19 @@ namespace CatalyticReforming.Views.Auth;
 
 public class LoginControlVM : ViewModelBase
 {
-    private readonly AppDbContext _dbContext;
-
     private readonly NavigationService _navigationService;
+    private readonly GenericRepository _repository;
     private readonly UserService _userService;
 
     private RelayCommand _loginCommand;
     private RelayCommand _registerCommand;
 
-    public LoginControlVM(NavigationService navigationService, UserService userService)
+    public LoginControlVM(NavigationService navigationService, UserService userService, GenericRepository repository)
     {
         _navigationService = navigationService;
         _userService = userService;
+        _repository = repository;
         _userService.CurrentUser = null;
-        _dbContext = new AppDbContext();
     }
 
     [Required]
@@ -47,7 +46,7 @@ public class LoginControlVM : ViewModelBase
         {
             return _loginCommand ??= new RelayCommand(o =>
             {
-                var user = _dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+                var user = _repository.GetAll<UserVM, User>(u => u.Username == Username && u.Password == Password).Result.First();
 
                 if (user == null)
                 {
@@ -87,4 +86,5 @@ public class LoginControlVM : ViewModelBase
         }
     }
 }
+
 

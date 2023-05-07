@@ -8,7 +8,7 @@ using CatalyticReforming.Utils.Services.DialogService.Interfaces;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
-using DAL;
+using DAL.Models.auth;
 
 
 namespace CatalyticReforming.Views.Admin;
@@ -59,7 +59,11 @@ public class UserEditControlVM : ViewModelBase, IDataHolder, IResultHolder, IInt
         set
         {
             EditingUser = (UserVM) value;
-            EditingUser.Role = UserRoles.First(x => x.Id == EditingUser.Role.Id);
+
+            if (EditingUser.Role is not null)
+            {
+                EditingUser.Role = UserRoles.First(x => x.Id == EditingUser.Role.Id);
+            }
         }
     }
 
@@ -67,4 +71,5 @@ public class UserEditControlVM : ViewModelBase, IDataHolder, IResultHolder, IInt
 
     public object Result { get; set; }
 }
+
 

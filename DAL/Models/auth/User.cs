@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace DAL;
+namespace DAL.Models.auth;
 
 public class User : EntityBase
 {
@@ -21,4 +21,6 @@ public class User : EntityBase
 
     public bool Access { get; set; }
 }
+
+
 

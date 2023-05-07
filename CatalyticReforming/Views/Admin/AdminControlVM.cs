@@ -9,7 +9,8 @@ using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 using CatalyticReforming.Views.Auth;
 
-using DAL;
+using DAL.Models.auth;
+using DAL.Models.test;
 
 using Mapster;
 
@@ -93,7 +94,7 @@ public class AdminControlVM : ViewModelBase
                     return;
                 }
 
-                await _repository.Delete<QuestionVM, Question>((QuestionVM) userVM);
+                await _repository.Delete<UserVM, User>((UserVM) userVM);
                 Users.Remove((UserVM) userVM);
             });
         }
@@ -110,4 +111,5 @@ public class AdminControlVM : ViewModelBase
         }
     }
 }
+
 

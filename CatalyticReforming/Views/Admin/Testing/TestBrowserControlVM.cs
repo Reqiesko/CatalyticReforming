@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 
 using CatalyticReforming.Utils.Commands;
@@ -9,7 +8,7 @@ using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
-using DAL;
+using DAL.Models.test;
 
 using Mapster;
 
@@ -18,7 +17,6 @@ namespace CatalyticReforming.Views.Admin.Testing;
 
 public class TestBrowserControlVM : ViewModelBase
 {
-    private readonly Func<AppDbContext> _contextCreator;
     private readonly DefaultDialogs _defaultDialogs;
     private readonly MyDialogService _dialogService;
     private readonly GenericRepository _repository;
@@ -28,16 +26,14 @@ public class TestBrowserControlVM : ViewModelBase
 
     private RelayCommand _editQuestion;
 
-    public TestBrowserControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, DefaultDialogs defaultDialogs,
+    public TestBrowserControlVM(MyDialogService dialogService, DefaultDialogs defaultDialogs,
                                 GenericRepository repository)
     {
-        _contextCreator = contextCreator;
         _dialogService = dialogService;
         _defaultDialogs = defaultDialogs;
         _repository = repository;
 
-        using var context = _contextCreator();
-        Questions = context.Questions.Adapt<ObservableCollection<QuestionVM>>();
+        Questions = _repository.GetAll<QuestionVM, Question>().Result.Adapt<ObservableCollection<QuestionVM>>();
     }
 
     public ObservableCollection<QuestionVM> Questions { get; set; }
@@ -100,5 +96,6 @@ public class TestBrowserControlVM : ViewModelBase
         }
     }
 }
+
 
 

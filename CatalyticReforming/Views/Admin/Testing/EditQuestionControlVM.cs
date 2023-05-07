@@ -9,8 +9,6 @@ using CatalyticReforming.Utils.Services.DialogService.Interfaces;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
 
-using DAL;
-
 using Mapster;
 
 
@@ -18,10 +16,9 @@ namespace CatalyticReforming.Views.Admin.Testing;
 
 public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, IInteractionAware
 {
-    private readonly GenericRepository _answerRepository;
-    private readonly Func<AppDbContext> _contextCreator;
     private readonly DefaultDialogs _defaultDialogs;
     private readonly MyDialogService _dialogService;
+    private readonly GenericRepository _repository;
 
     private RelayCommand _addAnswer;
 
@@ -33,12 +30,11 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
 
     private RelayCommand _editAnswer;
 
-    public EditQuestionControlVM(Func<AppDbContext> contextCreator, MyDialogService dialogService, GenericRepository answerRepository,
+    public EditQuestionControlVM(MyDialogService dialogService, GenericRepository repository,
                                  DefaultDialogs defaultDialogs)
     {
-        _contextCreator = contextCreator;
         _dialogService = dialogService;
-        _answerRepository = answerRepository;
+        _repository = repository;
         _defaultDialogs = defaultDialogs;
     }
 
@@ -130,5 +126,6 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
     public Action FinishInteraction { get; set; }
     public object Result { get; set; }
 }
+
 
 

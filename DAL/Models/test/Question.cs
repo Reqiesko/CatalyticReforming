@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace DAL;
+namespace DAL.Models.test;
 
 public class Question : EntityBase
 {
@@ -9,4 +9,6 @@ public class Question : EntityBase
 
     public virtual List<Answer> Answers { get; set; }
 }
+
+
 

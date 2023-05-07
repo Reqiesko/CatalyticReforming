@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
 
+using DAL.Models.auth;
+using DAL.Models.domain;
+using DAL.Models.test;
+
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,6 +19,10 @@ public class AppDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
+    public DbSet<Catalyst> Catalysts { get; set; }
+    public DbSet<Installation> Installations { get; set; }
+    public DbSet<Material> Materials { get; set; }
+    public DbSet<Reactor> Reactors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
@@ -89,4 +97,6 @@ public class AppDbContext : DbContext
                     });
     }
 }
+
+
 
