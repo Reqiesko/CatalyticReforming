@@ -260,7 +260,7 @@ public class ResearchControlVM : ViewModelBase
             });
         }
     }
-
+    
     private void UpdateMatlabCode()
     {
         string matlabCode = $"function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +

@@ -1,62 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using System.Linq;
+using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
+using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
-
+using CatalyticReforming.ViewModels.DAL_VM;
 using DAL;
+using Mapster;
 
 
 namespace CatalyticReforming.Views;
 
 public class StudyControlVM : ViewModelBase
 {
-    private readonly User _user;
+    private readonly UserService _userService;
+    private readonly GenericRepository _repository;
     private NavigationService _navigationService;
-
-    public StudyControlVM(NavigationService navigationService, User user)
+    private RelayCommand _completeTestCommand;
+    
+    public ObservableCollection<QuestionVM> Questions { get; set; }
+    
+    public string Text { get; set; }
+    public StudyControlVM(NavigationService navigationService, UserService userService, Func<AppDbContext> contextCreator, GenericRepository repository)
     {
         _navigationService = navigationService;
-        _user = user;
-
-        Questions = new List<Question>
-        {
-            new()
-            {
-                Id = 0,
-                Text = "Who is president of Russia?",
-                Answers = new List<Answer>
-                {
-                    new()
-                    {
-                        Id = 0,
-                        Text = "Putin",
-                        IsCorrect = false,
-                    },
-                    new()
-                    {
-                        Id = 1,
-                        Text = "Putin1",
-                        IsCorrect = false,
-                    },
-                    new()
-                    {
-                        Id = 2,
-                        Text = "Putin2",
-                        IsCorrect = false,
-                    },
-                    new()
-                    {
-                        Id = 3,
-                        Text = "Putin3",
-                        IsCorrect = false,
-                    },
-                },
-            },
-        };
-
-        Console.WriteLine("WWWW");
+        _userService = userService;
+        _repository = repository;
+        using var context = contextCreator();
+        Questions = context.Questions.Adapt<ObservableCollection<QuestionVM>>();
     }
 
-    public List<Question> Questions { get; set; }
+    public RelayCommand CompleteTestCommand
+    {
+        get
+        {
+            return _completeTestCommand ??= new RelayCommand(async _ =>
+            {
+                var score = Questions.Count(question => question.Answers.All(a => a.IsCorrect == a.IsSelected));
+
+                if (score < 2) return;
+                _userService.CurrentUser.Access = true;
+                await _repository.Update<UserVM, User>(_userService.CurrentUser);
+            });
+        }
+    }
 }

@@ -136,7 +136,7 @@
                             HeaderTextHorizontalAlignment="Left">
                             <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
                         </controls:LabeledControlPresenter>
-                        <TextBox></TextBox>
+                        <TextBox Margin="0 5 0 0"></TextBox>
                     </StackPanel>
                 </ui:Card.Footer>
             </ui:Card>

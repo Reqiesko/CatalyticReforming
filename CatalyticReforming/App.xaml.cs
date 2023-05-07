@@ -41,6 +41,7 @@ public partial class App : Application
         builder.RegisterType<DefaultDialogs>().AsSelf().SingleInstance();
         builder.RegisterType<MyDialogService>().AsSelf().SingleInstance();
         builder.RegisterType<MessageBoxService>().AsSelf().SingleInstance();
+        builder.RegisterType<UserService>().AsSelf().SingleInstance();
         builder.RegisterType<AppDbContext>().AsSelf();
 
     #endregion
