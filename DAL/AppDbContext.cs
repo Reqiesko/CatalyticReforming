@@ -23,6 +23,7 @@ public class AppDbContext : DbContext
     public DbSet<Installation> Installations { get; set; }
     public DbSet<Material> Materials { get; set; }
     public DbSet<Reactor> Reactors { get; set; }
+    public DbSet<TestConfig> TestConfigs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
@@ -94,6 +95,14 @@ public class AppDbContext : DbContext
                         IsCorrect = false,
                         QuestionId = 1,
                         Text = "ответ 2",
+                    });
+
+        modelBuilder.Entity<TestConfig>()
+                    .HasData(new TestConfig
+                    {
+                        Id = 1,
+                        NumberOfQuestions = 10,
+                        NumberOfQuestionsToPass = 7,
                     });
     }
 }

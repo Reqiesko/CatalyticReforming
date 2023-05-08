@@ -1,4 +1,4 @@
-﻿namespace CatalyticReforming.ViewModels.DAL_VM;
+﻿namespace CatalyticReforming.ViewModels.DAL_VM.auth;
 
 public class UserRoleVM : ViewModelBase, IDALVM
 {

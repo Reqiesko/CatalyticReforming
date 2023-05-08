@@ -1,4 +1,4 @@
-﻿using CatalyticReforming.ViewModels.DAL_VM;
+﻿using CatalyticReforming.ViewModels.DAL_VM.auth;
 
 
 namespace CatalyticReforming.Utils.Services;

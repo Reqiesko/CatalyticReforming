@@ -7,6 +7,7 @@ using CatalyticReforming.Utils.Services;
 using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.ViewModels.DAL_VM.auth;
 using CatalyticReforming.Views.Auth;
 
 using DAL.Models.auth;

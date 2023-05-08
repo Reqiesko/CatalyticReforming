@@ -4,6 +4,7 @@ using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.ViewModels.DAL_VM.auth;
 
 using DAL.Models.auth;
 

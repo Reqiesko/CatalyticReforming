@@ -5,6 +5,8 @@ using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.ViewModels.DAL_VM.auth;
+using CatalyticReforming.ViewModels.DAL_VM.test;
 using CatalyticReforming.Views.Auth;
 
 using DAL.Models.auth;

@@ -6,12 +6,13 @@
              xmlns:dal="clr-namespace:CatalyticReforming.ViewModels.DAL_VM"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:researcher="clr-namespace:CatalyticReforming.Views.Researcher"
+             xmlns:test="clr-namespace:CatalyticReforming.ViewModels.DAL_VM.test"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance researcher:StudyControl}">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="QuestionTemplate" DataType="{x:Type dal:QuestionVM}">
+        <DataTemplate x:Key="QuestionTemplate" DataType="{x:Type test:QuestionVM}">
             <StackPanel>
                 <TextBlock Text="{Binding Text}" />
                 <ItemsControl ItemsSource="{Binding Answers}">

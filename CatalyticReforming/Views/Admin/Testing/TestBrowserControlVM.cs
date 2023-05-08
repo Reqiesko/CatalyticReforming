@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 using CatalyticReforming.Utils.Commands;
@@ -7,10 +8,14 @@ using CatalyticReforming.Utils.Services;
 using CatalyticReforming.Utils.Services.DialogService;
 using CatalyticReforming.ViewModels;
 using CatalyticReforming.ViewModels.DAL_VM;
+using CatalyticReforming.ViewModels.DAL_VM.auth;
+using CatalyticReforming.ViewModels.DAL_VM.test;
 
 using DAL.Models.test;
 
 using Mapster;
+
+using PropertyChanged;
 
 
 namespace CatalyticReforming.Views.Admin.Testing;
@@ -34,7 +39,48 @@ public class TestBrowserControlVM : ViewModelBase
         _repository = repository;
 
         Questions = _repository.GetAll<QuestionVM, Question>().Result.Adapt<ObservableCollection<QuestionVM>>();
+        TestConfig = _repository.GetAll<TestConfigVM, TestConfig>().Result.First();
+        TestConfig.Adapt(TestConfigTemp);
     }
+
+
+#region test config
+
+    public TestConfigVM TestConfig { get; set; }
+    public TestConfigVM TestConfigTemp { get; set; } = new();
+    
+    public bool IsChanged =>
+        TestConfigTemp != null && TestConfig != null && (TestConfig.NumberOfQuestions != TestConfigTemp.NumberOfQuestions ||
+                                                         TestConfig.NumberOfQuestionsToPass != TestConfigTemp.NumberOfQuestionsToPass);
+
+    private RelayCommand _applyTestConfigChanges;
+
+    public RelayCommand ApplyTestConfigChanges
+    {
+        get
+        {
+            return _applyTestConfigChanges ??= new RelayCommand(async _ =>
+            {
+                TestConfigTemp.Adapt(TestConfig);
+                await _repository.Update<TestConfigVM, TestConfig>(TestConfig);
+            }, _=> IsChanged);
+        }
+    }
+
+    private RelayCommand _cancelTestConfigChanges;
+
+    public RelayCommand CancelTestConfigChanges
+    {
+        get
+        {
+            return _cancelTestConfigChanges ??= new RelayCommand(_ =>
+            {
+                TestConfig.Adapt(TestConfigTemp);
+            }, _ => IsChanged);
+        }
+    }
+
+#endregion
 
     public ObservableCollection<QuestionVM> Questions { get; set; }
 
