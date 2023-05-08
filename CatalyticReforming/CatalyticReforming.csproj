@@ -73,6 +73,12 @@
         <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditReactorControlVM.cs">
           <DependentUpon>EditReactorControl.xaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditCatalystControlVM.cs">
+          <DependentUpon>EditCatalystControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditMaterialControlVM.cs">
+          <DependentUpon>EditMaterialControl.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

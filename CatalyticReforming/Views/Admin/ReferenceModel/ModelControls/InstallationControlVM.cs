@@ -30,6 +30,7 @@ public class InstallationControlVM : ViewModelBase
         _dialogService = dialogService;
         _defaultDialogs = defaultDialogs;
         _repository = repository;
+        Installations = new ObservableCollection<InstallationVM>(_repository.GetAll<InstallationVM, Installation>().Result);
     }
 
     public RelayCommand AddInstallation
@@ -57,7 +58,7 @@ public class InstallationControlVM : ViewModelBase
         {
             return _editInstallation ??= new RelayCommand(async installation =>
             {
-                var res = await _dialogService.ShowDialog<EditInstallationControl>(new InstallationVM()) as InstallationVM;
+                var res = await _dialogService.ShowDialog<EditInstallationControl>(installation.Adapt<InstallationVM>()) as InstallationVM;
 
                 if (res is null)
                 {

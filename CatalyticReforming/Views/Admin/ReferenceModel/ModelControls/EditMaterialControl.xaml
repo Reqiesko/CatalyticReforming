@@ -4,9 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CatalyticReforming.Views.Admin.ReferenceModel.ModelControls"
+             xmlns:controls="clr-namespace:CatalyticReforming.Views.Shared.Controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             d:DataContext="{d:DesignInstance local:EditMaterialControl}"
+
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <controls:LabeledControlPresenter HeaderText="Название" HeaderTextHorizontalAlignment="Left">
+                <ui:TextBox Text="{Binding ViewModel.EditingMaterial.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ClearButtonEnabled="False"/>
+            </controls:LabeledControlPresenter>
+            <controls:LabeledControlPresenter HeaderText="Содержание нафтеновых углеводородов" HeaderTextHorizontalAlignment="Left">
+                <ui:NumberBox Value="{Binding ViewModel.EditingMaterial.NaphthenicHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False"/>
+            </controls:LabeledControlPresenter>
+            <controls:LabeledControlPresenter HeaderText="Содержание ароматических углеводородов" HeaderTextHorizontalAlignment="Left">
+                <ui:NumberBox Value="{Binding ViewModel.EditingMaterial.AromaticHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False" />
+            </controls:LabeledControlPresenter>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ui:Button Width="100" Margin="5,0" Content="Применить" Command="{Binding ViewModel.ApplyCommand}"
+                       Appearance="Info" />
+            <ui:Button Width="100" Margin="5,0" Content="Отмена" Command="{Binding ViewModel.CancelCommand}"
+                       Appearance="Transparent" />
+        </StackPanel>
     </Grid>
 </UserControl>

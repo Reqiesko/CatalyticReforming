@@ -21,7 +21,7 @@
             <TabItem Header="Редактирование катализаторов">
                 <modelControls:CatalystControl/>
             </TabItem>
-            <TabItem Header="Редактирование смесей">
+            <TabItem Header="Редактирование сырья">
                 <modelControls:MaterialControl/>
             </TabItem>
         </TabControl>
