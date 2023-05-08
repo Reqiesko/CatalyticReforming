@@ -67,6 +67,12 @@
         <Compile Update="Views\Admin\ReferenceModel\ModelControls\MaterialControlVM.cs">
           <DependentUpon>MaterialControl.xaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditInstallationControlVM.cs">
+          <DependentUpon>EditInstallationControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditReactorControlVM.cs">
+          <DependentUpon>EditReactorControl.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -121,6 +127,22 @@
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Views\Admin\ReferenceModel\ModelControls\EditInstallationControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <DependentUpon>InstallationControl.xaml</DependentUpon>
+        </Page>
+        <Page Update="Views\Admin\ReferenceModel\ModelControls\EditReactorControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <DependentUpon>ReactorControl.xaml</DependentUpon>
+        </Page>
+        <Page Update="Views\Admin\ReferenceModel\ModelControls\EditCatalystControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <DependentUpon>CatalystControl.xaml</DependentUpon>
+        </Page>
+        <Page Update="Views\Admin\ReferenceModel\ModelControls\EditMaterialControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <DependentUpon>MaterialControl.xaml</DependentUpon>
         </Page>
     </ItemGroup>
 

@@ -26,7 +26,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название установки" Binding="{Binding Path=Name}" 
                                     Width="auto" />
-                <DataGridTextColumn Header="Номер реактора" Binding="{Binding Path=Reactor.Id}" Width="*" />
+                <DataGridTextColumn Header="Номер реактора" Binding="{Binding Path=ReactorId}" Width="*" />
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
