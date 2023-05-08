@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CatalyticReforming.Views.Admin.ReferenceModel.ReferenceModelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CatalyticReforming.Views.Admin.ReferenceModel"
+             xmlns:modelControls="clr-namespace:CatalyticReforming.Views.Admin.ReferenceModel.ModelControls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             d:DataContext="{d:DesignInstance local:ReferenceModelControl}"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Редактирование установок">
+                <modelControls:InstallationControl/>
+            </TabItem>
+            <TabItem Header="Редактирование реакторов">
+                <modelControls:ReactorControl/>
+            </TabItem>
+            <TabItem Header="Редактирование катализаторов">
+                <modelControls:CatalystControl/>
+            </TabItem>
+            <TabItem Header="Редактирование смесей">
+                <modelControls:MaterialControl/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

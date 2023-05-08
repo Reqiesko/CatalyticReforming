@@ -55,6 +55,18 @@
         <Compile Update="Views\Admin\Testing\TestBrowserControlVM.cs">
             <DependentUpon>TestBrowserControl.xaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\InstallationControlVM.cs">
+          <DependentUpon>InstallationControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\ReactorControlVM.cs">
+          <DependentUpon>ReactorControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\CatalystControlVM.cs">
+          <DependentUpon>CatalystControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Admin\ReferenceModel\ModelControls\MaterialControlVM.cs">
+          <DependentUpon>MaterialControl.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -105,10 +117,11 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ViewModels\DAL VM\domain" />
+        <Page Update="Views\Admin\ReferenceModel\ReferenceModelControl.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
 </Project>

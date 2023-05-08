@@ -72,13 +72,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-
             </DataGrid>
-            <!-- <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal"> -->
-            <!--     <ui:Button Appearance="Info" Content="Изменить" Margin="5,0"/> -->
-            <!--     <ui:Button Appearance="Success" Content="Добавить" Margin="5,0" Command="{Binding ViewModel.AddQuestion}"/> -->
-            <!--     <ui:Button Appearance="Danger" Content="Удалаить" Margin="5,0"/> -->
-            <!-- </StackPanel> -->
         </Grid>
     </Grid>
 </UserControl>
