@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 using CatalyticReforming.Utils.Commands;
@@ -9,10 +10,13 @@ using CatalyticReforming.ViewModels.DAL_VM.auth;
 using CatalyticReforming.ViewModels.DAL_VM.test;
 using CatalyticReforming.Views.Auth;
 
+using DAL;
 using DAL.Models.auth;
 using DAL.Models.test;
 
 using Mapster;
+
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CatalyticReforming.Views.Researcher;
@@ -28,14 +32,21 @@ public class StudyControlVM : ViewModelBase
     private RelayCommand _navigateBackCommand;
 
     public StudyControlVM(NavigationService navigationService, UserService userService,
-                          GenericRepository repository)
+                          GenericRepository repository, Func<AppDbContext> contextCreator)
     {
         _navigationService = navigationService;
         _userService = userService;
         _repository = repository;
-        Questions = _repository.GetAll<QuestionVM, Question>().Result.Adapt<ObservableCollection<QuestionVM>>();
+        TestConfig = _repository.GetAll<TestConfigVM, TestConfig>().Result.First();
+
+        using var context = contextCreator();
+        Questions = context.Questions
+                           .OrderBy(r => EF.Functions.Random())
+                           .Take(TestConfig.NumberOfQuestions)
+                           .Adapt<ObservableCollection<QuestionVM>>();
     }
 
+    public TestConfigVM TestConfig { get; set; }
     public ObservableCollection<QuestionVM> Questions { get; set; }
 
     public string Text { get; set; }

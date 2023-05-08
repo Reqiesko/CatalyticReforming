@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <!-- todo сделать красиво -->
         <Grid>
             <StackPanel Orientation="Horizontal">
                 <controls:LabeledControlPresenter Margin="5,0" HeaderText="Количество вопросов в тесте" HeaderTextHorizontalAlignment="Left">
