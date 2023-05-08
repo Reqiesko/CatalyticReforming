@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Autofac" Version="7.0.1" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.5.2" />
         <PackageReference Include="Mapster" Version="7.4.0-pre06" />
         <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
         <PackageReference Include="Mapster.EFCore" Version="5.1.1-pre02" />
@@ -78,6 +79,30 @@
         </Compile>
         <Compile Update="Views\Admin\ReferenceModel\ModelControls\EditMaterialControlVM.cs">
           <DependentUpon>EditMaterialControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\auth\TestConfigValidator.cs">
+          <DependentUpon>TestConfigVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\auth\UserValidator.cs">
+          <DependentUpon>UserVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\test\AnswerValidator.cs">
+          <DependentUpon>AnswerVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\test\QuestionValidator.cs">
+          <DependentUpon>QuestionVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\domain\CatalystValidator.cs">
+          <DependentUpon>CatalystVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\domain\InstallationValidator.cs">
+          <DependentUpon>InstallationVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\domain\MaterialValidator.cs">
+          <DependentUpon>MaterialVM.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ViewModels\DAL VM\domain\ReactorValidator.cs">
+          <DependentUpon>ReactorVM.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
