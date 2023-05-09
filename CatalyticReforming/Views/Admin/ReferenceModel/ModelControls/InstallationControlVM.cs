@@ -47,7 +47,7 @@ public class InstallationControlVM : ViewModelBase
                 }
 
                 var entity = await _repository.Create<InstallationVM, Installation>(newInstallation);
-                newInstallation.Id = entity.Id;
+                entity.Adapt(newInstallation);
                 Installations.Add(newInstallation);
             });
         }

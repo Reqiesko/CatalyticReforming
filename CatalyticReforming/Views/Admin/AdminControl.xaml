@@ -37,26 +37,23 @@
                                 Style="{DynamicResource DataGridStyle1}"
                                 ItemsSource="{Binding ViewModel.Users}">
                                 <DataGrid.Columns>
-                                    <DataGridTemplateColumn Header="Id" IsReadOnly="True" Width="auto">
+                                    <DataGridTemplateColumn Header="Имя пользователя" IsReadOnly="True" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Id}" VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding Path=Username}" VerticalAlignment="Center" />
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"
+                                    <DataGridTextColumn Header="Пароль" Binding="{Binding Path=Password}"
                                                         IsReadOnly="True"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Password" Binding="{Binding Path=Password}"
+                                    <DataGridTextColumn Header="Роль" Binding="{Binding Path= Role.Name}"
                                                         IsReadOnly="True"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Role" Binding="{Binding Path= Role.Name}"
+                                    <DataGridTextColumn Header="Доступ" Binding="{Binding Path= Access}"
                                                         IsReadOnly="True"
                                                         Width="*" />
-                                    <DataGridTextColumn Header="Access" Binding="{Binding Path= Access}"
-                                                        IsReadOnly="True"
-                                                        Width="*" />
-                                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                                    <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">

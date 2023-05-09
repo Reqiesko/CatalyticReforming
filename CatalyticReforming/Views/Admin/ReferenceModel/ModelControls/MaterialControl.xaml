@@ -27,7 +27,7 @@
                 <DataGridTextColumn Header="Название сырья" Binding="{Binding Path=Name}" Width="auto" />
                 <DataGridTextColumn Header="Содержание нафтеновых углеводородов" Binding="{Binding Path=NaphthenicHydrocarbonsContent}" Width="*" />
                 <DataGridTextColumn Header="Содержание ароматических углеводородов" Binding="{Binding Path=AromaticHydrocarbonsContent}" Width="*" />
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

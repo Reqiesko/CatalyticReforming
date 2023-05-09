@@ -25,8 +25,8 @@
                 <controls:LabeledControlPresenter Margin="5,0" HeaderText="Количество вопросов для прохождения теста" HeaderTextHorizontalAlignment="Left">
                     <ui:TextBox Text="{Binding ViewModel.TestConfigTemp.NumberOfQuestionsToPass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </controls:LabeledControlPresenter>
-                <ui:Button Margin="5,0" Content="Применить" Command="{Binding ViewModel.ApplyTestConfigChanges}"/>
-                <ui:Button Margin="5,0" Content="Отмена" Command="{Binding ViewModel.CancelTestConfigChanges}"/>
+                <ui:Button Margin="5,0" Content="Применить" Command="{Binding ViewModel.ApplyTestConfigChanges}" VerticalAlignment="Bottom"/>
+                <ui:Button Margin="5,0" Content="Отмена" Command="{Binding ViewModel.CancelTestConfigChanges}" VerticalAlignment="Bottom"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Margin="8">
@@ -47,7 +47,7 @@
                     <DataGridTextColumn Header="Текст вопроса" Binding="{Binding Path=Text}" IsReadOnly="True"
                                         Width="*" />
                     <DataGridTextColumn Header="Количество ответов" Binding="{Binding Path=Answers.Count}" />
-                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

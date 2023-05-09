@@ -28,7 +28,7 @@
                                     Width="*" />
                 <DataGridTextColumn Header="Насыпная плотность" Binding="{Binding Path=Density}" Width="*" />
                 <DataGridTextColumn Header="Коэффициент прочности" Binding="{Binding Path=StrengthFactor}" Width="*" />
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

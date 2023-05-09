@@ -12,10 +12,10 @@
     <Grid Margin="15">
         <StackPanel>
             <controls:LabeledControlPresenter HeaderText="Название реактора" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingReactor.Name}" />
+                <ui:TextBox Text="{Binding ViewModel.EditingReactor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Давление" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingReactor.Pressure}" />
+                <ui:TextBox Text="{Binding ViewModel.EditingReactor.Pressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </controls:LabeledControlPresenter>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">

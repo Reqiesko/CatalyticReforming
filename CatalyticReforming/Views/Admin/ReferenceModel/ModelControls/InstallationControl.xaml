@@ -25,9 +25,9 @@
                   ItemsSource="{Binding ViewModel.Installations}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название установки" Binding="{Binding Path=Name}" 
-                                    Width="auto" />
-                <DataGridTextColumn Header="Номер реактора" Binding="{Binding Path=ReactorId}" Width="*" />
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                                    Width="*" />
+                <DataGridTextColumn Header="Название реактора" Binding="{Binding Path=Reactor.Name}" Width="*" />
+                <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
