@@ -20,7 +20,7 @@ public class EditReactorControlVM : ViewModelBase, IDataHolder, IResultHolder, I
             {
                 Result = EditingReactor;
                 FinishInteraction();
-            });
+            }, _=> !EditingReactor.HasErrors);
         }
     }
 

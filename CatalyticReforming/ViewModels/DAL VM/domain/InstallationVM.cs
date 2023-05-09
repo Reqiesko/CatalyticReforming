@@ -1,6 +1,6 @@
 ﻿namespace CatalyticReforming.ViewModels.DAL_VM.domain;
 
-public class InstallationVM : ViewModelBase, IDALVM
+public class InstallationVM : ValidatableViewModel<InstallationValidator>, IDALVM
 {
     public string Name { get; set; }
     public int ReactorId { get; set; }

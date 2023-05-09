@@ -17,16 +17,20 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <controls:LabeledControlPresenter HeaderText="Название" HeaderTextHorizontalAlignment="Left">
-                <ui:TextBox Text="{Binding ViewModel.EditingCatalyst.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <ui:TextBox Text="{Binding 
+                ViewModel.EditingCatalyst.Name, 
+                Mode=TwoWay, 
+                UpdateSourceTrigger=PropertyChanged,
+                 ValidatesOnNotifyDataErrors=True}"
                             ClearButtonEnabled="False"/>
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Насыпная плотность катализатора" HeaderTextHorizontalAlignment="Left">
-                <ui:NumberBox Value="{Binding ViewModel.EditingCatalyst.Density, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False"/>
+                <ui:TextBox Text="{Binding ViewModel.EditingCatalyst.Density, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ClearButtonEnabled="False"/>
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Коэффициент прочности" HeaderTextHorizontalAlignment="Left">
-                <ui:NumberBox Value="{Binding ViewModel.EditingCatalyst.StrengthFactor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False" />
+                <ui:TextBox Text="{Binding ViewModel.EditingCatalyst.StrengthFactor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ClearButtonEnabled="False" />
             </controls:LabeledControlPresenter>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

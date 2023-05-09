@@ -1,6 +1,6 @@
 ﻿namespace CatalyticReforming.ViewModels.DAL_VM.test;
 
-public class AnswerVM : ViewModelBase, IDALVM
+public class AnswerVM : ValidatableViewModel<AnswerValidator>, IDALVM
 {
     public string Text { get; set; }
     public bool IsCorrect { get; set; }

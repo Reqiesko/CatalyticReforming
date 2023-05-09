@@ -48,6 +48,14 @@ public partial class App : Application
     #endregion
 
 
+    #region Validators
+
+        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+               .Where(t => t.Name.EndsWith("Validator"))
+               .AsSelf();
+
+    #endregion
+
     #region VM And Views
 
         builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())

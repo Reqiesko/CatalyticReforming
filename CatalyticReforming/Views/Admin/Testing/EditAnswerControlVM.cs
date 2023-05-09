@@ -25,7 +25,7 @@ public class EditAnswerControlVM : ViewModelBase, IDataHolder, IResultHolder, II
             {
                 Result = EditingAnswer;
                 FinishInteraction();
-            });
+            }, _=> !EditingAnswer.HasErrors);
         }
     }
 

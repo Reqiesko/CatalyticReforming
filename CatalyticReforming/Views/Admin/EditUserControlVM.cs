@@ -38,7 +38,7 @@ public class UserEditControlVM : ViewModelBase, IDataHolder, IResultHolder, IInt
             {
                 Result = EditingUser;
                 FinishInteraction();
-            });
+            }, _=>!EditingUser.HasErrors);
         }
     }
 

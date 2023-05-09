@@ -3,7 +3,7 @@
 
 namespace CatalyticReforming.ViewModels.DAL_VM.test;
 
-public class QuestionVM : ViewModelBase, IDALVM
+public class QuestionVM : ValidatableViewModel<QuestionValidator>, IDALVM
 {
     public string Text { get; set; }
 

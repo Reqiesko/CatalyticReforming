@@ -55,7 +55,7 @@ public class EditInstallationControlVM : ViewModelBase, IDataHolder, IResultHold
             {
                 Result = EditingInstallation;
                 FinishInteraction();
-            });
+            }, _=>!EditingInstallation.HasErrors);
         }
     }
 

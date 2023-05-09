@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel;
 
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Services.DialogService.Interfaces;
@@ -10,6 +12,12 @@ namespace CatalyticReforming.Views.Admin.ReferenceModel.ModelControls;
 
 public class EditCatalystControlVM : ViewModelBase, IDataHolder, IResultHolder, IInteractionAware
 {
+    private readonly CatalystValidator _catalystValidator;
+
+    public EditCatalystControlVM(CatalystValidator catalystValidator)
+    {
+        _catalystValidator = catalystValidator;
+    }
     public CatalystVM EditingCatalyst { get; set; }
 
 
@@ -23,7 +31,7 @@ public class EditCatalystControlVM : ViewModelBase, IDataHolder, IResultHolder, 
             {
                 Result = EditingCatalyst;
                 FinishInteraction();
-            });
+            }, _=> !EditingCatalyst.HasErrors);
         }
     }
 
@@ -50,4 +58,8 @@ public class EditCatalystControlVM : ViewModelBase, IDataHolder, IResultHolder, 
 
     public object Result { get; set; }
     public Action FinishInteraction { get; set; }
+
+
+
+
 }

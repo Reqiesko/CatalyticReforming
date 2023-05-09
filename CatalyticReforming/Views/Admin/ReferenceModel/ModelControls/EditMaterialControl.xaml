@@ -21,12 +21,12 @@
                             ClearButtonEnabled="False"/>
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Содержание нафтеновых углеводородов" HeaderTextHorizontalAlignment="Left">
-                <ui:NumberBox Value="{Binding ViewModel.EditingMaterial.NaphthenicHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False"/>
+                <ui:TextBox Text="{Binding ViewModel.EditingMaterial.NaphthenicHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ClearButtonEnabled="False"/>
             </controls:LabeledControlPresenter>
             <controls:LabeledControlPresenter HeaderText="Содержание ароматических углеводородов" HeaderTextHorizontalAlignment="Left">
-                <ui:NumberBox Value="{Binding ViewModel.EditingMaterial.AromaticHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SpinButtonPlacementMode="Hidden" ClearButtonEnabled="False" />
+                <ui:TextBox Text="{Binding ViewModel.EditingMaterial.AromaticHydrocarbonsContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ClearButtonEnabled="False" />
             </controls:LabeledControlPresenter>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

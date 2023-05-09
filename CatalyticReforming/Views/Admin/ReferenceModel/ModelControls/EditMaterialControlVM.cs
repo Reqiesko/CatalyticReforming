@@ -31,7 +31,7 @@ public class EditMaterialControlVM: ViewModelBase, IDataHolder, IResultHolder, I
             {
                 Result = EditingMaterial;
                 FinishInteraction();
-            });
+            }, _=> !EditingMaterial.HasErrors);
         }
     }
 

@@ -103,7 +103,7 @@ public class EditQuestionControlVM : ViewModelBase, IResultHolder, IDataHolder, 
             {
                 Result = EditingQuestion;
                 FinishInteraction();
-            });
+            }, _=>!EditingQuestion.HasErrors);
         }
     }
 

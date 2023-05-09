@@ -63,7 +63,7 @@ public class TestBrowserControlVM : ViewModelBase
             {
                 TestConfigTemp.Adapt(TestConfig);
                 await _repository.Update<TestConfigVM, TestConfig>(TestConfig);
-            }, _=> IsChanged);
+            }, _=> IsChanged && !TestConfigTemp.HasErrors);
         }
     }
 

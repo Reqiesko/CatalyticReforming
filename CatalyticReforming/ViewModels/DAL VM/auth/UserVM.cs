@@ -1,6 +1,6 @@
 ﻿namespace CatalyticReforming.ViewModels.DAL_VM.auth;
 
-public class UserVM : ViewModelBase, IDALVM
+public class UserVM : ValidatableViewModel<UserValidator>, IDALVM
 {
     public string Username { get; set; }
     public string Password { get; set; }
