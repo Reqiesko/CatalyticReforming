@@ -8,4 +8,9 @@ public partial class ReferenceModelControl : UserControl
     {
         InitializeComponent();
     }
+
+    private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+       ResearchControl.ViewModel.UpdateReactors();
+    }
 }

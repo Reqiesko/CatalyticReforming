@@ -26,9 +26,15 @@ public class ReactorControlVM : ViewModelBase
         _repository = repository;
         _defaultDialogs = defaultDialogs;
         _dialogService = dialogService;
-        Reactors = new ObservableCollection<ReactorVM>(_repository.GetAll<ReactorVM, Reactor>().Result);
+        UpdateReactors();
     }
 
+
+    public void UpdateReactors()
+    {
+        Reactors = new ObservableCollection<ReactorVM>(_repository.GetAll<ReactorVM, Reactor>().Result);
+    }
+    
     public ObservableCollection<ReactorVM> Reactors { get; set; }
     private RelayCommand _addReactor;
 
