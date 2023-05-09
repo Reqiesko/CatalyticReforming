@@ -28,19 +28,18 @@
             <ScrollViewer>
                 <StackPanel>
                     <ui:Card>
-                        Входные параметры
+                        Параметры установки
                         <ui:Card.Footer>
                             <StackPanel>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Выберите установку"
                                     HeaderTextHorizontalAlignment="Left">
-                                    <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
+                                    <ComboBox ItemsSource="{Binding ViewModel.Installations}" 
+                                              DisplayMemberPath="Name"
+                                              SelectedItem="{Binding ViewModel.SelectedInstallation}"/>
                                 </controls:LabeledControlPresenter>
 
-                                <controls:LabeledControlPresenter
-                                    HeaderText="Реактор">
-                                    <ComboBox ItemsSource="{Binding ViewModel.ReactorsCollection}" />
-                                </controls:LabeledControlPresenter>
+                                
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
@@ -49,17 +48,18 @@
                         Входные параметры реактора
                         <ui:Card.Footer>
                             <StackPanel>
-
+                                <controls:LabeledControlPresenter
+                                    HeaderText="Реактор">
+                                    <ui:TextBox IsReadOnly="True"
+                                                Text="{Binding ViewModel.SelectedInstallation.Reactor.Name}" />
+                                </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Давление">
-                                    <TextBox Text="{Binding ViewModel.ReactorPressure}" />
+                                    <ui:TextBox Text="{Binding ViewModel.SelectedInstallation.Reactor.Pressure}" />
                                 </controls:LabeledControlPresenter>
 
 
-                                <controls:LabeledControlPresenter
-                                    HeaderText="Катализатор">
-                                    <ComboBox ItemsSource="{Binding ViewModel.CatalystCollection}" />
-                                </controls:LabeledControlPresenter>
+                                
                             </StackPanel>
                         </ui:Card.Footer>
                     </ui:Card>
@@ -69,12 +69,18 @@
                         <ui:Card.Footer>
                             <StackPanel>
                                 <controls:LabeledControlPresenter
+                                    HeaderText="Катализатор">
+                                    <ComboBox ItemsSource="{Binding ViewModel.Catalysts}"
+                                              SelectedItem="{Binding ViewModel.SelectedCatalyst}"
+                                              DisplayMemberPath="Name"/>
+                                </controls:LabeledControlPresenter>
+                                <controls:LabeledControlPresenter
                                     HeaderText="Насыпаная плотность катализатора">
-                                    <TextBox Text="{Binding ViewModel.CatalystDensity}" />
+                                    <TextBox Text="{Binding ViewModel.SelectedCatalyst.Density}" />
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Коэффициент прочности">
-                                    <TextBox Text="{Binding ViewModel.StrengthFactor}" />
+                                    <TextBox Text="{Binding ViewModel.SelectedCatalyst.StrengthFactor}" />
                                 </controls:LabeledControlPresenter>
                             </StackPanel>
                         </ui:Card.Footer>
@@ -87,16 +93,26 @@
                             <StackPanel>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Сырье">
-                                    <ComboBox ItemsSource="{Binding ViewModel.MaterialCollection}" />
+                                    <ComboBox ItemsSource="{Binding ViewModel.Materials}"
+                                              SelectedItem="{Binding ViewModel.SelectedMaterial}"
+                                              DisplayMemberPath="Name"/>
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Содержание нафтеновых углеводородов">
-                                    <TextBox Text="{Binding ViewModel.NaphthenicHydrocarbons}" />
+                                    <TextBox Text="{Binding ViewModel.SelectedMaterial.NaphthenicHydrocarbonsContent}" />
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Содержание ароматических углеводородов">
-                                    <TextBox Text="{Binding ViewModel.AromaticHydrocarbons}" />
+                                    <TextBox Text="{Binding ViewModel.SelectedMaterial.AromaticHydrocarbonsContent}" />
                                 </controls:LabeledControlPresenter>
+                                
+                            </StackPanel>
+                        </ui:Card.Footer>
+                    </ui:Card>
+                    <ui:Card>
+                        Параметры расчета
+                        <ui:Card.Footer>
+                            <StackPanel>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Подача сырья">
                                     <TextBox Text="{Binding ViewModel.MaterialsInput}" />
@@ -105,13 +121,6 @@
                                     HeaderText="Температура на входе в реактор">
                                     <TextBox Text="{Binding ViewModel.Temperature}" />
                                 </controls:LabeledControlPresenter>
-                            </StackPanel>
-                        </ui:Card.Footer>
-                    </ui:Card>
-                    <ui:Card>
-                        Выберите параметр для варьирования
-                        <ui:Card.Footer>
-                            <StackPanel>
                                 <CheckBox Content="Варьировать подачу сырья"
                                           x:Name="MaterialCheckBox"
                                           Click="MaterialCheckBox_OnChecked"
@@ -144,7 +153,7 @@
                             <controls:LabeledControlPresenter
                                 HeaderText="Выберите функцию"
                                 HeaderTextHorizontalAlignment="Left">
-                                <ComboBox ItemsSource="{Binding ViewModel.InsallersCollection}" />
+                                <ComboBox ItemsSource="{Binding ViewModel.Installations}" />
                             </controls:LabeledControlPresenter>
                             <TextBox Margin="0 5 0 0" />
                         </StackPanel>

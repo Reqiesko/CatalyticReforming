@@ -1,13 +1,17 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 using CatalyticReforming.Utils.Commands;
 using CatalyticReforming.Utils.Default_Dialogs;
 using CatalyticReforming.Utils.Services;
 using CatalyticReforming.ViewModels;
+using CatalyticReforming.ViewModels.DAL_VM.domain;
 using CatalyticReforming.Views.Auth;
+
+using DAL.Models.domain;
 
 using Microsoft.Win32;
 
@@ -36,12 +40,19 @@ public class ResearchControlVM : ViewModelBase
     private string _temperature;
     private RelayCommand _temperatureChangeCommand;
 
-    public ResearchControlVM(NavigationService navigationService, DefaultDialogs defaultDialogs)
+    public ResearchControlVM(NavigationService navigationService, DefaultDialogs defaultDialogs, GenericRepository repository)
     {
         _navigationService = navigationService;
         _defaultDialogs = defaultDialogs;
         MaterialCheckBox = false;
         TemperatureCheckBox = false;
+
+        Installations = new ObservableCollection<InstallationVM>(repository.GetAll<InstallationVM, Installation>().Result);
+        SelectedInstallation = Installations.First();
+        Materials = new ObservableCollection<MaterialVM>(repository.GetAll<MaterialVM, Material>().Result);
+        SelectedMaterial = Materials.First();
+        Catalysts = new ObservableCollection<CatalystVM>(repository.GetAll<CatalystVM, Catalyst>().Result);
+        SelectedCatalyst = Catalysts.First();
 
         MatlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                      "% Определение параметров функции\n" +
@@ -99,13 +110,13 @@ public class ResearchControlVM : ViewModelBase
     public string MatlabCode { get; set; }
 
 
-    public ObservableCollection<string> InsallersCollection { get; set; }
-    public ObservableCollection<string> ReactorsCollection { get; set; }
-    public ObservableCollection<double> ReactorPressure { get; set; }
-    public ObservableCollection<string> CatalystCollection { get; set; }
-    public ObservableCollection<double> CatalystDensity { get; set; }
-    public ObservableCollection<double> StrengthFactor { get; set; }
-    public ObservableCollection<string> MaterialCollection { get; set; }
+    public ObservableCollection<InstallationVM> Installations { get; set; }
+    public InstallationVM SelectedInstallation { get; set; }
+    public ObservableCollection<CatalystVM> Catalysts { get; set; }
+
+    public CatalystVM SelectedCatalyst { get; set; }
+    public ObservableCollection<MaterialVM> Materials { get; set; }
+    public MaterialVM SelectedMaterial { get; set; }
 
     public string NaphthenicHydrocarbons
     {
