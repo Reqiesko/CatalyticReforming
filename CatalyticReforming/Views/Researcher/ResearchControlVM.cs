@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -21,16 +22,18 @@ namespace CatalyticReforming.Views.Researcher;
 public class ResearchControlVM : ViewModelBase
 {
     private readonly DefaultDialogs _defaultDialogs;
-    private string _aromaticHydrocarbons;
+    
     private RelayCommand _changeMaterialCommand;
     private RelayCommand _changeTemperatureCommand;
 
     private RelayCommand _changeUserCommand;
     private RelayCommand _materialCheckChangeCommand;
+    private RelayCommand _selectedMethodChangedCommand;
 
     private string _materialsInput;
 
-    private string _naphthenicHydrocarbons;
+    private double _naphthenicHydrocarbons;
+    private double _aromaticHydrocarbons;
 
     private RelayCommand _navigateBackCommand;
     private readonly NavigationService _navigationService;
@@ -39,6 +42,8 @@ public class ResearchControlVM : ViewModelBase
 
     private string _temperature;
     private RelayCommand _temperatureChangeCommand;
+    private MaterialVM _selectedMaterial;
+    private string _selectedMethod;
 
     public ResearchControlVM(NavigationService navigationService, DefaultDialogs defaultDialogs, GenericRepository repository)
     {
@@ -53,6 +58,9 @@ public class ResearchControlVM : ViewModelBase
         SelectedMaterial = Materials.First();
         Catalysts = new ObservableCollection<CatalystVM>(repository.GetAll<CatalystVM, Catalyst>().Result);
         SelectedCatalyst = Catalysts.First();
+
+        Methods = new ObservableCollection<string>(new List<string> {"Метод золотого сечения", "Метод половинного деления", "Метод сканирования", "Метод чисел Фибоначчи"});
+        SelectedMethod = Methods.First();
 
         MatlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                      "% Определение параметров функции\n" +
@@ -116,9 +124,24 @@ public class ResearchControlVM : ViewModelBase
 
     public CatalystVM SelectedCatalyst { get; set; }
     public ObservableCollection<MaterialVM> Materials { get; set; }
-    public MaterialVM SelectedMaterial { get; set; }
 
-    public string NaphthenicHydrocarbons
+    public MaterialVM SelectedMaterial
+    {
+        get => _selectedMaterial;
+        set
+        {
+            if (_selectedMaterial != value)
+            {
+                _selectedMaterial = value;
+                NaphthenicHydrocarbons = _selectedMaterial.NaphthenicHydrocarbonsContent;
+                AromaticHydrocarbons = _selectedMaterial.AromaticHydrocarbonsContent;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
+
+    public double NaphthenicHydrocarbons
     {
         get => _naphthenicHydrocarbons;
         set
@@ -132,7 +155,7 @@ public class ResearchControlVM : ViewModelBase
         }
     }
 
-    public string AromaticHydrocarbons
+    public double AromaticHydrocarbons
     {
         get => _aromaticHydrocarbons;
         set
@@ -174,9 +197,21 @@ public class ResearchControlVM : ViewModelBase
         }
     }
 
-    //uitable('Data',tableResult{:,:},'ColumnName',tableResult.Properties.VariableNames,'Units','Normalized','Position',[0,0,1,1]);
-    //tableResult = targetFunction();
+    public ObservableCollection<string> Methods { get; set; }
 
+    public string SelectedMethod
+    {
+        get => _selectedMethod;
+        set
+        {
+            if (_selectedMethod != value)
+            {
+                _selectedMethod = value;
+                OnPropertyChanged();
+                UpdateMatlabCode();
+            }
+        }
+    }
 
     public RelayCommand StartResearchCommand
     {
@@ -254,6 +289,17 @@ public class ResearchControlVM : ViewModelBase
         }
     }
 
+    public RelayCommand SelectedMethodChangedCommand
+    {
+        get
+        {
+            return _selectedMethodChangedCommand ??= new RelayCommand(o =>
+            {
+                
+            });
+        }
+    }
+
     public RelayCommand TemperatureCheckChangeCommand
     {
         get
@@ -300,56 +346,154 @@ public class ResearchControlVM : ViewModelBase
 
     private void UpdateMatlabCode()
     {
-        var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
-                         "% Определение параметров функции\n" +
-                         "a = 15.802;\n" +
-                         "b = 0.03155;\n" +
-                         "c = 0.95975;\n" +
-                         "d = 2.4206;\n" +
-                         "a1 = 2.517;\n" +
-                         "b1 = 0.00455;\n" +
-                         "c1 = 0.1449;\n" +
-                         "d1 = 0.0221;\n" +
-                         "yn = " + NaphthenicHydrocarbons + ";\n" +
-                         "ya = " + AromaticHydrocarbons + ";\n" +
-                         "parameter = " + $"'{ChangeParameter}'" + ";\n" +
-                         "% Создание таблицы\n" +
-                         "T = " + Temperature + ";\n" +
-                         "G = " + MaterialsInput + ";\n" +
-                         "[TT, GG] = meshgrid(T, G);\n" +
-                         "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
-                         "tableData = [TT(:), GG(:), F(:)];\n" +
-                         "tableHeaders = {'T', 'G', 'F'};\n" +
-                         "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
-                         "% Отображение таблицы в новом окне\n" +
-                         "figure;\n" +
-                         "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
-                         "% Построение графика в новом окне\n" +
-                         "figure;\n" +
-                         "if strcmp(parameter, 'G')\n" +
-                         "plot(T, F);\n" +
-                         "title('Зависимость функции при различных Т');\n" +
-                         "xlabel('T');\n" +
-                         "ylabel('F');\n" +
-                         "elseif strcmp(parameter, 'T')\n" +
-                         "plot(G, F);\n" +
-                         "title('Зависимость функции при различных G');\n" +
-                         "xlabel('G');\n" +
-                         "ylabel('F');\n" +
-                         "end\n" +
-                         "% Поиск оптимального значения параметра\n" +
-                         "if strcmp(parameter, 'T')\n" +
-                         "[~, index] = max(F);\n" +
-                         "optimalValue = G(index);\n" +
-                         "elseif strcmp(parameter, 'G')\n" +
-                         "[~, index] = max(F);\n" +
-                         "optimalValue = T(index);\n" +
-                         "end\n" +
-                         "% Расчет октанового числа при оптимальном значении параметра\n" +
-                         "optimalOctaneNumber = a1 + b1 * optimalValue - c1 * optimalValue + d1*(yn - ya);\n" +
-                         "end";
+        if (_selectedMethod != null)
+        {
+            if (_selectedMethod.Equals("Метод золотого сечения"))
+            {
+                var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
+                     "% Определение параметров функции\n" +
+                     "a = 15.802;\n" +
+                     "b = 0.03155;\n" +
+                     "c = 0.95975;\n" +
+                     "d = 2.4206;\n" +
+                     "a1 = 2.517;\n" +
+                     "b1 = 0.00455;\n" +
+                     "c1 = 0.1449;\n" +
+                     "d1 = 0.0221;\n" +
+                     "yn = " + NaphthenicHydrocarbons + ";\n" +
+                     "ya = " + AromaticHydrocarbons + ";\n" +
+                     "parameter = " + $"'{ChangeParameter}'" + ";\n" +
+                     "% Создание таблицы\n" +
+                     "T = " + Temperature + ";\n" +
+                     "G = " + MaterialsInput + ";\n" +
+                     "[TT, GG] = meshgrid(T, G);\n" +
+                     "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                     "tableData = [TT(:), GG(:), F(:)];\n" +
+                     "tableHeaders = {'T', 'G', 'F'};\n" +
+                     "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
+                     "% Отображение таблицы в новом окне\n" +
+                     "figure;\n" +
+                     "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
+                     "% Построение графика в новом окне\n" +
+                     "figure;\n" +
+                     "if strcmp(parameter, 'G')\n" +
+                     "plot(T, F);\n" +
+                     "title('Зависимость функции при различных Т');\n" +
+                     "xlabel('T');\n" +
+                     "ylabel('F');\n" +
+                     "elseif strcmp(parameter, 'T')\n" +
+                     "plot(G, F);\n" +
+                     "title('Зависимость функции при различных G');\n" +
+                     "xlabel('G');\n" +
+                     "ylabel('F');\n" +
+                     "end\n" +
+                     "% Поиск оптимального значения параметра методом золотого сечения(с помощью fminbnd)\n" +
+                     "if strcmp(parameter, 'T')\n" +
+                     "f = @(x)abs(a - b * T + c * x - d * (yn - ya));\n" +
+                     "[optimalValue, ~] = fminbnd(f, G(1), G(end));\n" +
+                     "elseif strcmp(parameter, 'G')\n" +
+                     "f = @(x)abs(a - b * x + c * G - d * (yn - ya));\n" +
+                     "[optimalValue, ~] = fminbnd(f, T(1), T(end));\n" +
+                     "end\n" +
+                     "% Расчет октанового числа при оптимальном значении параметра\n" +
+                     "optimalOctaneNumber = a1 + b1 * optimalValue - c1 * optimalValue + d1*(yn - ya);\n" +
+                     "end";
 
-        MatlabCode = matlabCode;
+                MatlabCode = matlabCode;
+            }
+            else if (_selectedMethod.Equals("Метод половинного деления"))
+            {
+                var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
+                     "% Определение параметров функции\n" +
+                     "a = 15.802;\n" +
+                     "b = 0.03155;\n" +
+                     "c = 0.95975;\n" +
+                     "d = 2.4206;\n" +
+                     "a1 = 2.517;\n" +
+                     "b1 = 0.00455;\n" +
+                     "c1 = 0.1449;\n" +
+                     "d1 = 0.0221;\n" +
+                     "yn = " + NaphthenicHydrocarbons + ";\n" +
+                     "ya = " + AromaticHydrocarbons + ";\n" +
+                     "parameter = " + $"'{ChangeParameter}'" + ";\n" +
+                     "% Создание таблицы\n" +
+                     "T = " + Temperature + ";\n" +
+                     "G = " + MaterialsInput + ";\n" +
+                     "[TT, GG] = meshgrid(T, G);\n" +
+                     "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                     "tableData = [TT(:), GG(:), F(:)];\n" +
+                     "tableHeaders = {'T', 'G', 'F'};\n" +
+                     "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
+                     "% Отображение таблицы в новом окне\n" +
+                     "figure;\n" +
+                     "uitable('Data', tableData, 'ColumnName', tableHeaders);\n" +
+                     "% Построение графика в новом окне\n" +
+                     "figure;\n" +
+                     "if strcmp(parameter, 'G')\n" +
+                     "plot(T, F);\n" +
+                     "title('Зависимость функции при различных Т');\n" +
+                     "xlabel('T');\n" +
+                     "ylabel('F');\n" +
+                     "elseif strcmp(parameter, 'T')\n" +
+                     "plot(G, F);\n" +
+                     "title('Зависимость функции при различных G');\n" +
+                     "xlabel('G');\n" +
+                     "ylabel('F');\n" +
+                     "end\n" +
+                     "% Поиск оптимального значения параметра методом половинного деления (бисекции)\r\n" +
+                     "    tol = 0.001;" +
+                     "  % Погрешность\r\n " +
+                     "   iter = 0;\r\n " +
+                     "   if strcmp(parameter, 'T')\r\n  " +
+                     "      G1 = G(1);\r\n " +
+                     "       G2 = G(end);\r\n" +
+                     "        while (abs(G2 - G1) > tol)\r\n " +
+                     "           curr = (G1 + G2) / 2;\r\n " +
+                     "           F1 = abs(a - b * T + c * G1 - d * (yn - ya));\r\n" +
+                     "            F2 = abs(a - b * T + c * curr - d * (yn - ya));\r\n" +
+                     "            if (F1 > F2)\r\n " +
+                     "               G2 = curr;\r\n " +
+                     "           else\r\n " +
+                     "               G1 = curr;\r\n " +
+                     "           end\r\n" +
+                     "            iter = iter + 1;\r\n" +
+                     "            fprintf('Iteration: %d, a: %.6f, b: %.6f\\n', iter, G1, G2);\r\n " +
+                     "       end\r\n" +
+                     "        optimalValue = (G1 + G2) / 2;\r\n" +
+                     "    elseif strcmp(parameter, 'G')\r\n" +
+                     "        T1 = T(1);\r\n" +
+                     "        T2 = T(end);\r\n" +
+                     "        while (abs(T2 - T1) > tol)\r\n" +
+                     "            curr = (T1 + T2) / 2;\r\n" +
+                     "            F1 = abs(a - b * T1 + c * G - d * (yn - ya));\r\n" +
+                     "            F2 = abs(a - b * curr + c * G - d * (yn - ya));\r\n" +
+                     "            if (F1 > F2)\r\n" +
+                     "                T2 = curr;\r\n" +
+                     "            else\r\n " +
+                     "               T1 = curr;\r\n " +
+                     "           end\r\n" +
+                     "            iter = iter + 1;\r\n" +
+                     "            fprintf('Iteration: %d, a: %.6f, b: %.6f\\n', iter, T1, T2);\r\n " +
+                     "       end\r\n" +
+                     "        optimalValue = (T1 + T2) / 2;\r\n" +
+                     "    end\r\n" +
+                     "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
+                     "    if strcmp(parameter, 'T')\r\n" +
+                     "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                     "    elseif strcmp(parameter, 'G')\r\n" +
+                     "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                     "    end\r\n" +
+                     "    % Проверка критерия октанового числа\r\n" +
+                     "    targetOctaneNumber = 10;" +
+                     "  % Критериальное значение октанового числа\r\n" +
+                     "    if optimalOctaneNumber < targetOctaneNumber\r\n" +
+                     "        fprintf('Не удалось получить решение, это может быть вызвано слишком большим значением критериального ограничения, попробуйте его снизить.\\n');\r\n" +
+                     "    end";
+
+                MatlabCode = matlabCode;
+            }
+        }
+        
     }
 
     private string GetInstallationPath(string programName)

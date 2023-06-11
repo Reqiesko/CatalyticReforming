@@ -99,11 +99,11 @@
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Содержание нафтеновых углеводородов">
-                                    <TextBox Text="{Binding ViewModel.SelectedMaterial.NaphthenicHydrocarbonsContent}" />
+                                    <TextBox Text="{Binding ViewModel.NaphthenicHydrocarbons}" />
                                 </controls:LabeledControlPresenter>
                                 <controls:LabeledControlPresenter
                                     HeaderText="Содержание ароматических углеводородов">
-                                    <TextBox Text="{Binding ViewModel.SelectedMaterial.AromaticHydrocarbonsContent}" />
+                                    <TextBox Text="{Binding ViewModel.AromaticHydrocarbons}" />
                                 </controls:LabeledControlPresenter>
                                 
                             </StackPanel>
@@ -133,6 +133,19 @@
                         </ui:Card.Footer>
                     </ui:Card>
 
+                    <ui:Card>
+                        Выбор метода оптимизаии
+                        <ui:Card.Footer>
+                            <StackPanel>
+                                <controls:LabeledControlPresenter
+                                    HeaderText="Методы оптимизации">
+                                    <ComboBox ItemsSource="{Binding ViewModel.Methods}"
+                                              SelectedItem="{Binding ViewModel.SelectedMethod}"/>
+                                </controls:LabeledControlPresenter>
+                            </StackPanel>
+                        </ui:Card.Footer>
+                    </ui:Card>
+
                     <Button
                         Content="Начать исследование"
                         Margin="10 15 10 0"
@@ -142,7 +155,7 @@
             </ScrollViewer>
             <ScrollViewer Grid.Column="1">
                 <StackPanel>
-                    <TextBox Text="{Binding .ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
+                    <TextBox Text="{Binding ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer Grid.Column="2">
