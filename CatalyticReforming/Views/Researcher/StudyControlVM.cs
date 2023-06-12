@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 
 using CatalyticReforming.Utils.Commands;
@@ -31,6 +32,7 @@ public class StudyControlVM : ViewModelBase
     private RelayCommand _completeTestCommand;
 
     private RelayCommand _navigateBackCommand;
+    private RelayCommand _openStudyBookCommand;
 
     public StudyControlVM(NavigationService navigationService, UserService userService,
                           GenericRepository repository, Func<AppDbContext> contextCreator)
@@ -69,6 +71,21 @@ public class StudyControlVM : ViewModelBase
                 _messageBoxService.Show($"Вы успешно прошли тест\nВаше количество баллов: {score}\nЧтобы перейти к исследованию\n вернитесь на предыдущую страницу!", "Внимание!");
                 _userService.CurrentUser.Access = true;
                 await _repository.Update<UserVM, User>(_userService.CurrentUser);
+            });
+        }
+    }
+
+    public RelayCommand OpenStudyBookCommand
+    {
+        get
+        {
+            return _openStudyBookCommand ??= new RelayCommand(o =>
+            {
+                var proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "Методы оптимизации.pdf";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+
             });
         }
     }

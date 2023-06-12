@@ -38,6 +38,8 @@
             <ui:MenuItem SymbolIcon="ArrowLeft24" Command="{Binding ViewModel.NavigateBackCommand}" />
             <ui:MenuItem Header="Сменить пользователя" SymbolIcon="PersonSwap24"
                          Command="{Binding ViewModel.ChangeUserCommand}" />
+            <ui:MenuItem Header="Читать теорию"
+                         Command="{Binding ViewModel.OpenStudyBookCommand}"/>
         </Menu>
         <Label Grid.Row="0" Content="Пройдите тестирование" Margin="5" HorizontalAlignment="Center" />
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible">

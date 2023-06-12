@@ -47,6 +47,7 @@ public class ResearchControlVM : ViewModelBase
     private MaterialVM _selectedMaterial;
     private string _selectedMethod;
     private double _octaineNumberBounds;
+    private RelayCommand _openStudyBookCommand;
 
     public ResearchControlVM(NavigationService navigationService, DefaultDialogs defaultDialogs, GenericRepository repository)
     {
@@ -318,28 +319,6 @@ public class ResearchControlVM : ViewModelBase
             });
         }
     }
-    
-    public RelayCommand TemperatureCheckChangeCommand
-    {
-        get
-        {
-            return _temperatureChangeCommand ??= new RelayCommand(o =>
-            {
-                TemperatureCheckBox = TemperatureCheckBox != true;
-            });
-        }
-    }
-
-    public RelayCommand MaterialCheckChangeCommand
-    {
-        get
-        {
-            return _materialCheckChangeCommand ??= new RelayCommand(o =>
-            {
-                MaterialCheckBox = MaterialCheckBox != true;
-            });
-        }
-    }
 
     public RelayCommand ChangeUserCommand
     {
@@ -386,6 +365,21 @@ public class ResearchControlVM : ViewModelBase
                         ExecMatlab("", GetDirectoryName("exampleFunction3.m"));
                         break;
                 }
+            });
+        }
+    }
+
+    public RelayCommand OpenStudyBookCommand
+    {
+        get
+        {
+            return _openStudyBookCommand ??= new RelayCommand(o =>
+            {
+                var proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "Методы оптимизации в среде MATLAB.pdf";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+
             });
         }
     }
