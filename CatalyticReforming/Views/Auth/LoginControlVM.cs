@@ -70,7 +70,7 @@ public class LoginControlVM : ViewModelBase
                 else
                 {
                     // Пользователь не найден, выводим сообщение об ошибке.
-                    ErrorMessage = "Error";
+                    ErrorMessage = "Неверный логин или пароль!";
                 }
             });
         }

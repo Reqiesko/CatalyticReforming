@@ -26,6 +26,7 @@ public class StudyControlVM : ViewModelBase
     private readonly NavigationService _navigationService;
     private readonly GenericRepository _repository;
     private readonly UserService _userService;
+    private readonly MessageBoxService _messageBoxService;
     private RelayCommand _changeUserCommand;
     private RelayCommand _completeTestCommand;
 
@@ -37,6 +38,7 @@ public class StudyControlVM : ViewModelBase
         _navigationService = navigationService;
         _userService = userService;
         _repository = repository;
+        _messageBoxService = new MessageBoxService();
         TestConfig = _repository.GetAll<TestConfigVM, TestConfig>().Result.First();
 
         using var context = contextCreator();
@@ -59,11 +61,12 @@ public class StudyControlVM : ViewModelBase
             {
                 var score = Questions.Count(question => question.Answers.All(a => a.IsCorrect == a.IsSelected));
 
-                if (score < 2)
+                if (score < TestConfig.NumberOfQuestionsToPass)
                 {
+                    _messageBoxService.Show($"Вы не прошли тест\nДля удачного прохождения требуется набрать {TestConfig.NumberOfQuestionsToPass} баллов.\nВаше количество баллов: {score}", "Внимание!");
                     return;
                 }
-
+                _messageBoxService.Show($"Вы успешно прошли тест\nВаше количество баллов: {score}\nЧтобы перейти к исследованию\n вернитесь на предыдущую страницу!", "Внимание!");
                 _userService.CurrentUser.Access = true;
                 await _repository.Update<UserVM, User>(_userService.CurrentUser);
             });

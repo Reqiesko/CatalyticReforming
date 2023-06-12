@@ -146,6 +146,18 @@
                         </ui:Card.Footer>
                     </ui:Card>
 
+                    <ui:Card>
+                        Критериальное ограничение
+                        <ui:Card.Footer>
+                            <StackPanel>
+                                <controls:LabeledControlPresenter
+                                    HeaderText="Октановое число">
+                                    <TextBox Text="{Binding ViewModel.OctaineNumberBounds}"/>
+                                </controls:LabeledControlPresenter>
+                            </StackPanel>
+                        </ui:Card.Footer>
+                    </ui:Card>
+
                     <Button
                         Content="Начать исследование"
                         Margin="10 15 10 0"
@@ -160,15 +172,20 @@
             </ScrollViewer>
             <ScrollViewer Grid.Column="2">
                 <ui:Card VerticalAlignment="Top">
-                    Справка по коду Matlab
+                    Тестирование Matlab
                     <ui:Card.Footer>
                         <StackPanel>
                             <controls:LabeledControlPresenter
                                 HeaderText="Выберите функцию"
                                 HeaderTextHorizontalAlignment="Left">
-                                <ComboBox ItemsSource="{Binding ViewModel.Installations}" />
+                                <ComboBox ItemsSource="{Binding ViewModel.TestFunctions}" 
+                                          SelectedItem="{Binding ViewModel.SelectedFunction}"
+                                          DisplayMemberPath="FunctionContent" />
                             </controls:LabeledControlPresenter>
-                            <TextBox Margin="0 5 0 0" />
+                            <Button Margin="0 5 0 0"
+                                    Command="{Binding ViewModel.StartTestMatlabCommand}"
+                                    HorizontalAlignment="Center"
+                                    Content="Начать тестирование"/>
                         </StackPanel>
                     </ui:Card.Footer>
                 </ui:Card>
