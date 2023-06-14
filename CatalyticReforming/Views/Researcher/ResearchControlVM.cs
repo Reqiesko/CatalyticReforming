@@ -83,10 +83,10 @@ public class ResearchControlVM : ViewModelBase
                      "b = 0.03155;\n" +
                      "c = 0.95975;\n" +
                      "d = 2.4206;\n" +
-                     "a1 = 2.517;\n" +
-                     "b1 = 0.00455;\n" +
-                     "c1 = 0.1449;\n" +
-                     "d1 = 0.0221;\n" +
+                     "a1 = 32.181;\n" +
+                     "b1 = 0.08775;\n" +
+                     "c1 = 0.5253;\n" +
+                     "d1 = 3.57;\n" +
                      "yn = " + NaphthenicHydrocarbons + ";\n" +
                      "ya = " + AromaticHydrocarbons + ";\n" +
                      "parameter = " + $"'{ChangeParameter}'" + ";\n" +
@@ -94,7 +94,7 @@ public class ResearchControlVM : ViewModelBase
                      "T = " + Temperature + ";\n" +
                      "G = " + MaterialsInput + ";\n" +
                      "[TT, GG] = meshgrid(T, G);\n" +
-                     "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                     "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
                      "tableData = [TT(:), GG(:), F(:)];\n" +
                      "tableHeaders = {'T', 'G', 'F'};\n" +
                      "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -116,17 +116,25 @@ public class ResearchControlVM : ViewModelBase
                      "end\n" +
                      "% Поиск оптимального значения параметра методом золотого сечения(с помощью fminbnd)\n" +
                      "if strcmp(parameter, 'T')\n" +
-                     "f = @(x)abs(a - b * T + c * x - d * (yn - ya));\n" +
+                     "f = @(x)-abs(a - b * T + c * x - d * (yn + ya));\n" +
                      "[optimalValue, ~] = fminbnd(f, G(1), G(end));\n" +
                      "elseif strcmp(parameter, 'G')\n" +
-                     "f = @(x)abs(a - b * x + c * G - d * (yn - ya));\n" +
+                     "f = @(x)-abs(a - b * x + c * G - d * (yn + ya));\n" +
                      "[optimalValue, ~] = fminbnd(f, T(1), T(end));\n" +
                      "end\n" +
                      "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
                      "    if strcmp(parameter, 'T')\r\n" +
-                     "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                     "       optimalOctaneNumber = abs(a1 - b1 * T + c1 * optimalValue - d1 * (yn - ya));\r\n" +
+                     "       fprintf('\\nОктановое число: ');\r\n       " +
+                     "       disp(optimalOctaneNumber);\r\n       " +
+                     "       fprintf('Оптимальный расход сырья: ');\r\n      " +
+                     "       disp(optimalValue);\n" + 
                      "    elseif strcmp(parameter, 'G')\r\n" +
-                     "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                     "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
+                     "       fprintf('\\nОктановое число: ');\r\n       " +
+                     "       disp(optimalOctaneNumber);\r\n       " +
+                     "       fprintf('Оптимальная температура: ');\r\n      " +
+                     "       disp(optimalValue);\n" +
                      "    end\r\n" +
                      "    % Проверка критерия октанового числа\r\n" +
                      "    targetOctaneNumber =" + $"{OctaineNumberBounds};" +
@@ -398,10 +406,10 @@ public class ResearchControlVM : ViewModelBase
                                  "b = 0.03155;\n" +
                                  "c = 0.95975;\n" +
                                  "d = 2.4206;\n" +
-                                 "a1 = 2.517;\n" +
-                                 "b1 = 0.00455;\n" +
-                                 "c1 = 0.1449;\n" +
-                                 "d1 = 0.0221;\n" +
+                                 "a1 = 32.181;\n" +
+                                 "b1 = 0.08775;\n" +
+                                 "c1 = 0.5253;\n" +
+                                 "d1 = 3.57;\n" +
                                  "yn = " + NaphthenicHydrocarbons + ";\n" +
                                  "ya = " + AromaticHydrocarbons + ";\n" +
                                  "parameter = " + $"'{ChangeParameter}'" + ";\n" +
@@ -409,7 +417,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -431,17 +439,27 @@ public class ResearchControlVM : ViewModelBase
                                  "end\n" +
                                  "% Поиск оптимального значения параметра методом золотого сечения(с помощью fminbnd)\n" +
                                  "if strcmp(parameter, 'T')\n" +
-                                 "f = @(x)abs(a - b * T + c * x - d * (yn - ya));\n" +
+                                 "f = @(x)-abs(a - b * T + c * x - d * (yn + ya));\n" +
                                  "[optimalValue, ~] = fminbnd(f, G(1), G(end));\n" +
                                  "elseif strcmp(parameter, 'G')\n" +
-                                 "f = @(x)abs(a - b * x + c * G - d * (yn - ya));\n" +
+                                 "f = @(x)-abs(a - b * x + c * G - d * (yn + ya));\n" +
                                  "[optimalValue, ~] = fminbnd(f, T(1), T(end));\n" +
                                  "end\n" +
                                  "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
-                                 "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * T + c1 * optimalValue - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальный расход сырья: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    elseif strcmp(parameter, 'G')\r\n" +
-                                 "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальная температура: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    end\r\n" +
                                  "    % Проверка критерия октанового числа\r\n" +
                                  "    targetOctaneNumber =" + $" {OctaineNumberBounds};" +
@@ -461,10 +479,10 @@ public class ResearchControlVM : ViewModelBase
                                  "b = 0.03155;\n" +
                                  "c = 0.95975;\n" +
                                  "d = 2.4206;\n" +
-                                 "a1 = 2.517;\n" +
-                                 "b1 = 0.00455;\n" +
-                                 "c1 = 0.1449;\n" +
-                                 "d1 = 0.0221;\n" +
+                                 "a1 = 32.181;\n" +
+                                 "b1 = 0.08775;\n" +
+                                 "c1 = 0.5253;\n" +
+                                 "d1 = 3.57;\n" +
                                  "yn = " + NaphthenicHydrocarbons + ";\n" +
                                  "ya = " + AromaticHydrocarbons + ";\n" +
                                  "parameter = " + $"'{ChangeParameter}'" + ";\n" +
@@ -472,7 +490,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -501,9 +519,9 @@ public class ResearchControlVM : ViewModelBase
                                  "       G2 = G(end);\r\n" +
                                  "        while (abs(G2 - G1) > tol)\r\n " +
                                  "           curr = (G1 + G2) / 2;\r\n " +
-                                 "           F1 = abs(a - b * T + c * G1 - d * (yn - ya));\r\n" +
-                                 "            F2 = abs(a - b * T + c * curr - d * (yn - ya));\r\n" +
-                                 "            if (F1 > F2)\r\n " +
+                                 "           F1 = abs(a - b * T + c * G1 - d * (yn + ya));\r\n" +
+                                 "           F2 = abs(a - b * T + c * curr - d * (yn + ya));\r\n" +
+                                 "           if (F1 > F2)\r\n " +
                                  "               G2 = curr;\r\n " +
                                  "           else\r\n " +
                                  "               G1 = curr;\r\n " +
@@ -517,8 +535,8 @@ public class ResearchControlVM : ViewModelBase
                                  "        T2 = T(end);\r\n" +
                                  "        while (abs(T2 - T1) > tol)\r\n" +
                                  "            curr = (T1 + T2) / 2;\r\n" +
-                                 "            F1 = abs(a - b * T1 + c * G - d * (yn - ya));\r\n" +
-                                 "            F2 = abs(a - b * curr + c * G - d * (yn - ya));\r\n" +
+                                 "            F1 = abs(a - b * T1 + c * G - d * (yn + ya));\r\n" +
+                                 "            F2 = abs(a - b * curr + c * G - d * (yn + ya));\r\n" +
                                  "            if (F1 > F2)\r\n" +
                                  "                T2 = curr;\r\n" +
                                  "            else\r\n " +
@@ -531,9 +549,19 @@ public class ResearchControlVM : ViewModelBase
                                  "    end\r\n" +
                                  "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
-                                 "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * T + c1 * optimalValue - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальный расход сырья: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    elseif strcmp(parameter, 'G')\r\n" +
-                                 "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальная температура: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    end\r\n" +
                                  "    % Проверка критерия октанового числа\r\n" +
                                  "    targetOctaneNumber =" + $" {OctaineNumberBounds};" +
@@ -553,10 +581,10 @@ public class ResearchControlVM : ViewModelBase
                                  "b = 0.03155;\n" +
                                  "c = 0.95975;\n" +
                                  "d = 2.4206;\n" +
-                                 "a1 = 2.517;\n" +
-                                 "b1 = 0.00455;\n" +
-                                 "c1 = 0.1449;\n" +
-                                 "d1 = 0.0221;\n" +
+                                 "a1 = 32.181;\n" +
+                                 "b1 = 0.08775;\n" +
+                                 "c1 = 0.5253;\n" +
+                                 "d1 = 3.57;\n" +
                                  "yn = " + NaphthenicHydrocarbons + ";\n" +
                                  "ya = " + AromaticHydrocarbons + ";\n" +
                                  "parameter = " + $"'{ChangeParameter}'" + ";\n" +
@@ -564,7 +592,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -587,18 +615,18 @@ public class ResearchControlVM : ViewModelBase
                                  "% Поиск оптимального значения параметра методом сканирования\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
                                  "        optimalValue = G(1);\r\n " +
-                                 "       minF = abs(a - b * T + c * optimalValue - d * (yn - ya));\r\n" +
+                                 "       minF = abs(a - b * T + c * optimalValue - d * (yn + ya));\r\n" +
                                  "        for i = 2:length(G)\r\n" +
-                                 "            f = abs(a - b * T + c * G(i) - d * (yn - ya));\r\n" +
+                                 "            f = abs(a - b * T + c * G(i) - d * (yn + ya));\r\n" +
                                  "            if f > minF\r\n" +
                                  "                minF = f;\r\n " +
                                  "               optimalValue = G(i);\r\n" +
                                  "            end\r\n " +
                                  "       end\r\n    elseif strcmp(parameter, 'G')\r\n" +
                                  "        optimalValue = T(1);\r\n" +
-                                 "        minF = abs(a - b * optimalValue + c * G - d * (yn - ya));\r\n" +
+                                 "        minF = abs(a - b * optimalValue + c * G - d * (yn + ya));\r\n" +
                                  "        for i = 2:length(T)\r\n" +
-                                 "            f = abs(a - b * T(i) + c * G - d * (yn - ya));\r\n" +
+                                 "            f = abs(a - b * T(i) + c * G - d * (yn + ya));\r\n" +
                                  "            if f > minF\r\n" +
                                  "                minF = f;\r\n" +
                                  "                optimalValue = T(i);\r\n" +
@@ -607,9 +635,19 @@ public class ResearchControlVM : ViewModelBase
                                  "    end\n" +
                                  "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
-                                 "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * T + c1 * optimalValue - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальный расход сырья: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    elseif strcmp(parameter, 'G')\r\n" +
-                                 "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальная температура: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    end\r\n" +
                                  "    % Проверка критерия октанового числа\r\n" +
                                  "    targetOctaneNumber =" + $" {OctaineNumberBounds};" +
@@ -629,10 +667,10 @@ public class ResearchControlVM : ViewModelBase
                                  "b = 0.03155;\n" +
                                  "c = 0.95975;\n" +
                                  "d = 2.4206;\n" +
-                                 "a1 = 2.517;\n" +
-                                 "b1 = 0.00455;\n" +
-                                 "c1 = 0.1449;\n" +
-                                 "d1 = 0.0221;\n" +
+                                 "a1 = 32.181;\n" +
+                                 "b1 = 0.08775;\n" +
+                                 "c1 = 0.5253;\n" +
+                                 "d1 = 3.57;\n" +
                                  "yn = " + NaphthenicHydrocarbons + ";\n" +
                                  "ya = " + AromaticHydrocarbons + ";\n" +
                                  "parameter = " + $"'{ChangeParameter}'" + ";\n" +
@@ -640,7 +678,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn - ya));\n" +
+                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -672,20 +710,20 @@ public class ResearchControlVM : ViewModelBase
                                  "        a_k = G(K);\r\n" +
                                  "        a_j = G(J);\r\n " +
                                  "       \r\n " +
-                                 "       f_k = abs(a - b * T + c * a_k - d * (yn - ya));\r\n" +
-                                 "        f_j = abs(a - b * T + c * a_j - d * (yn - ya));\r\n" +
+                                 "       f_k = abs(a - b * T + c * a_k - d * (yn + ya));\r\n" +
+                                 "        f_j = abs(a - b * T + c * a_j - d * (yn + ya));\r\n" +
                                  "        \r\n" +
                                  "        for i = 3:n\r\n" +
                                  "            if f_k(i) < f_j(i)\r\n" +
                                  "                a_j(i) = a_k(i);\r\n" +
                                  "                a_k(i) = a_j(i) + (G(n+1) - a_j(i)) * fib(n-i+2) / fib(n-i+3);\r\n" +
                                  "                f_j(i) = f_k(i);\r\n" +
-                                 "                f_k(i) = abs(a - b * T + c * a_k(i) - d * (yn - ya));\r\n" +
+                                 "                f_k(i) = abs(a - b * T + c * a_k(i) - d * (yn + ya));\r\n" +
                                  "            else\r\n" +
                                  "                a_k(i) = a_j(i);\r\n" +
                                  "                a_j(i) = a_k(i) + (a_k(i) - a_j(i-1)) * fib(n-i+1) / fib(n-i+3);\r\n" +
                                  "                f_k(i) = f_j(i);\r\n" +
-                                 "                f_j(i) = abs(a - b * T + c * a_j(i) - d * (yn - ya));\r\n" +
+                                 "                f_j(i) = abs(a - b * T + c * a_j(i) - d * (yn + ya));\r\n" +
                                  "            end\r\n" +
                                  "        end\r\n" +
                                  "        \r\n" +
@@ -699,19 +737,19 @@ public class ResearchControlVM : ViewModelBase
                                  "        J = I + fib(n-2);\r\n" +
                                  "        \r\n        a_k = T(K);\r\n" +
                                  "        a_j = T(J);\r\n" +
-                                 "        \r\n        f_k = abs(a - b * a_k + c * G - d * (yn - ya));\r\n" +
-                                 "        f_j = abs(a - b * a_j + c * G - d * (yn - ya));\r\n" +
+                                 "        \r\n        f_k = abs(a - b * a_k + c * G - d * (yn + ya));\r\n" +
+                                 "        f_j = abs(a - b * a_j + c * G - d * (yn + ya));\r\n" +
                                  "        \r\n        for i = 3:n\r\n" +
                                  "            if f_k(i) < f_j(i)\r\n" +
                                  "                a_j(i) = a_k(i);\r\n" +
                                  "                a_k(i) = a_j(i) + (T(n+1) - a_j(i)) * fib(n-i+2) / fib(n-i+3);\r\n" +
                                  "                f_j(i) = f_k(i);\r\n" +
-                                 "                f_k(i) = abs(a - b * a_k(i) + c * G - d * (yn - ya));\r\n" +
+                                 "                f_k(i) = abs(a - b * a_k(i) + c * G - d * (yn + ya));\r\n" +
                                  "            else\r\n" +
                                  "                a_k(i) = a_j(i);\r\n" +
                                  "                a_j(i) = a_k(i) + (a_k(i) - a_j(i-1)) * fib(n-i+1) / fib(n-i+3);\r\n" +
                                  "                f_k(i) = f_j(i);\r\n" +
-                                 "                f_j(i) = abs(a - b * a_j(i) + c * G - d * (yn - ya));\r\n" +
+                                 "                f_j(i) = abs(a - b * a_j(i) + c * G - d * (yn + ya));\r\n" +
                                  "            end\r\n" +
                                  "        end\r\n" +
                                  "        \r\n" +
@@ -720,9 +758,19 @@ public class ResearchControlVM : ViewModelBase
                                  "    end" +
                                  "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
-                                 "       optimalOctaneNumber = abs(a1 + b1 * T - c1 * optimalValue + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * T + c1 * optimalValue - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальный расход сырья: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    elseif strcmp(parameter, 'G')\r\n" +
-                                 "        optimalOctaneNumber = abs(a1 + b1 * optimalValue - c1 * G + d1 * (yn - ya));\r\n" +
+                                 "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
+                                 "       fprintf('\\nОктановое число: ');\r\n       " +
+                                 "       disp(optimalOctaneNumber);\r\n       " +
+                                 "       fprintf('Оптимальная температура: ');\r\n      " +
+                                 "       disp(optimalValue);\n" +
+                                 "       disp(tableResult);\n" +
                                  "    end\r\n" +
                                  "    % Проверка критерия октанового числа\r\n" +
                                  "    targetOctaneNumber =" + $" {OctaineNumberBounds};" +
