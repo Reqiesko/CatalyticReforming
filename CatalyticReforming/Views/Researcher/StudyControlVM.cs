@@ -33,6 +33,8 @@ public class StudyControlVM : ViewModelBase
 
     private RelayCommand _navigateBackCommand;
     private RelayCommand _openStudyBookCommand;
+    private RelayCommand _openStudyBookExamplesCommand;
+    private RelayCommand _openStudyBookSearchCommand;
 
     public StudyControlVM(NavigationService navigationService, UserService userService,
                           GenericRepository repository, Func<AppDbContext> contextCreator)
@@ -83,6 +85,36 @@ public class StudyControlVM : ViewModelBase
             {
                 var proc = new System.Diagnostics.Process();
                 proc.StartInfo.FileName = "Методы оптимизации.pdf";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+
+            });
+        }
+    }
+
+    public RelayCommand OpenStudyBookExamplesCommand
+    {
+        get
+        {
+            return _openStudyBookExamplesCommand ??= new RelayCommand(o =>
+            {
+                var proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "Примеры.pdf";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+
+            });
+        }
+    }
+    
+    public RelayCommand OpenStudyBookSearchCommand
+    {
+        get
+        {
+            return _openStudyBookSearchCommand ??= new RelayCommand(o =>
+            {
+                var proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "Изучение характеристик.pdf";
                 proc.StartInfo.UseShellExecute = true;
                 proc.Start();
 

@@ -20,6 +20,9 @@
                          Command="{Binding ViewModel.ChangeUserCommand}" />
             <ui:MenuItem Header="Читать теорию"
                          Command="{Binding ViewModel.OpenStudyBookCommand}"/>
+            <ui:MenuItem Header="">
+
+            </ui:MenuItem>
         </Menu>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -46,7 +49,7 @@
                         </ui:Card.Footer>
                     </ui:Card>
 
-                    <ui:Card Margin="0,5">
+                    <ui:Card Margin="0,10">
                         Входные параметры реактора
                         <ui:Card.Footer>
                             <StackPanel>
@@ -148,7 +151,7 @@
                         </ui:Card.Footer>
                     </ui:Card>
 
-                    <ui:Card>
+                    <ui:Card Margin="0,5">
                         Критериальное ограничение
                         <ui:Card.Footer>
                             <StackPanel>
@@ -165,32 +168,31 @@
                         Margin="10 15 10 0"
                         HorizontalAlignment="Center"
                         Command="{Binding ViewModel.StartResearchCommand}" />
+
+                    <ui:Card VerticalAlignment="Top" Margin="0,15">
+                        Тестирование Matlab
+                        <ui:Card.Footer>
+                            <StackPanel>
+                                <controls:LabeledControlPresenter
+                                    HeaderText="Выберите функцию"
+                                    HeaderTextHorizontalAlignment="Left">
+                                    <ComboBox ItemsSource="{Binding ViewModel.TestFunctions}" 
+                                              SelectedItem="{Binding ViewModel.SelectedFunction}"
+                                              DisplayMemberPath="FunctionContent" />
+                                </controls:LabeledControlPresenter>
+                                <Button Margin="0 5 0 0"
+                                        Command="{Binding ViewModel.StartTestMatlabCommand}"
+                                        HorizontalAlignment="Center"
+                                        Content="Начать тестирование"/>
+                            </StackPanel>
+                        </ui:Card.Footer>
+                    </ui:Card>
                 </StackPanel>
             </ScrollViewer>
-            <ScrollViewer Grid.Column="1">
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <TextBox Text="{Binding ViewModel.MatlabCode}" Width="600" Margin="0 5 10 0" />
+                    <TextBox Text="{Binding ViewModel.MatlabCode}" Width="Auto" Margin="0 5 10 0" />
                 </StackPanel>
-            </ScrollViewer>
-            <ScrollViewer Grid.Column="2">
-                <ui:Card VerticalAlignment="Top">
-                    Тестирование Matlab
-                    <ui:Card.Footer>
-                        <StackPanel>
-                            <controls:LabeledControlPresenter
-                                HeaderText="Выберите функцию"
-                                HeaderTextHorizontalAlignment="Left">
-                                <ComboBox ItemsSource="{Binding ViewModel.TestFunctions}" 
-                                          SelectedItem="{Binding ViewModel.SelectedFunction}"
-                                          DisplayMemberPath="FunctionContent" />
-                            </controls:LabeledControlPresenter>
-                            <Button Margin="0 5 0 0"
-                                    Command="{Binding ViewModel.StartTestMatlabCommand}"
-                                    HorizontalAlignment="Center"
-                                    Content="Начать тестирование"/>
-                        </StackPanel>
-                    </ui:Card.Footer>
-                </ui:Card>
             </ScrollViewer>
         </Grid>
     </Grid>
