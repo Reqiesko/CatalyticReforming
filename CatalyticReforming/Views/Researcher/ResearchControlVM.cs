@@ -79,10 +79,10 @@ public class ResearchControlVM : ViewModelBase
 
         MatlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                      "% Определение параметров функции\n" +
-                     "a = 15.802;\n" +
-                     "b = 0.03155;\n" +
-                     "c = 0.95975;\n" +
-                     "d = 2.4206;\n" +
+                     "a = 0.802;\n" +
+                     "b = 0.95975;\n" +
+                     "c = 0.4206;\n" +
+                     "%d = 0.03155;\n" +
                      "a1 = 32.181;\n" +
                      "b1 = 0.08775;\n" +
                      "c1 = 0.5253;\n" +
@@ -94,7 +94,7 @@ public class ResearchControlVM : ViewModelBase
                      "T = " + Temperature + ";\n" +
                      "G = " + MaterialsInput + ";\n" +
                      "[TT, GG] = meshgrid(T, G);\n" +
-                     "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
+                     "F = a .* G .* log(T) - b .* (ya)^3 + c .* (yn)^2;\n" +
                      "tableData = [TT(:), GG(:), F(:)];\n" +
                      "tableHeaders = {'T', 'G', 'F'};\n" +
                      "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -116,10 +116,10 @@ public class ResearchControlVM : ViewModelBase
                      "end\n" +
                      "% Поиск оптимального значения параметра методом золотого сечения(с помощью fminbnd)\n" +
                      "if strcmp(parameter, 'T')\n" +
-                     "f = @(x)-abs(a - b * T + c * x - d * (yn + ya));\n" +
+                     "f = @(x)- a * x *log(T) - b * (ya)^3 + c * (yn)^2;\n" +
                      "[optimalValue, ~] = fminbnd(f, G(1), G(end));\n" +
                      "elseif strcmp(parameter, 'G')\n" +
-                     "f = @(x)-abs(a - b * x + c * G - d * (yn + ya));\n" +
+                     "f = @(x)- a * G *log(x) - b * (ya)^3 + c * (yn)^2;\n" +
                      "[optimalValue, ~] = fminbnd(f, T(1), T(end));\n" +
                      "end\n" +
                      "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
@@ -128,7 +128,7 @@ public class ResearchControlVM : ViewModelBase
                      "       fprintf('\\nОктановое число: ');\r\n       " +
                      "       disp(optimalOctaneNumber);\r\n       " +
                      "       fprintf('Оптимальный расход сырья: ');\r\n      " +
-                     "       disp(optimalValue);\n" + 
+                     "       disp(optimalValue);\n" +
                      "    elseif strcmp(parameter, 'G')\r\n" +
                      "       optimalOctaneNumber = abs(a1 - b1 * optimalValue + c1 * G - d1 * (yn - ya));\r\n" +
                      "       fprintf('\\nОктановое число: ');\r\n       " +
@@ -402,10 +402,10 @@ public class ResearchControlVM : ViewModelBase
             {
                 var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                                  "% Определение параметров функции\n" +
-                                 "a = 15.802;\n" +
-                                 "b = 0.03155;\n" +
-                                 "c = 0.95975;\n" +
-                                 "d = 2.4206;\n" +
+                                 "a = 0.802;\n" +
+                                 "b = 0.95975;\n" +
+                                 "c = 0.4206;\n" +
+                                 "%d = 0.03155;\n" +
                                  "a1 = 32.181;\n" +
                                  "b1 = 0.08775;\n" +
                                  "c1 = 0.5253;\n" +
@@ -417,7 +417,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
+                                 "F = a .* G .* log(T) - b .* (ya)^3 + c .* (yn)^2;\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -439,10 +439,10 @@ public class ResearchControlVM : ViewModelBase
                                  "end\n" +
                                  "% Поиск оптимального значения параметра методом золотого сечения(с помощью fminbnd)\n" +
                                  "if strcmp(parameter, 'T')\n" +
-                                 "f = @(x)-abs(a - b * T + c * x - d * (yn + ya));\n" +
+                                 "f = @(x)- a * x *log(T) - b * (ya)^3 + c * (yn)^2;\n" +
                                  "[optimalValue, ~] = fminbnd(f, G(1), G(end));\n" +
                                  "elseif strcmp(parameter, 'G')\n" +
-                                 "f = @(x)-abs(a - b * x + c * G - d * (yn + ya));\n" +
+                                 "f = @(x)- a * G *log(x) - b * (ya)^3 + c * (yn)^2;\n" +
                                  "[optimalValue, ~] = fminbnd(f, T(1), T(end));\n" +
                                  "end\n" +
                                  "    \r % Расчет октанового числа при оптимальном значении параметра\r\n" +
@@ -475,10 +475,10 @@ public class ResearchControlVM : ViewModelBase
             {
                 var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                                  "% Определение параметров функции\n" +
-                                 "a = 15.802;\n" +
-                                 "b = 0.03155;\n" +
-                                 "c = 0.95975;\n" +
-                                 "d = 2.4206;\n" +
+                                 "a = 0.802;\n" +
+                                 "b = 0.95975;\n" +
+                                 "c = 0.4206;\n" +
+                                 "%d = 0.03155;\n" +
                                  "a1 = 32.181;\n" +
                                  "b1 = 0.08775;\n" +
                                  "c1 = 0.5253;\n" +
@@ -490,7 +490,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
+                                 "F = a .* G .* log(T) - b .* (ya)^3 + c .* (yn)^2;\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -519,8 +519,8 @@ public class ResearchControlVM : ViewModelBase
                                  "       G2 = G(end);\r\n" +
                                  "        while (abs(G2 - G1) > tol)\r\n " +
                                  "           curr = (G1 + G2) / 2;\r\n " +
-                                 "           F1 = abs(a - b * T + c * G1 - d * (yn + ya));\r\n" +
-                                 "           F2 = abs(a - b * T + c * curr - d * (yn + ya));\r\n" +
+                                 "           F1 = a * G * log(T) - b * (ya)^3 + (yn)^2;\r\n" +
+                                 "           F2 = a * curr * log(T) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "           if (F1 > F2)\r\n " +
                                  "               G2 = curr;\r\n " +
                                  "           else\r\n " +
@@ -535,8 +535,8 @@ public class ResearchControlVM : ViewModelBase
                                  "        T2 = T(end);\r\n" +
                                  "        while (abs(T2 - T1) > tol)\r\n" +
                                  "            curr = (T1 + T2) / 2;\r\n" +
-                                 "            F1 = abs(a - b * T1 + c * G - d * (yn + ya));\r\n" +
-                                 "            F2 = abs(a - b * curr + c * G - d * (yn + ya));\r\n" +
+                                 "            F1 = a * G * log(T) - b * (ya)^3 + (yn)^2;\r\n" +
+                                 "            F2 = a * G * log(curr) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "            if (F1 > F2)\r\n" +
                                  "                T2 = curr;\r\n" +
                                  "            else\r\n " +
@@ -577,10 +577,10 @@ public class ResearchControlVM : ViewModelBase
             {
                 var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                                  "% Определение параметров функции\n" +
-                                 "a = 15.802;\n" +
-                                 "b = 0.03155;\n" +
-                                 "c = 0.95975;\n" +
-                                 "d = 2.4206;\n" +
+                                 "a = 0.802;\n" +
+                                 "b = 0.95975;\n" +
+                                 "c = 0.4206;\n" +
+                                 "%d = 0.03155;\n" +
                                  "a1 = 32.181;\n" +
                                  "b1 = 0.08775;\n" +
                                  "c1 = 0.5253;\n" +
@@ -592,7 +592,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
+                                 "F = a .* G .* log(T) - b .* (ya)^3 + c .* (yn)^2;\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
@@ -615,18 +615,18 @@ public class ResearchControlVM : ViewModelBase
                                  "% Поиск оптимального значения параметра методом сканирования\r\n" +
                                  "    if strcmp(parameter, 'T')\r\n" +
                                  "        optimalValue = G(1);\r\n " +
-                                 "       minF = abs(a - b * T + c * optimalValue - d * (yn + ya));\r\n" +
+                                 "       minF = a * optimalValue * log(T) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "        for i = 2:length(G)\r\n" +
-                                 "            f = abs(a - b * T + c * G(i) - d * (yn + ya));\r\n" +
+                                 "            f =  a * G(i) * log(T) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "            if f > minF\r\n" +
                                  "                minF = f;\r\n " +
                                  "               optimalValue = G(i);\r\n" +
                                  "            end\r\n " +
                                  "       end\r\n    elseif strcmp(parameter, 'G')\r\n" +
                                  "        optimalValue = T(1);\r\n" +
-                                 "        minF = abs(a - b * optimalValue + c * G - d * (yn + ya));\r\n" +
+                                 "        minF = a * G * log(optimalValue) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "        for i = 2:length(T)\r\n" +
-                                 "            f = abs(a - b * T(i) + c * G - d * (yn + ya));\r\n" +
+                                 "            f = a * G * log(T(i)) - b * (ya)^3 + (yn)^2;\r\n" +
                                  "            if f > minF\r\n" +
                                  "                minF = f;\r\n" +
                                  "                optimalValue = T(i);\r\n" +
@@ -663,10 +663,10 @@ public class ResearchControlVM : ViewModelBase
             {
                 var matlabCode = "function[tableResult, optimalValue, optimalOctaneNumber] = targetFunction()\n" +
                                  "% Определение параметров функции\n" +
-                                 "a = 15.802;\n" +
-                                 "b = 0.03155;\n" +
-                                 "c = 0.95975;\n" +
-                                 "d = 2.4206;\n" +
+                                 "a = 0.802;\n" +
+                                 "b = 0.95975;\n" +
+                                 "c = 0.4206;\n" +
+                                 "%d = 0.03155;\n" +
                                  "a1 = 32.181;\n" +
                                  "b1 = 0.08775;\n" +
                                  "c1 = 0.5253;\n" +
@@ -678,7 +678,7 @@ public class ResearchControlVM : ViewModelBase
                                  "T = " + Temperature + ";\n" +
                                  "G = " + MaterialsInput + ";\n" +
                                  "[TT, GG] = meshgrid(T, G);\n" +
-                                 "F = abs(a - b * TT + c * GG - d*(yn + ya));\n" +
+                                 "F = a .* G .* log(T) - b .* (ya)^3 + c .* (yn)^2;\n" +
                                  "tableData = [TT(:), GG(:), F(:)];\n" +
                                  "tableHeaders = {'T', 'G', 'F'};\n" +
                                  "tableResult = array2table(tableData, 'VariableNames', tableHeaders);\n" +
