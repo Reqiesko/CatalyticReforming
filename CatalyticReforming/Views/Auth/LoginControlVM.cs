@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 using CatalyticReforming.Utils.Commands;
@@ -47,29 +48,36 @@ public class LoginControlVM : ViewModelBase
         {
             return _loginCommand ??= new RelayCommand(o =>
             {
-                var user = _repository.GetAll<UserVM, User>(u => u.Username == Username && u.Password == Password).Result.First();
+                try
+                {
+                    var user = _repository.GetAll<UserVM, User>(u => u.Username == Username && u.Password == Password).Result.First();
 
-                if (user == null)
-                {
-                    ErrorMessage = "Error";
+                    if (user == null)
+                    {
+                        ErrorMessage = "Пользователь не найден";
 
-                    return;
-                }
+                        return;
+                    }
 
-                if (user.Role.Name == "User")
-                {
-                    // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
-                    _userService.CurrentUser = user.Adapt<UserVM>();
-                    _navigationService.ChangeContent<StartControl>();
+                    if (user.Role.Name == "User")
+                    {
+                        // Пользователь найден, выполняем необходимые действия, например, переходим на главную страницу приложения.
+                        _userService.CurrentUser = user.Adapt<UserVM>();
+                        _navigationService.ChangeContent<StartControl>();
+                    }
+                    else if (user.Role.Name == "Admin")
+                    {
+                        _userService.CurrentUser = user.Adapt<UserVM>();
+                        _navigationService.ChangeContent<AdminControl>();
+                    }
+                    else
+                    {
+                        // Пользователь не найден, выводим сообщение об ошибке.
+                        ErrorMessage = "Неверный логин или пароль!";
+                    }
                 }
-                else if (user.Role.Name == "Admin")
+                catch (Exception e)
                 {
-                    _userService.CurrentUser = user.Adapt<UserVM>();
-                    _navigationService.ChangeContent<AdminControl>();
-                }
-                else
-                {
-                    // Пользователь не найден, выводим сообщение об ошибке.
                     ErrorMessage = "Неверный логин или пароль!";
                 }
             });
